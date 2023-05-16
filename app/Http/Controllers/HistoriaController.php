@@ -35,15 +35,14 @@ class HistoriaController extends Controller
         $historia -> update($request->all());
         return response()->json($historia,200);
     }
+   
     public function deleteHistoria($id){
-        $historia = Historia::find($id);
+        $historia = Pacientes :: find($id);
         if(is_null($historia)){
-               return response()->json($historia,200); 
+            return response()->json(["message"=>"Registro no encontrado"],404);
         }
-
-        $historia -> delete();
+        $historia->delete();
         return response()->json(["message"=>"Registro eliminado"],200);
-
     }
 
 }

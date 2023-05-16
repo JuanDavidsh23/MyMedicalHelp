@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\HistoriaController;
+use App\Http\Controllers\AgendaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,21 @@ Route::post('/Historia/insert',[HistoriaController::class,'insertHistoria']);
 Route::put('/Historia/update/{id}',[HistoriaController::class,'updateHistoria']);
 //DELETE
 Route::delete('/Historia/delete/{id}',[HistoriaController::class,'deleteHistoria']);
+
+
+//AGENDA
+Route::get('/Agenda',[AgendaController::class,'getAgenda']);
+Route::get('/Agenda/{id}',[AgendaController::class,'getAgendaid']);
+//POST
+Route::post('/Agenda/insert',[AgendaController::class,'insertAgenda']);
+//PUT
+Route::put('/Agenda/update/{id}',[AgendaController::class,'updateAgenda']);
+//DELETE
+Route::delete('/Agenda/delete/{id}',[AgendaController::class,'deleteAgenda']);
+
+
+
+
+
 
 
