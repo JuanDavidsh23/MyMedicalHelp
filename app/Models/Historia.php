@@ -9,5 +9,5 @@ class Historia extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id','observaciones','procedimientos','recomendaciones','idPaciente'];
+    protected $fillable = ['id','observaciones','procedimientos','recomendaciones','pacientes_id'];
 }
