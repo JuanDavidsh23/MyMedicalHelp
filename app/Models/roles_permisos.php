@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Historia extends Model
+class roles_permisos extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id','observaciones','procedimientos','recomendaciones','pacientes_id'];
+    protected $fillable = ['id','idRol','idPermisos'];
 }

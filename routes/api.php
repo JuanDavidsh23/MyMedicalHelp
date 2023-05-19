@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\PacientesController;
+use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\rolController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +32,7 @@ Route::put('/Pacientes/update/{id}',[PacientesController::class,'updatePacientes
 Route::delete('/Pacientes/delete/{id}',[PacientesController::class,'deletePaciente']);
 
 
-//HISTORIAS
+//HISTORIA
 Route::get('/Historia',[HistoriaController::class,'getHistorias']);
 Route::get('/Historia/{id}',[HistoriaController::class,'getHistoriasid']);
 //POST
@@ -39,5 +41,26 @@ Route::post('/Historia/insert',[HistoriaController::class,'insertHistoria']);
 Route::put('/Historia/update/{id}',[HistoriaController::class,'updateHistoria']);
 //DELETE
 Route::delete('/Historia/delete/{id}',[HistoriaController::class,'deleteHistoria']);
+
+//PERMISOS
+Route::get('/permiso',[PermisosController::class,'getPermisos']);
+Route::get('/permiso/{id}',[PermisosController::class,'getPermisosid']);
+//POST
+Route::post('/permisos/insert',[PermisosController::class,'insertPermisos']);
+//PUT
+Route::put('/permisos/update/{id}',[PermisosController::class,'updatePermisos']);
+//DELETE
+Route::delete('/permisos/delete/{id}',[PermisosController::class,'deletePermisos']);
+
+
+//ROL
+Route::get('/rol',[rolController::class,'getRol']);
+Route::get('/rol/{id}',[rolController::class,'getRolid']);
+//POST
+Route::post('/rol/insert',[rolController::class,'insertRol']);
+//PUT
+Route::put('/rol/update/{id}',[rolController::class,'updateRol']);
+//DELETE
+Route::delete('/rol/delete/{id}',[rolController::class,'deleteRol']);
 
 
