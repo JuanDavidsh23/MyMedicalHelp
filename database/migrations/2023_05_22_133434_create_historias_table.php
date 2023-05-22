@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('historias', function (Blueprint $table) {
             $table->id();
-            $table->string('fecha');
-            $table->string('hora');
-            $table->string('lugar');
-            $table->string('idusuario');
-            $table->string('idpaciente');
+            $table->string('observaciones');
+            $table->string('procedimientos');
+            $table->string('recomendaciones');
+             $table->unsignedBigInteger('pacientes_id');
+            $table->foreign('pacientes_id')->references('id')->on('pacientes')->onDelete('cascade'); 
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agendas');
+        Schema::dropIfExists('historias');
     }
 };

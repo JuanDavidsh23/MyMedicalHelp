@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Historia;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HistoriaController extends Controller
+class historiasController extends Controller
 {
     public function getHistorias(){
         return response()->json(Historia::all(),200);
@@ -44,5 +44,4 @@ class HistoriaController extends Controller
         $historia->delete();
         return response()->json(["message"=>"Registro eliminado"],200);
     }
-
 }

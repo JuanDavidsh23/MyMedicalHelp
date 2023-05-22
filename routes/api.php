@@ -4,6 +4,7 @@ use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\rolController;
 use App\Http\Controllers\HistoriaController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,16 @@ Route::put('/Agenda/update/{id}',[AgendaController::class,'updateAgenda']);
 Route::delete('/Agenda/delete/{id}',[AgendaController::class,'deleteAgenda']);
 
 
+//USUARIOS
+Route::get('/Usuarios',[UsuariosController::class,'getUsuarios']);
+//GET_ID
+Route::get('/Usuarios/{id}',[UsuariosController::class,'getUsuariosid']);
+//POST
+Route::post('/Usuarios/insert',[UsuariosController::class,'insertUsuarios']);
+//PUT
+Route::put('/Usuarios/update/{id}',[UsuariosController::class,'updateUsuarios']);
+//DELETE
+Route::delete('/Usuarios/delete/{id}',[UsuariosController::class,'deleteUsuarios']);
 
 
 
