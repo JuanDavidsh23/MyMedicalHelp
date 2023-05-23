@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pacientes extends Model
+class Usuarios extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id','nombre','apellido','correo','telefono','direccion','ciudad','documento','idEps'];
+    protected $fillable = ['id','nombre','apellido','telefono','correo','clave','direccion','ciudad','departamento','cedula','zona','id_rol'];
 }
