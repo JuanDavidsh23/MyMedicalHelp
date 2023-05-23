@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->integer('telefono');
-            $table->string('correo');
+            $table->string('correo')->unique();
             $table->string('clave');
             $table->string('direccion');
             $table->string('ciudad');
-            $table->string('departamemnto');
+            $table->string('departamento');
             $table->integer('cedula');
             $table->string('zona');
              $table->unsignedBigInteger('id_rol');
-            $table->foreign('id_rol')->references('id')->on('rols')->onDelete('cascade');
+            $table->foreign('id_rol')->references('id')-> on('rols')->onDelete('cascade');
             $table->timestamps();
         });
     }

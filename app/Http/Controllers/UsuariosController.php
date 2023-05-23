@@ -38,7 +38,7 @@ class UsuariosController extends Controller
     }
    
     public function deleteUsuarios($id){
-        $Usuarios = Pacientes :: find($id);
+        $Usuarios = Usuarios :: find($id);
         if(is_null($Usuarios)){
             return response()->json(["message"=>"Registro no encontrado"],404);
         }

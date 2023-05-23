@@ -78,15 +78,15 @@ Route::delete('/Agenda/delete/{id}',[AgendaController::class,'deleteAgenda']);
 
 
 //USUARIOS
-Route::get('/Usuarios',[UsuariosController::class,'getUsuarios']);
+Route::get('/usuarios',[UsuariosController::class,'getUsuarios']);
 //GET_ID
-Route::get('/Usuarios/{id}',[UsuariosController::class,'getUsuariosid']);
+Route::get('/usuarios/{id}',[UsuariosController::class,'getUsuariosid']);
 //POST
-Route::post('/Usuarios/insert',[UsuariosController::class,'insertUsuarios']);
+Route::post('/usuarios/insert',[UsuariosController::class,'insertUsuarios']);
 //PUT
-Route::put('/Usuarios/update/{id}',[UsuariosController::class,'updateUsuarios']);
+Route::put('/usuarios/update/{id}',[UsuariosController::class,'updateUsuarios']);
 //DELETE
-Route::delete('/Usuarios/delete/{id}',[UsuariosController::class,'deleteUsuarios']);
+Route::delete('/usuarios/delete/{id}',[UsuariosController::class,'deleteUsuarios']);
 
 
 
