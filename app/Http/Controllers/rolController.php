@@ -2,50 +2,110 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Rol;
+use Illuminate\Http\Request;
 
-
-class rolController extends Controller
+/**
+ * Class RolController
+ * @package App\Http\Controllers
+ */
+class RolController extends Controller
 {
-    public function getRol(){
-        return response()->json(Rol::all(),200);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $rols = Rol::paginate();
 
+        return view('rol.index', compact('rols'))
+            ->with('i', (request()->input('page', 1) - 1) * $rols->perPage());
     }
 
-    public function getRolid($id){
-        $Rol = Rol::find($id);
-        if(is_null($Rol)){
-            return response()->json(["message"=>"Rol no encontrado"],404);
-        }
-        return response()->json($Rol,200);
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $rol = new Rol();
+        return view('rol.create', compact('rol'));
     }
 
-    public function insertRol(Request $request){
-        $Rol = Rol::create($request->all());
-        if(is_null($Rol)){
-            return response()->json(["message"=>"Hubo problemas con el Rol"],404);
-        }
-        return response()->json($Rol,200);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        request()->validate(Rol::$rules);
 
+        $rol = Rol::create($request->all());
+
+        return redirect()->route('Rol.index')
+            ->with('success', 'Rol created successfully.');
     }
 
-    public function updateRol(Request $request, $id){
-        $Rol = Rol :: find($id);
-        if(is_null($Rol)){
-            return response()->json(["message"=>"Rol no encontrado"],404);
-        }
-        $Rol -> update($request->all());
-        return response()->json ($Rol, 200);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $rol = Rol::find($id);
+
+        return view('rol.show', compact('rol'));
     }
 
-    public function deleteRol($id){
-        $Rol = Rol :: find($id);
-        if(is_null($Rol)){
-            return response()->json(["message"=>"Rol no encontrado"],404);
-        }
-        $Rol->delete();
-        return response()->json(["message"=>"Rol eliminado"],200);
-    }}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $rol = Rol::find($id);
+
+        return view('rol.edit', compact('rol'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Rol $rol
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+{
+    $request->validate(Rol::$rules);
+
+    $rol = Rol::find($id);
+    $rol->update($request->all());
+
+    return redirect()->route('Rol.index')
+        ->with('success', 'Rol updated successfully');
+}
+
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $rol = Rol::find($id)->delete();
+
+        return redirect()->route('Rol.index')
+            ->with('success', 'Rol deleted successfully');
+    }
+}
