@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Agenda</span>
+                        <span class="card-title">{{ __('Agregar') }} Agenda</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('Agenda.store') }}"  role="form" enctype="multipart/form-data">

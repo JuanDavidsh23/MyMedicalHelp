@@ -45,13 +45,49 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
-
-        $user = User::create($request->all());
-
+        $rules = [
+            'name' => 'required|string|max:30|min:3',
+            'apellido' => 'required|string|max:30|min:5',
+            'telefono' => 'required|integer|digits:10',
+            'direccion' => 'required|string|max:50|min:5',
+            'ciudad' => 'required|string',
+            'departamemnto' => 'required|string',
+            'cedula' => 'required|string|digits_between:7,10',
+            'zona' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'IdRol' => 'required|integer',
+        ];
+    
+        $messages = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de texto.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+            'unique' => 'El campo :attribute ya ha sido registrado.',
+            'digits' => 'El campo :attribute debe tener :digits dígitos.',
+            'digits_between' => 'El campo :attribute debe tener entre :min y :max dígitos.',
+            'min' => [
+                'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+            ],
+            'max' => [
+                'string' => 'El campo :attribute debe tener al menos :max caracteres.',
+            ],
+            'integer' => 'El campo :attribute debe ser un número entero.',  
+            'IdRol.required' => 'El campo ID de rol es obligatorio.',
+             
+        ];
+    
+     
+    
+        $validatedData = $request->validate($rules, $messages);
+    
+        $user = User::create($validatedData);
+    
         return redirect()->route('User.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'Usuario creado exitosamente.');
     }
+    
+
 
     /**
      * Display the specified resource.
@@ -75,8 +111,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('user.edit', compact('user'));
+        $rol = Rol::pluck('nombre_rol','id');
+        return view('user.edit', compact('user','rol'));
     }
 
     /**
@@ -87,15 +123,47 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $request->validate(User::$rules);
-    
-        $user = User::find($id);
-        $user->update($request->all());
-    
-        return redirect()->route('User.index')
-            ->with('success', 'User updated successfully');
-    }
+{
+    $rules = [
+        'name' => 'required|string|max:30|min:3',
+        'apellido' => 'required|string|max:30|min:5',
+        'telefono' => 'required|digits:9',
+        'direccion' => 'required|string|max:50|min:5',
+        'ciudad' => 'required|string',
+        'departamemnto' => 'required|string',
+        'cedula' => 'required|digits_between:7,10',
+        'zona' => 'required|string',
+        'email' => 'required|email|unique:users,email,' . $id,
+        'password' => 'required|string|min:8',
+        'IdRol' => 'required|integer',
+    ];
+
+    $messages = [
+        'required' => 'El campo :attribute es obligatorio.',
+        'string' => 'El campo :attribute debe ser una cadena de texto.',
+        'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+        'unique' => 'El campo :attribute ya ha sido registrado.',
+        'digits' => 'El campo :attribute debe tener :digits dígitos.',
+        'digits_between' => 'El campo :attribute debe tener entre :min y :max dígitos.',
+        'min' => [
+            'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+        ],
+        'max' => [
+            'string' => 'El campo :attribute debe tener máximo :max caracteres.',
+        ],
+        'integer' => 'El campo :attribute debe ser un número entero.',
+        'IdRol.required' => 'El campo ID de rol es obligatorio.',
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+
+    $user = User::find($id);
+    $user->update($validatedData);
+
+    return redirect()->route('User.index')
+        ->with('success', 'Usuario actualizado exitosamente.');
+}
+
     
 
     /**

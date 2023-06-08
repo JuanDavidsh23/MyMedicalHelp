@@ -44,9 +44,40 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Paciente::$rules);
+        $rules = [
+            'nombre' => 'required|string|max:30|min:3',
+            'apellido' => 'required|string|max:30|min:5',
+            'correo' => 'required|email|unique:pacientes',
+            'telefono' => 'required|integer|digits:10',
+            'direccion' => 'required|string|max:50|min:5',
+            'ciudad' => 'required|string',
+            'documento' => 'required|string|digits_between:7,10',
+            'idEps' => 'required|integer',
+        ];
+    
+        $messages = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de texto.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+            'unique' => 'El campo :attribute ya ha sido registrado.',
+            'digits' => 'El campo :attribute debe tener :digits dígitos.',
+            'digits_between' => 'El campo :attribute debe tener entre :min y :max dígitos.',
+            'min' => [
+                'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+            ],
+            'max' => [
+                'string' => 'El campo :attribute debe tener  menos de :max caracteres.',
+            ],
+            'integer' => 'El campo :attribute debe ser un número entero.',  
+            'idEps.required' => 'El campo ID de rol es obligatorio.',
+             
+        ];
+        
+        $validatedData = $request->validate($rules, $messages);
 
-        $paciente = Paciente::create($request->all());
+  
+
+        $paciente = Paciente::create($validatedData);
 
         return redirect()->route('Paciente.index')
             ->with('success', 'Paciente created successfully.');
@@ -88,14 +119,43 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(Paciente::$rules);
+        $rules = [
+            'nombre' => 'required|string|max:30|min:3',
+            'apellido' => 'required|string|max:30|min:5',
+            'correo' => 'required|email|unique:pacientes,correo,' . $id,
+            'telefono' => 'required|integer|digits:10',
+            'direccion' => 'required|string|max:50|min:5',
+            'ciudad' => 'required|string',
+            'documento' => 'required|string|digits_between:7,10',
+            'idEps' => 'required|integer',
+        ];
+    
+        $messages = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de texto.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+            'unique' => 'El campo :attribute ya ha sido registrado.',
+            'digits' => 'El campo :attribute debe tener :digits dígitos.',
+            'digits_between' => 'El campo :attribute debe tener entre :min y :max dígitos.',
+            'min' => [
+                'string' => 'El campo :attribute debe tener al menos :min caracteres.',
+            ],
+            'max' => [
+                'string' => 'El campo :attribute debe tener menos de :max caracteres.',
+            ],
+            'integer' => 'El campo :attribute debe ser un número entero.',
+            'idEps.required' => 'El campo ID de rol es obligatorio.',
+        ];
+    
+        $validatedData = $request->validate($rules, $messages);
     
         $paciente = Paciente::findOrFail($id);
-        $paciente->update($request->all());
+        $paciente->update($validatedData);
     
         return redirect()->route('Paciente.index')
             ->with('success', 'Paciente updated successfully.');
     }
+    
 
     /**
      * @param int $id
