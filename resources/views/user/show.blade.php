@@ -56,6 +56,10 @@
                             <strong>Email:</strong>
                             {{ $user->email }}
                         </div>
+                        <div class="form-group">
+                            <strong>Fecha de registro:</strong>
+                            {{ $user->created_at }}
+                        </div>
 
                     </div>
                 </div>

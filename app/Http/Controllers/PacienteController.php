@@ -16,9 +16,17 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pacientes = Paciente::paginate();
+        $busqueda = $request->busqueda;
+        $pacientes = Paciente::where('documento',$busqueda)
+                    ->orWhere('nombre','LIKE','%'.$busqueda.'%')
+                    ->latest('id')
+                    ->paginate();
+
+        $data = [
+            'pacientes'=>$pacientes,
+        ];
 
         return view('paciente.index', compact('pacientes'))
             ->with('i', (request()->input('page', 1) - 1) * $pacientes->perPage());
@@ -51,7 +59,7 @@ class PacienteController extends Controller
             'telefono' => 'required|integer|digits:10',
             'direccion' => 'required|string|max:50|min:5',
             'ciudad' => 'required|string',
-            'documento' => 'required|string|digits_between:7,10',
+            'documento' => 'required|string|digits_between:7,10|unique:pacientes',
             'idEps' => 'required|integer',
         ];
     

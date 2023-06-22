@@ -48,14 +48,16 @@
         </div>
         <div class="form-group">
             {{ Form::label('password') }}
-            {{ Form::text('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'password']) }}
+            {{ Form::password('password', ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'password']) }}
             {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
         <div class="form-group">
-            {{ Form::label('IdRol') }}
-            {{ Form::select('IdRol',$rol, $user->IdRol, ['class' => 'form-control' . ($errors->has('IdRol') ? ' is-invalid' : ''), 'placeholder' => 'IdRol']) }}
-            {!! $errors->first('IdRol', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+    {{ Form::label('Rol') }}
+    {{ Form::select('IdRol', $rol, 2, ['class' => 'form-control' . ($errors->has('IdRol') ? ' is-invalid' : ''), 'placeholder' => 'IdRol']) }}
+    {!! $errors->first('IdRol', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+
 
     </div>
     <div class="box-footer mt20">

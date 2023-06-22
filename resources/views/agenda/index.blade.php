@@ -15,6 +15,14 @@
                             <span id="card_title">
                                <h3> {{ __('Agenda') }} </h3>
                             </span>
+                            <div class="d-md-flex justify-content-md-end">
+                                <form action="{{ route('Agenda.index') }}" method="GET" class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn btn-primary btn-sm ml-2">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                </form>
+                            </div>
 
                              <div class="float-right">
                                 <a href="{{ route('Agenda.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -23,11 +31,19 @@
                               </div>
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
+                    @if(Session::has('success'))
+                    
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
                     @endif
+
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
+                    @endif
+
 
                     <div class="card-body">
                         <div class="table-responsive">

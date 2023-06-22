@@ -23,12 +23,14 @@
         </div>
         <div class="form-group">
             {{ Form::label('id_user') }}
-            {{ Form::select('id_user',$user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User']) }}
+            {{ Form::select('id_user', $user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User']) }}
             {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+
+
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
+         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de que deseas confirmar esta agenda?')">{{ __('Enviar') }}
     </div>
 </div>

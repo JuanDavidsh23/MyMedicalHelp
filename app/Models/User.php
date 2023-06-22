@@ -3,32 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-/**
- * Class User
- *
- * @property $id
- * @property $name
- * @property $apellido
- * @property $telefono
- * @property $direccion
- * @property $ciudad
- * @property $departamemnto
- * @property $cedula
- * @property $zona
- * @property $email
- * @property $email_verified_at
- * @property $password
- * @property $remember_token
- * @property $created_at
- * @property $updated_at
- *
- * @property Agenda[] $agendas
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
-class User extends Model
+class User extends Model implements Authenticatable
 {
+    use AuthenticatableTrait;
     
     static $rules = [
 		'name' => 'required',
@@ -60,6 +40,4 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Agenda', 'id_user', 'id');
     }
-    
-
 }

@@ -22,9 +22,7 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('dist/img/LogoMH.png') }}" alt="AdminLTELogo" height="600" width="600">
-  </div>
+  
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -147,7 +145,18 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Eps</p>
                 </a>
-              </li>        
+              </li>  
+              <li class="nav-item">
+    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="nav-icon fas fa-sign-out-alt"></i>
+        <p>
+            Cerrar Sesión
+        </p>
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</li>      
             </ul>
           </li>
         </ul>

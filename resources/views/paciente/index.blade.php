@@ -15,6 +15,14 @@
                             <span id="card_title">
                                 <h3>{{ __('Paciente') }}</h3>
                             </span>
+                            <div class="d-md-flex justify-content-md-end">
+                                <form action="{{ route('Paciente.index') }}" method="GET" class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn btn-primary btn-sm ml-2">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                </form>
+                            </div>
 
                              <div class="float-right">
                                 <a href="{{ route('Paciente.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">

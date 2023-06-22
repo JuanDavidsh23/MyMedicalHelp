@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\rolController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -45,22 +46,37 @@ Route::get('/Regpaciente',[pacienteController::class,'create']);
 Route::post('/Regpaciente',[pacienteController::class,'store'])->name('paciente.store');
 Route::get('/paciente/delete/{id}',[pacienteController::class,'delete'])->name('paciente.delete');
 Auth::routes(); */
-Route::get('/',function(){
-    return view('welcome');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
+    Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
+    Route::resource('Historia', App\Http\Controllers\HistoriaController::class);
+    Route::resource('Paciente', App\Http\Controllers\PacienteController::class);
+    Route::resource('Permiso', App\Http\Controllers\PermisoController::class);
+    Route::resource('Rol', App\Http\Controllers\RolController::class);
+    Route::resource('Ep', App\Http\Controllers\EpController::class);
+    Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
 });
+Route::resource('User', App\Http\Controllers\UserController::class);
 
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('Agenda',App\Http\Controllers\AgendaController::class);
-Route::resource('Contrato',App\Http\Controllers\ContratoController::class);
-Route::resource('Historia',App\Http\Controllers\HistoriaController::class);
-Route::resource('Paciente',App\Http\Controllers\PacienteController::class);
-Route::resource('Permiso',App\Http\Controllers\PermisoController::class);
-Route::resource('Rol',App\Http\Controllers\RolController::class);
-Route::resource('User',App\Http\Controllers\UserController::class);
-Route::resource('Ep',App\Http\Controllers\EpController::class);
-Route::resource('rolespermisos',App\Http\Controllers\RolesPermisoController::class);
+Route::post('/login', function () {
+    $credentials = [
+        'email' => request()->input('email'),
+        'password' => request()->input('password')
+    ];
 
-Auth::routes();
+    if (Auth::attempt($credentials)) {
+        request()->session()->regenerate();
+        return redirect('Paciente');
+    }
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    return redirect()->back()->withInput()->withErrors(['login' => __('auth.failed')]);
+})->middleware('guest')->name('login');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->middleware('guest')->name('login');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

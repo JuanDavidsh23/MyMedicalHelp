@@ -16,13 +16,19 @@ class RolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rols = Rol::paginate();
-
-        return view('rol.index', compact('rols'))
-            ->with('i', (request()->input('page', 1) - 1) * $rols->perPage());
+        {
+            $busqueda = $request->busqueda;
+            $rols = Rol::where('nombre_rol', 'LIKE', '%' . $busqueda . '%')
+                        ->paginate();
+        
+            return view('rol.index', compact('rols'))
+                ->with('i', (request()->input('page', 1) - 1) * $rols->perPage());
+        }
+        
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -43,12 +49,20 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Rol::$rules);
+        $rules = [
+            'nombre_rol' => 'required|unique:rols',
+        ];        
+        $messages = [
+            'unique' => 'Este rol ya ha sido registrado.',
+             
+        ];
+        $validatedData = $request->validate($rules, $messages);
 
-        $rol = Rol::create($request->all());
+
+        $rol = Rol::create($validatedData);
 
         return redirect()->route('Rol.index')
-            ->with('success', 'Rol created successfully.');
+            ->with('Exito', 'Rol creado Exitosamente.');
     }
 
     /**
@@ -85,15 +99,25 @@ class RolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $request->validate(Rol::$rules);
-
-    $rol = Rol::find($id);
-    $rol->update($request->all());
-
-    return redirect()->route('Rol.index')
-        ->with('success', 'Rol updated successfully');
-}
+    {
+        $rules = [
+            'nombre_rol' => 'required|unique:rols,nombre_rol,' . $id,
+        ];
+    
+        $messages = [
+            'nombre_rol.required' => 'Rol es obligatorio.',
+            'nombre_rol.unique' => 'No puedes cambiar el nombre de este rol por que ya ha sido registrado.',
+        ];
+    
+        $validatedData = $request->validate($rules, $messages);
+    
+        $rol = Rol::find($id);
+        $rol->update($validatedData);
+    
+        return redirect()->route('Rol.index')
+            ->with('success', 'Rol actualizado exitosamente.');
+    }
+    
 
 
     /**

@@ -21,7 +21,6 @@
                             @csrf
 
                             @include('agenda.form')
-
                         </form>
                     </div>
                 </div>
