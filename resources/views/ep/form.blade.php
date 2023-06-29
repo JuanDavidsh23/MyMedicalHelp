@@ -1,14 +1,20 @@
+
+    <title>Formulario con formato numérico</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
 <div class="box box-info padding-1">
     <div class="box-body">
-        
         <div class="form-group">
-            {{ Form::label('descripcion') }}
-            {{ Form::text('descripcion', $ep->descripcion, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
-            {!! $errors->first('descripcion', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="eps">Nombre Eps</label>
+            <input type="text" name="eps" id="eps" class="form-control number-format" placeholder="Nombre">
         </div>
-
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </div>
 </div>
+
+</body>
+

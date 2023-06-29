@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('correo');
-            $table->integer('telefono');
+            $table->BigInteger('telefono');
             $table->string('direccion');
             $table->string('ciudad');
-            $table->integer('documento');
+            $table->BigInteger('documento');
             $table->unsignedBigInteger('idEps');
             $table->foreign('idEps')->references('id')->on('eps')->onDelete('cascade'); 
             $table->timestamps();

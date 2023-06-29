@@ -38,7 +38,6 @@
                                         
 										<th>Ideps</th>
 										<th>Costo</th>
-										<th>Politicas</th>
 
                                         <th></th>
                                     </tr>
@@ -48,9 +47,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $contrato->ep->descripcion }}</td>
+											<td>{{ $contrato->ep->eps }}</td>
 											<td>{{ $contrato->costo }}</td>
-											<td>{{ $contrato->politicas }}</td>
 
                                             <td>
                                                 <form action="{{ route('Contrato.destroy',$contrato->id) }}" method="POST">

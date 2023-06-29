@@ -2,9 +2,14 @@
     <div class="box-body">
         
         <div class="form-group">
-            {{ Form::label('fecha') }}
-            {{ Form::date('fecha', $agenda->fecha, ['class' => 'form-control' . ($errors->has('fecha') ? ' is-invalid' : ''), 'placeholder' => 'Fecha']) }}
-            {!! $errors->first('fecha', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('fecha_inicio') }}
+            {{ Form::date('fecha_inicio', $agenda->fecha_inicio, ['class' => 'form-control' . ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}
+            {!! $errors->first('fecha_inicio', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('fecha_fin') }}
+            {{ Form::date('fecha_fin', $agenda->fecha_fin, ['class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Fin']) }}
+            {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('hora') }}
@@ -12,10 +17,11 @@
             {!! $errors->first('hora', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('lugar') }}
-            {{ Form::text('lugar', $agenda->lugar, ['class' => 'form-control' . ($errors->has('lugar') ? ' is-invalid' : ''), 'placeholder' => 'Lugar']) }}
-            {!! $errors->first('lugar', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('hora_fin') }}
+            {{ Form::time('hora_fin', $agenda->hora_fin, ['class' => 'form-control' . ($errors->has('hora_fin') ? ' is-invalid' : ''), 'placeholder' => 'Hora Fin']) }}
+            {!! $errors->first('hora_fin', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
         <div class="form-group">
             {{ Form::label('id_pacientes') }}
             {{ Form::select('id_pacientes',$pacientes, $agenda->id_pacientes, ['class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Id Pacientes']) }}

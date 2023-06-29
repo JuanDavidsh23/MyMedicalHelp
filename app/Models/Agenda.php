@@ -25,9 +25,10 @@ class Agenda extends Model
 {
     
     static $rules = [
-		'fecha' => 'required',
+		'fecha_inicio' => 'required',
+		'fecha_fin' => 'required',
 		'hora' => 'required',
-		'lugar' => 'required',
+		'hora_fin' => 'required',
 		'id_pacientes' => 'required',
 		'id_user' => 'required',
     ];
@@ -39,7 +40,7 @@ class Agenda extends Model
      *
      * @var array
      */
-    protected $fillable = ['fecha','hora','lugar','id_pacientes','id_user'];
+    protected $fillable = ['fecha_inicio','fecha_fin','hora','hora_fin','lugar','id_pacientes','id_user'];
 
 
     /**

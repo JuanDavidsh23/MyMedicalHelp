@@ -40,7 +40,7 @@ class PacienteController extends Controller
     public function create()
     {
         $paciente = new Paciente();
-        $eps = Ep::pluck('descripcion','id');
+        $eps = Ep::pluck('eps','id');
         return view('paciente.create', compact('paciente','eps'));
     }
 
@@ -113,7 +113,7 @@ class PacienteController extends Controller
     public function edit($id)
     {
         $paciente = Paciente::find($id);
-        $eps = Ep::pluck('descripcion','id');
+        $eps = Ep::pluck('eps','id');
 
         return view('paciente.edit', compact('paciente','eps'));
     }

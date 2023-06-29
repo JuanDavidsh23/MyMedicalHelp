@@ -14,9 +14,10 @@ return new class extends Migration
         
  Schema::create('agendas', function (Blueprint $table) {
     $table->id();
-    $table->string('fecha');
-    $table->string('hora');
-    $table->string('lugar');
+    $table->date('fecha_inicio');
+    $table->date('fecha_fin');
+    $table->time('hora');
+    $table->time('hora_fin');
     $table->unsignedBigInteger('id_pacientes');
     $table->foreign('id_pacientes')->references('id')->on('pacientes')->onDelete('cascade'); 
     $table->unsignedBigInteger('id_user');

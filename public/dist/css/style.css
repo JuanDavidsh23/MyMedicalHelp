@@ -1,6 +1,6 @@
 body{
     height: 100vh;
-    background: #0062E6 !important;
+    background: white !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@ body{
   
   .img-left{
     width: 45%;
-    background: url('img.jpg') center;
+    background: url("../img/LogoMH.png")  center;
     background-size: cover;
   }
   
@@ -49,7 +49,7 @@ body{
     position: absolute;
     top: 10px;
     padding-left: 15px;
-    color: #007bff;
+    color: red;
   }
   
   .form-input input::placeholder{
@@ -58,7 +58,7 @@ body{
   }
   
   .form-input input:focus, .form-input input:valid{
-    border: 2px solid #007bff;
+    border: 2px solid #460880;
   }
   
   .form-input input:focus::placeholder{
@@ -66,7 +66,7 @@ body{
   }
   
   .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
-    background-color: #007bff !important;
+    background-color: #460880 !important;
     border: 0px;
   }
   
@@ -75,7 +75,7 @@ body{
     border: none;
     cursor: pointer;
     border-radius: 50px;
-    background: #007bff;
+    background: red;
     color: #fff;
     font-size: 90%;
     font-weight: bold;
@@ -85,7 +85,7 @@ body{
   }
   
   .form-box button[type="submit"]:hover{
-    background: #0069d9;
+    background: #460880;
   }
   
   .forget-link, .register-link{

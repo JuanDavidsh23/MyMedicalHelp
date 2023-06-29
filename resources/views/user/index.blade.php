@@ -19,7 +19,7 @@
                                     <button type="submit" class="btn btn-primary btn-sm ml-2">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                    <input type="text" name="busqueda" placeholder="Buscador" class="form-control mr-2">
                                 </form>
                             </div>
                             <div class="float-right">
@@ -45,7 +45,7 @@
                                         <th>Telefono</th>
                                         <th>Direccion</th>
                                         <th>Cedula</th>
-                                        <th>Rol</th>
+                              
                                         
                                         <th></th>
                                     </tr>
@@ -59,7 +59,7 @@
                                             <td>{{ $user->telefono }}</td>
                                             <td>{{ $user->direccion }}</td>
                                             <td>{{ $user->cedula }}</td>
-                                            <td>{{ $user->idRol}}</td>
+                                
 
                                             <td>
                                                 <form action="{{ route('User.destroy', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">

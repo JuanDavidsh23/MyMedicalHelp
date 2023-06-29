@@ -23,25 +23,28 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index(Request $request)
-{
-    $busqueda = $request->input('busqueda');
+    public function index(Request $request)
+    {
+        $busqueda = $request->input('busqueda');
     
-    if ($busqueda) {
-        $agendas = Agenda::where('id', 'LIKE', '%' . $busqueda . '%')
-            ->orWhere('id_pacientes', 'LIKE', '%' . $busqueda . '%')
-            ->orWhere('id_user', 'LIKE', '%' . $busqueda . '%')
-            ->orWhere('fecha', 'LIKE', '%' . $busqueda . '%')
-            ->orWhere('hora', 'LIKE', '%' . $busqueda . '%')
-            ->latest('id')
-            ->paginate();
-    } else {
-        $agendas = Agenda::paginate();
+        $query = Agenda::query();
+    
+        if ($busqueda) {
+            $query->where('id', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('id_pacientes', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('id_user', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('fecha_inicio', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('fecha_fin', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('hora', 'LIKE', '%' . $busqueda . '%')
+                ->orWhere('hora_fin', 'LIKE', '%' . $busqueda . '%');
+        }
+    
+        $agendas = $query->latest('id')->paginate();
+    
+        return view('agenda.index', compact('agendas'))
+            ->with('i', (request()->input('page', 1) - 1) * $agendas->perPage());
     }
-
-    return view('agenda.index', compact('agendas'))
-        ->with('i', (request()->input('page', 1) - 1) * $agendas->perPage());
-}
+    
 
 
     /**
@@ -57,93 +60,43 @@ public function index(Request $request)
         return view('agenda.create', compact('agenda','pacientes','user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-/*     public function store(Request $request)
-    {
-        $rules = [
-            'fecha' => [
-                'required',
-                function ($attribute, $value, $fail) use ($request) {
-                    $startDateTime = Carbon::parse($value . ' ' . $request->hora);
-                    $endDateTime = $startDateTime->copy()->addMinutes(40);
-    
-                    $existingAgenda = Agenda::where('id_user', $request->id_user)
-                        ->where(function ($query) use ($startDateTime, $endDateTime) {
-                            $query->where('fecha', $startDateTime->toDateString())
-                                ->where(function ($query) use ($startDateTime, $endDateTime) {
-                                    $query->where(function ($query) use ($startDateTime, $endDateTime) {
-                                        $query->where('hora', '>=', $startDateTime->toTimeString())
-                                            ->where('hora', '<=', $endDateTime->toTimeString());
-                                    })
-                                    ->orWhere(function ($query) use ($startDateTime, $endDateTime) {
-                                        $query->where('hora', '<=', $startDateTime->toTimeString())
-                                            ->where('hora', '>=', $endDateTime->toTimeString());
-                                    });
-                                });
-                        })
-                        ->first();
-    
-                    if ($existingAgenda) {
-                        $fail('Ya existe una agenda dentro de un rango de 30 minutos para este usuario.');
-                    }
-                }
-            ],
-            'hora' => 'required',
-            'lugar' => 'required',
-            'id_pacientes' => 'required',
-            'id_user' => 'required',
-        ];
-    
-        $messages = [
-            'required' => 'El campo es obligatorio.',
-        ];
-    
-        $validatedData = $request->validate($rules, $messages);
-    
-        $agenda = Agenda::create($validatedData);
-    
-        return redirect()->route('Agenda.index')
-            ->with('success', 'Agenda creada correctamente.');
-    } */
     public function store(Request $request)
-    {
-        $rules = [
-            'fecha' => [
-                'required',
-                function ($attribute, $value, $fail) use ($request) {
-                    $existingAgenda = Agenda::where('fecha', $value)
-                        ->where('hora', $request->hora)
-                        ->where('id_user', $request->id_user)
-                        ->first();
-    
-                    if ($existingAgenda) {
-                        $fail('Ya existe una agenda con la misma fecha y hora para esta enfermera.');
-                    }
-                }
-            ],
-            'hora' => 'required',
-            'lugar' => 'required',
-            'id_pacientes' => 'required',
-            'id_user' => 'required',
-        ];
-    
-        $messages = [
-            'required' => 'El campo es obligatorio.',
-        ];
-    
-        $validatedData = $request->validate($rules, $messages);
-    
-        $agenda = Agenda::create($validatedData);
-    
-        return redirect()->route('Agenda.index')
-            ->with('success', 'Agenda creada correctamente.');
+{
+    $rules = [
+        'hora' => 'required',
+        'hora_fin' => 'required',
+        'id_pacientes' => 'required',
+        'id_user' => 'required',
+    ];
+
+    $messages = [
+        'required' => 'El campo es obligatorio.',
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+
+    // Verificar si el paciente ya tiene una agenda activa en el rango de fechas proporcionado
+    $existingAgenda = Agenda::where('id_pacientes', $validatedData['id_pacientes'])
+        ->where(function ($query) use ($validatedData) {
+            $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                ->orWhere(function ($query) use ($validatedData) {
+                    $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
+                        ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
+                });
+        })
+        ->first();
+
+    if ($existingAgenda) {
+        return redirect()->back()->withErrors('El paciente ya tiene una agenda activa en el rango de fechas proporcionado.');
     }
-    
+
+    $agenda = Agenda::create($validatedData);
+
+    return redirect()->route('Agenda.index')
+        ->with('success', 'Agenda creada correctamente.');
+}
+
 
     /**
      * Display the specified resource.
@@ -184,9 +137,10 @@ public function index(Request $request)
     $agenda = Agenda::findOrFail($id);
 
         $rules = [
-            'fecha' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required', 
             'hora' => 'required',
-            'lugar' => 'required',
+            'hora_fin' => 'required',
             'id_pacientes' => 'required',
             'id_user' => 'required',
         ];

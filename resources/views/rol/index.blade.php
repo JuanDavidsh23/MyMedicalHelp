@@ -20,7 +20,7 @@
                                     <button type="submit" class="btn btn-primary btn-sm ml-2">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                    <input type="text" name="busqueda" placeholder="buscador" class="form-control mr-2">
                                 </form>
                             </div>
 

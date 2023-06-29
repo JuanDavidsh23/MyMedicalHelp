@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('User', App\Http\Controllers\UserController::class);
 
+
 Route::post('/login', function () {
     $credentials = [
         'email' => request()->input('email'),
@@ -72,7 +73,7 @@ Route::post('/login', function () {
         return redirect('Paciente');
     }
 
-    return redirect()->back()->withInput()->withErrors(['login' => __('auth.failed')]);
+    return redirect()->back()->withInput()->withErrors(['login' => __('Correo o contraseña incorrectos.')]);
 })->middleware('guest')->name('login');
 
 Route::get('/login', function () {

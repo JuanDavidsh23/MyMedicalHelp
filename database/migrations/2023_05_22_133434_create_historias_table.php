@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('historias', function (Blueprint $table) {
             $table->id();
-            $table->string('observaciones');
-            $table->string('procedimientos');
-            $table->string('recomendaciones');
+            $table->string('diagnostico');
+            $table->string('signosvitales');
+            $table->string('antecedentesalergicos');
+            $table->string('evolucion');
+            $table->string('tratamiento');
              $table->unsignedBigInteger('pacientes_id');
             $table->foreign('pacientes_id')->references('id')->on('pacientes')->onDelete('cascade'); 
             $table->timestamps();

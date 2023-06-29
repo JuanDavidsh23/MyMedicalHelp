@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contrato;
 use App\Models\User;
 use App\Models\Rol;
+use App\Models\Ep;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -38,8 +39,11 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        $rol = Rol::pluck('id', 'nombre_rol');
-        return view('User.create', compact('user', 'rol'));
+        $rol = Rol::pluck('nombre_rol', 'id');
+        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->pluck('eps.eps', 'contratos.id');
+        $eps = Ep::pluck('eps','id');
+        return view('User.create', compact('user', 'rol','contrato','eps'));
     }
 
     protected function validator(array $data)
@@ -50,12 +54,13 @@ class UserController extends Controller
             'telefono' => ['required', 'integer', 'digits:10'],
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
-            'departamemnto' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
             'zona' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
+            'idContrato' => ['required', 'integer'],
+
         ]);
     }
 
@@ -67,29 +72,31 @@ class UserController extends Controller
             'telefono' => $data['telefono'],
             'direccion' => $data['direccion'],
             'ciudad' => $data['ciudad'],
-            'departamemnto' => $data['departamemnto'],
             'cedula' => $data['cedula'],
             'zona' => $data['zona'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'IdRol' => $data['IdRol'],
+            'idContrato' => $data['idContrato']     
         ]);
     }
 
     public function store(Request $request)
     {
+       
         $rules = [
-            'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z]+$/'],
-            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z]+$/'],
+            'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
+            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
             'telefono' => ['required', 'integer', 'digits:10'],
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
-            'ciudad' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
-            'departamemnto' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+            'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
-            'zona' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+            'zona' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
+            'idContrato' => ['nullable', 'integer'],
+
         ];
 
         $messages = [
@@ -112,10 +119,24 @@ class UserController extends Controller
 
         $validatedData = $request->validate($rules, $messages);
 
-        $user = User::create($validatedData);
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'apellido' => $validatedData['apellido'],
+            'telefono' => $validatedData['telefono'],
+            'direccion' => $validatedData['direccion'],
+            'ciudad' => $validatedData['ciudad'],
+            'cedula' => $validatedData['cedula'],
+            'zona' => $validatedData['zona'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'IdRol' => $validatedData['IdRol'],
+            'idContrato' => $validatedData['idContrato']
+
+        ]);
 
         return redirect()->route('User.index')
             ->with('success', 'Usuario creado exitosamente.');
+          
     }
 
     public function show($id)
@@ -129,23 +150,26 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $rol = Rol::pluck('nombre_rol', 'id');
-        return view('user.edit', compact('user', 'rol'));
+        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->pluck('eps.eps', 'contratos.id');
+        $eps = Ep::pluck('eps','id');
+        return view('user.edit', compact('user', 'rol','contrato','eps'));
     }
 
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z]+$/'],
-            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z]+$/'],
-            'telefono' => ['required', 'digits:9'],
+            'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
+            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
+            'telefono' => ['required', 'digits:10'],
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
-            'ciudad' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
-            'departamemnto' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+            'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'digits_between:7,10'],
-            'zona' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+            'zona' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'email' => ['required', 'email', 'unique:users,email,' . $id],
             'password' => ['nullable', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
+            'idContrato' => ['nullable', 'integer'],
         ];
 
         $messages = [
@@ -174,11 +198,14 @@ class UserController extends Controller
         $user->telefono = $validatedData['telefono'];
         $user->direccion = $validatedData['direccion'];
         $user->ciudad = $validatedData['ciudad'];
-        $user->departamemnto = $validatedData['departamemnto'];
         $user->cedula = $validatedData['cedula'];
         $user->zona = $validatedData['zona'];
         $user->email = $validatedData['email'];
         $user->IdRol = $validatedData['IdRol'];
+        $user->idContrato = $validatedData['idContrato'];
+
+        
+        
 
         // Verificar si se proporcionó una nueva contraseña
         if (!empty($validatedData['password'])) {

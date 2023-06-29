@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class Historia
  *
  * @property $id
- * @property $observaciones
- * @property $procedimientos
- * @property $recomendaciones
+ * @property $diagnostico
+ * @property $signosvitales
+ * @property $antecedentesalergicos
+ * @property $evolucion
+ * @property $tratamiento
  * @property $pacientes_id
  * @property $created_at
  * @property $updated_at
@@ -23,9 +25,11 @@ class Historia extends Model
 {
     
     static $rules = [
-		'observaciones' => 'required',
-		'procedimientos' => 'required',
-		'recomendaciones' => 'required',
+    'diagnostico'=>'required',
+    'signosvitales'=>'required',
+    'antecedentesalergicos'=>'required',
+		'evolucion' => 'required',
+		'tratamiento' => 'required',
 		'pacientes_id' => 'required',
     ];
 
@@ -36,7 +40,7 @@ class Historia extends Model
      *
      * @var array
      */
-    protected $fillable = ['observaciones','procedimientos','recomendaciones','pacientes_id'];
+    protected $fillable = ['diagnostico','signosvitales','antecedentesalergicos','evolucion','tratamiento','pacientes_id'];
 
 
     /**

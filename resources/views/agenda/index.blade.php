@@ -20,7 +20,7 @@
                                     <button type="submit" class="btn btn-primary btn-sm ml-2">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                    <input type="text" name="busqueda" placeholder="buscador" class="form-control mr-2">
                                 </form>
                             </div>
 
@@ -52,11 +52,10 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Fecha</th>
-										<th>Hora</th>
-										<th>Lugar</th>
+										<th>Fecha Inicio</th>
+										<th>Fecha Final</th>
 										<th>Pacientes</th>
-										<th>Usuarios</th>
+										<th>Enfermera</th>
 
                                         <th></th>
                                     </tr>
@@ -66,9 +65,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $agenda->fecha }}</td>
-											<td>{{ $agenda->hora }}</td>
-											<td>{{ $agenda->lugar }}</td>
+											<td>{{ $agenda->fecha_inicio }}</td>
+											<td>{{ $agenda->fecha_fin }}</td>
 											<td>{{ $agenda->paciente->nombre }}</td>
 											<td>{{ $agenda->usuario->name }}</td>
 

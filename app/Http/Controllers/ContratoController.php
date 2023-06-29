@@ -33,7 +33,7 @@ class ContratoController extends Controller
     public function create()
     {
         $contrato = new Contrato();
-        $eps = Ep::pluck('descripcion','id');
+        $eps = Ep::pluck('eps','id');
         return view('contrato.create', compact('contrato','eps'));
     }
 
@@ -75,7 +75,7 @@ class ContratoController extends Controller
     public function edit($id)
     {
         $contrato = Contrato::find($id);
-        $eps = Ep::pluck('descripcion','id');
+        $eps = Ep::pluck('eps','id');
 
         return view('contrato.edit', compact('contrato','eps'));
     }

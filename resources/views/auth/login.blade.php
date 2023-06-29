@@ -1,147 +1,14 @@
-
 <!DOCTYPE html>
-<style>
-    body{
-    height: 100vh;
-    background: #0062E6 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .card{
-    overflow: hidden;
-    border: 0 !important;
-    border-radius: 20px !important;
-    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-  }
-  
-  .img-left{
-    width: 45%;
-    background: url("dist/img/enfermeralogin.jpg")  center;
-    background-size: cover;
-  }
-  
-  .card-body{
-    padding: 2rem;
-  }
-  
-  .title{
-    margin-bottom: 2rem;
-  }
-  
-  .form-input{
-    position: relative;
-  }
-  
-  .form-input input{
-    width: 100%;
-    height: 45px;
-    padding-left: 40px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    box-shadow: none;
-    border: 1px solid #00000020;
-    border-radius: 50px;
-    outline: none;
-    background: transparent;
-  }
-  
-  .form-input span{
-    position: absolute;
-    top: 10px;
-    padding-left: 15px;
-    color: #007bff;
-  }
-  
-  .form-input input::placeholder{
-    color: black;
-    padding-left: 0px;
-  }
-  
-  .form-input input:focus, .form-input input:valid{
-    border: 2px solid #007bff;
-  }
-  
-  .form-input input:focus::placeholder{
-    color: #454b69;
-  }
-  
-  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
-    background-color: #007bff !important;
-    border: 0px;
-  }
-  
-  .form-box button[type="submit"]{
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 50px;
-    background: #007bff;
-    color: #fff;
-    font-size: 90%;
-    font-weight: bold;
-    letter-spacing: .1rem;
-    transition: 0.5s;
-    padding: 12px;
-  }
-  
-  .form-box button[type="submit"]:hover{
-    background: #0069d9;
-  }
-  
-  .forget-link, .register-link{
-    color: #007bff;
-    font-weight: bold;
-  }
-  
-  .forget-link:hover, .register-link:hover{
-    color: #0069d9;
-    text-decoration: none;
-  }
-  
-  .form-box .btn-social{
-    color: white !important;
-    border: 0;
-    font-weight: bold;
-  }
-  
-  .form-box .btn-facebook{
-    background: #4866a8;
-  }
-  
-  .form-box .btn-google{
-    background: #da3f34;
-  }
-  
-  .form-box .btn-twitter{
-    background: #33ccff;
-  }
-  
-  .form-box .btn-facebook:hover{
-    background: #3d578f;
-  }
-  
-  .form-box .btn-google:hover{
-    background: #bf3b31;
-  }
-  
-  .form-box .btn-twitter:hover{
-    background: #2eb7e5;
-  }
-  
-  
-</style>
 <html>
 <head>
-  <title>Login Form</title>
+  <title>Iniciar sesión</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('dist/css/style.css') }}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <link rel="icon" type="image/png" href="{{ asset('dist/img/log.png') }}">
 </head>
 <body>
   <div class="container">
@@ -153,36 +20,30 @@
           <h4 class="title text-center mt-4">
             My Medical Help
           </h4>
-          <form class="form-box px-3"method="POST">
-          @csrf
+          <form class="form-box px-3" method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="form-input">
               <span><i class="fa fa-envelope-o"></i></span>
-              <input type="email" name="email"  placeholder="Email" tabindex="10" required>
+              <input type="email" name="email" placeholder="Email" tabindex="10" required>
             </div>
             <div class="form-input">
               <span><i class="fa fa-key"></i></span>
-              <input type="password" name="password"  placeholder="Contraseña" required>
+              <input type="password" name="password" placeholder="Contraseña" required>
             </div>
 
-<!--             <div class="mb-3">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="cb1" name="">
-                <label class="custom-control-label" for="cb1">Remember me</label>
-              </div>
+            <div class="mb-3">
+              @error('login')
+                <div class="alert alert-danger" role="alert">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
- -->
+
             <div class="mb-3">
               <button type="submit" class="btn btn-block text-uppercase">
-                Login
+                Iniciar sesión
               </button>
             </div>
-
-<!--             <div class="text-right">
-              <a href="#" class="forget-link">
-                Forget Password?
-              </a>
-            </div> -->
-
     
           </form>
         </div>

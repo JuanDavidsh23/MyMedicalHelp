@@ -21,24 +21,28 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Fecha:</strong>
-                            {{ $agenda->fecha }}
+                            <strong>Fecha Inicio:</strong>
+                            {{ $agenda->fecha_inicio }}
                         </div>
                         <div class="form-group">
-                            <strong>Hora:</strong>
+                            <strong>Fecha Fin</strong>
+                            {{ $agenda->fecha_fin }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Hora Inicio:</strong>
                             {{ $agenda->hora }}
                         </div>
                         <div class="form-group">
-                            <strong>Lugar:</strong>
-                            {{ $agenda->lugar }}
+                            <strong>Hora Fin:</strong>
+                            {{ $agenda->hora_fin }}
                         </div>
                         <div class="form-group">
                             <strong>Id Pacientes:</strong>
-                            {{ $agenda->id_pacientes }}
+                            {{ $agenda->paciente->nombre }}
                         </div>
                         <div class="form-group">
-                            <strong>Id User:</strong>
-                            {{ $agenda->id_user }}
+                            <strong>Enfermera:</strong>
+                            {{ $agenda->usuario->name }}
                         </div>
 
                     </div>

@@ -20,7 +20,7 @@
                                     <button type="submit" class="btn btn-primary btn-sm ml-2">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <input type="text" name="busqueda" class="form-control mr-2">
+                                    <input type="text" name="busqueda" placeholder="Buscador" class="form-control mr-2">
                                 </form>
                             </div>
 
@@ -64,7 +64,7 @@
 											<td>{{ $paciente->correo }}</td>
 											<td>{{ $paciente->telefono }}</td>
 											<td>{{ $paciente->documento }}</td>
-											<td>{{ $paciente->ep->descripcion }}</td>
+											<td>{{ $paciente->ep->eps }}</td>
 
                                             <td>
                                                 <form action="{{ route('Paciente.destroy',$paciente->id) }}" method="POST">

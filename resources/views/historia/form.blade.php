@@ -1,26 +1,37 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
-        <div class="form-group">
-            {{ Form::label('observaciones') }}
-            {{ Form::text('observaciones', $historia->observaciones, ['class' => 'form-control' . ($errors->has('observaciones') ? ' is-invalid' : ''), 'placeholder' => 'Observaciones']) }}
-            {!! $errors->first('observaciones', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('procedimientos') }}
-            {{ Form::text('procedimientos', $historia->procedimientos, ['class' => 'form-control' . ($errors->has('procedimientos') ? ' is-invalid' : ''), 'placeholder' => 'Procedimientos']) }}
-            {!! $errors->first('procedimientos', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('recomendaciones') }}
-            {{ Form::text('recomendaciones', $historia->recomendaciones, ['class' => 'form-control' . ($errors->has('recomendaciones') ? ' is-invalid' : ''), 'placeholder' => 'Recomendaciones']) }}
-            {!! $errors->first('recomendaciones', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
+    <div class="form-group">
             {{ Form::label('pacientes') }}
             {{ Form::select('pacientes_id',$pacientes, $historia->pacientes_id, ['class' => 'form-control' . ($errors->has('pacientes_id') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
             {!! $errors->first('pacientes_id', '<div class="invalid-feedback">:message</div>') !!}
+        </div>    
+
+        <div class="form-group">
+            {{ Form::label('diagnostico') }}
+            {{ Form::text('diagnostico', $historia->diagnostico, ['class' => 'form-control' . ($errors->has('diagnostico') ? ' is-invalid' : ''), 'placeholder' => 'Diagnostico']) }}
+            {!! $errors->first('diagnostico', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('signosvitales') }}
+            {{ Form::text('signosvitales', $historia->signosvitales, ['class' => 'form-control' . ($errors->has('signosvitales') ? ' is-invalid' : ''), 'placeholder' => 'signosvitales']) }}
+            {!! $errors->first('signosvitales', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('antecedentesalergicos') }}
+            {{ Form::text('antecedentesalergicos', $historia->antecedentesalergicos, ['class' => 'form-control' . ($errors->has('antecedentesalergicos') ? ' is-invalid' : ''), 'placeholder' => 'antecedentesalergicos']) }}
+            {!! $errors->first('antecedentesalergicos', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('evolucion') }}
+            {{ Form::text('evolucion', $historia->evolucion, ['class' => 'form-control' . ($errors->has('evolucion') ? ' is-invalid' : ''), 'placeholder' => 'Procedimientos']) }}
+            {!! $errors->first('evolucion', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('tratamiento') }}
+            {{ Form::text('tratamiento', $historia->tratamiento, ['class' => 'form-control' . ($errors->has('tratamiento') ? ' is-invalid' : ''), 'placeholder' => 'Recomendaciones']) }}
+            {!! $errors->first('tratamiento', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+       
 
     </div>
     <br>

@@ -46,7 +46,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $ep->descripcion }}</td>
+											<td>{{ $ep->eps }}</td>
 
                                             <td>
                                                 <form action="{{ route('Ep.destroy',$ep->id) }}" method="POST">

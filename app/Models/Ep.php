@@ -21,7 +21,7 @@ class Ep extends Model
 {
     
     static $rules = [
-		'descripcion' => 'required',
+		'eps' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,7 +31,7 @@ class Ep extends Model
      *
      * @var array
      */
-    protected $fillable = ['descripcion'];
+    protected $fillable = ['eps'];
 
 
     /**

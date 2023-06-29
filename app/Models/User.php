@@ -16,11 +16,14 @@ class User extends Model implements Authenticatable
 		'telefono' => 'required',
 		'direccion' => 'required',
 		'ciudad' => 'required',
-		'departamemnto' => 'required',
 		'cedula' => 'required',
 		'zona' => 'required',
 		'email' => 'required',
-        'password' => 'required'
+        'password' => 'required',
+        'IdRol' => 'required',
+        'idContrato' => 'required',
+
+     
     ];
 
     protected $perPage = 20;
@@ -30,7 +33,7 @@ class User extends Model implements Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name','apellido','telefono','direccion','ciudad','departamemnto','cedula','zona','email','password','IdRol'];
+    protected $fillable = ['name','apellido','telefono','direccion','ciudad','cedula','zona','email','password','IdRol','idContrato'];
 
 
     /**

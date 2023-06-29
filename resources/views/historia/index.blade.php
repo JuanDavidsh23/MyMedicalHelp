@@ -36,10 +36,14 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Observaciones</th>
-										<th>Procedimientos</th>
-										<th>Recomendaciones</th>
-										<th>Pacientes</th>
+										<th>Diagnostico</th>
+										<th>Signos</th>
+										<th>Antecedentes</th>
+										<th>Evolución</th>
+										<th>Tratamiento</th>
+										<th>Paciente</th>
+
+
 
                                         <th></th>
                                     </tr>
@@ -49,9 +53,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $historia->observaciones }}</td>
-											<td>{{ $historia->procedimientos }}</td>
-											<td>{{ $historia->recomendaciones }}</td>
+											<td>{{ $historia->diagnostico }}</td>
+											<td>{{ $historia->signosvitales }}</td>
+											<td>{{ $historia->antecedentesalergicos }}</td>
+											<td>{{ $historia->evolucion }}</td>
+											<td>{{ $historia->tratamiento }}</td>
 											<td>{{ $historia->paciente->nombre }}</td>
 
                                             <td>
