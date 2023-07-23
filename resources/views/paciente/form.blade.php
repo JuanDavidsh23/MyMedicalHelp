@@ -38,10 +38,10 @@
             {!! $errors->first('documento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('idEps') }}
-            {{ Form::select('idEps',$eps, $paciente->idEps, ['class' => 'form-control' . ($errors->has('idEps') ? ' is-invalid' : ''), 'placeholder' => 'Ideps']) }}
-            {!! $errors->first('idEps', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+            {{ Form::label('Contrato') }}
+            {{ Form::select('idContrato',$contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+            {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
 
     </div>
     <div class="box-footer mt20">

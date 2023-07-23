@@ -23,7 +23,9 @@ class Contrato extends Model
     
     static $rules = [
 		'idEps' => 'required',
-		'costo' => 'required',
+		'fecha_inicio' => 'required',
+		'fecha_fin' => 'required',
+		'estado' => 'required',
     ];
 
     protected $perPage = 20;
@@ -33,7 +35,7 @@ class Contrato extends Model
      *
      * @var array
      */
-    protected $fillable = ['idEps','costo'];
+    protected $fillable = ['idEps','fecha_inicio','fecha_fin','estado'];
 
 
     /**

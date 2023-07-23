@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contrato;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\Ep;
@@ -40,8 +40,10 @@ class PacienteController extends Controller
     public function create()
     {
         $paciente = new Paciente();
+        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->pluck('eps.eps', 'contratos.id');
         $eps = Ep::pluck('eps','id');
-        return view('paciente.create', compact('paciente','eps'));
+        return view('paciente.create', compact('paciente','eps','contrato'));
     }
 
     /**
@@ -60,7 +62,7 @@ class PacienteController extends Controller
             'direccion' => 'required|string|max:50|min:5',
             'ciudad' => 'required|string',
             'documento' => 'required|string|digits_between:7,10|unique:pacientes',
-            'idEps' => 'required|integer',
+            'idContrato' => 'required|integer',
         ];
     
         $messages = [
@@ -77,7 +79,7 @@ class PacienteController extends Controller
                 'string' => 'El campo :attribute debe tener  menos de :max caracteres.',
             ],
             'integer' => 'El campo :attribute debe ser un número entero.',  
-            'idEps.required' => 'El campo ID de rol es obligatorio.',
+            'idContrato.required' => 'El campo ID de rol es obligatorio.',
              
         ];
         
@@ -135,7 +137,7 @@ class PacienteController extends Controller
             'direccion' => 'required|string|max:50|min:5',
             'ciudad' => 'required|string',
             'documento' => 'required|string|digits_between:7,10',
-            'idEps' => 'required|integer',
+            'idContrato' => 'required|integer',
         ];
     
         $messages = [
@@ -152,7 +154,7 @@ class PacienteController extends Controller
                 'string' => 'El campo :attribute debe tener menos de :max caracteres.',
             ],
             'integer' => 'El campo :attribute debe ser un número entero.',
-            'idEps.required' => 'El campo ID de rol es obligatorio.',
+            'idContrato.required' => 'El campo ID de rol es obligatorio.',
         ];
     
         $validatedData = $request->validate($rules, $messages);

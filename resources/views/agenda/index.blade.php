@@ -47,7 +47,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="table_agenda" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -90,4 +90,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(()=>{
+            new DataTable('#table_agenda');
+        })
+        
+    </script>
 @endsection

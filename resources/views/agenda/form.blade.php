@@ -1,6 +1,10 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+        <div class="form-group">
+            {{ Form::label('Contrato') }}
+            {{ Form::select('idContrato',$contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+            {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
         <div class="form-group">
             {{ Form::label('fecha_inicio') }}
             {{ Form::date('fecha_inicio', $agenda->fecha_inicio, ['class' => 'form-control' . ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}

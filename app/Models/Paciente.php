@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $direccion
  * @property $ciudad
  * @property $documento
- * @property $idEps
+ * @property $idContrato
  * @property $created_at
  * @property $updated_at
  *
@@ -36,7 +36,7 @@ class Paciente extends Model
 		'direccion' => 'required',
 		'ciudad' => 'required',
 		'documento' => 'required',
-		'idEps' => 'required',
+		'idContrato' => 'required',
     ];
 
     protected $perPage = 20;
@@ -46,7 +46,7 @@ class Paciente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','idEps'];
+    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','idContrato'];
 
 
     /**
@@ -62,7 +62,7 @@ class Paciente extends Model
      */
     public function ep()
     {
-        return $this->hasOne('App\Models\Ep', 'id', 'idEps');
+        return $this->hasOne('App\Models\Ep', 'id', 'idContrato');
     }
     
     /**

@@ -55,11 +55,12 @@ class UserController extends Controller
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
-            'zona' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['required', 'integer'],
+            'zona' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
+
 
         ]);
     }
@@ -73,11 +74,12 @@ class UserController extends Controller
             'direccion' => $data['direccion'],
             'ciudad' => $data['ciudad'],
             'cedula' => $data['cedula'],
-            'zona' => $data['zona'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'IdRol' => $data['IdRol'],
-            'idContrato' => $data['idContrato']     
+            'idContrato' => $data['idContrato'], 
+            'zona' => $data['zona']
+
         ]);
     }
 
@@ -91,11 +93,12 @@ class UserController extends Controller
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
-            'zona' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['nullable', 'integer'],
+            'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+
 
         ];
 
@@ -126,11 +129,12 @@ class UserController extends Controller
             'direccion' => $validatedData['direccion'],
             'ciudad' => $validatedData['ciudad'],
             'cedula' => $validatedData['cedula'],
-            'zona' => $validatedData['zona'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'IdRol' => $validatedData['IdRol'],
-            'idContrato' => $validatedData['idContrato']
+            'idContrato' => $validatedData['idContrato'],
+            'zona' => $validatedData['zona'],
+
 
         ]);
 
@@ -165,11 +169,12 @@ class UserController extends Controller
             'direccion' => ['required', 'string', 'max:50', 'min:5'],
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'digits_between:7,10'],
-            'zona' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'email' => ['required', 'email', 'unique:users,email,' . $id],
             'password' => ['nullable', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['nullable', 'integer'],
+            'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+
         ];
 
         $messages = [
@@ -199,10 +204,11 @@ class UserController extends Controller
         $user->direccion = $validatedData['direccion'];
         $user->ciudad = $validatedData['ciudad'];
         $user->cedula = $validatedData['cedula'];
-        $user->zona = $validatedData['zona'];
         $user->email = $validatedData['email'];
         $user->IdRol = $validatedData['IdRol'];
         $user->idContrato = $validatedData['idContrato'];
+        $user->zona = $validatedData['zona'];
+
 
         
         

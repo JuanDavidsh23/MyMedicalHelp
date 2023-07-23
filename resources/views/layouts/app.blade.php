@@ -17,6 +17,16 @@
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 <link rel="icon" type="image/png" href="{{ asset('dist/img/log.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -94,57 +104,51 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Administracion
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
+         
             <li class="nav-item">
-                    <a href="/Paciente" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pacientes</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                <a href="/Contrato" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Contratos</p>
-                </a>
-              </li> 
-              <li class="nav-item">
-                <a href="/Agenda" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agenda</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/Historia" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Historia</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/User" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Usuario</p>
-                </a>
-              </li>    
-              <li class="nav-item">
                 <a href="/Rol" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa-solid fa-users"></i>
                   <p>Roles</p>
                 </a>
               </li>  
               <li class="nav-item">
                 <a href="/Ep" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="fa-sharp fa-solid fa-building"></i>
                   <p>Eps</p>
                 </a>
               </li>  
+              <li class="nav-item">
+                <a href="/Contrato" class="nav-link">
+                  <i class="fa-solid fa-users"></i>
+                  <p>Contratos</p>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a href="/User" class="nav-link">
+                <i class="fa-solid fa-user-nurse"></i>
+                  <p>Usuario</p>
+                </a>
+              </li>  
+            <li class="nav-item">
+                    <a href="/Paciente" class="nav-link">
+                        <i class="fa-solid fa-users"></i>
+                        <p>Pacientes</p>
+                    </a>
+                </li>
+              <li class="nav-item">
+                <a href="/Agenda" class="nav-link">
+                  <i class="fa-solid fa-users"></i>
+                  <p>Agenda</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/Historia" class="nav-link">
+                  <i class="fa-solid fa-users"></i>
+                  <p>Historia</p>
+                </a>
+              </li>
+  
+
               <li class="nav-item">
     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -155,8 +159,7 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
-</li>      
-            </ul>
+
           </li>
         </ul>
       </nav>
@@ -224,6 +227,11 @@
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
 
 </body>
 </html>

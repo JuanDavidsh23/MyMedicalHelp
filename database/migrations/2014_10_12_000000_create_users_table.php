@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('ciudad');
             $table->BigInteger('cedula');
-            $table->string('zona');
+            $table->string('zona')->nullable();
             $table->string('email')->unique();
             $table->unsignedBigInteger('idRol');
             $table->foreign('idRol')->references('id')->on('rols')->onDelete('cascade'); 

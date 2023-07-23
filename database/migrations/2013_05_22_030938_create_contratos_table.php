@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
              $table->unsignedBigInteger('idEps');
             $table->foreign('idEps')->references('id')->on('eps')->onDelete('cascade');
-            $table->BigInteger('costo');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }

@@ -37,7 +37,7 @@ class ContratoController extends Controller
         return view('contrato.create', compact('contrato','eps'));
     }
 
-    /**
+    /**c
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request

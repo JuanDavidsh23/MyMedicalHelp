@@ -23,12 +23,6 @@
                                     <input type="text" name="busqueda" placeholder="buscador" class="form-control mr-2">
                                 </form>
                             </div>
-
-                            <div class="float-right">
-                                <a href="{{ route('Rol.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-                                    {{ __('Nuevo') }}
-                                </a>
-                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -54,11 +48,7 @@
                                             <td>{{ $rol->nombre_rol }}</td>
                                             <td>
                                                 <form action="{{ route('Rol.destroy',$rol->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('Rol.show',$rol->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('Rol.edit',$rol->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este rol?')"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

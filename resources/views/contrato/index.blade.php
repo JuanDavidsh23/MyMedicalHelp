@@ -11,16 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
                                 <h3>{{ __('Contrato') }}</h3>
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('Contrato.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            <div class="float-right">
+                                <a href="{{ route('Contrato.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                   {{ __('Nuevo') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,10 +34,10 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Ideps</th>
-										<th>Costo</th>
-
+                                        <th>Ideps</th>
+                                        <th>Fecha Inicio Contrato</th>
+                                        <th>Fecha Fin Contrato</th>
+                                        <th>Estado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -46,14 +45,19 @@
                                     @foreach ($contratos as $contrato)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $contrato->ep->eps }}</td>
-											<td>{{ $contrato->costo }}</td>
-
+                                            <td>{{ $contrato->ep->eps }}</td>
+                                            <td>{{ $contrato->fecha_inicio }}</td>
+                                            <td>{{ $contrato->fecha_fin }}</td>
                                             <td>
-                                                <form action="{{ route('Contrato.destroy',$contrato->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('Contrato.show',$contrato->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('Contrato.edit',$contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                @if ($contrato->estado == 0)
+                                                    <button class="btn btn-success btn-sm">Activo</button>
+                                                @else
+                                                    <button class="btn btn-warning btn-sm">Inactivo</button>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('Contrato.destroy', $contrato->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>

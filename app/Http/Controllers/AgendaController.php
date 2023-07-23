@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Contrato;
+use App\Models\Ep;
 use App\Models\Agenda;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -57,12 +58,17 @@ class AgendaController extends Controller
         $agenda = new Agenda();
         $pacientes = Paciente::pluck('nombre','id');
         $user = User::where('IdRol', 2)->pluck('name', 'id');
-        return view('agenda.create', compact('agenda','pacientes','user'));
+        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->pluck('eps.eps', 'contratos.id');
+        $eps = Ep::pluck('eps','id');
+        return view('agenda.create', compact('agenda','pacientes','user','contrato','eps'));
     }
 
     public function store(Request $request)
 {
     $rules = [
+        'fecha_inicio' => 'required',
+        'fecha_fin' => 'required', 
         'hora' => 'required',
         'hora_fin' => 'required',
         'id_pacientes' => 'required',

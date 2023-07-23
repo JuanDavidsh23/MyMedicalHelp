@@ -49,8 +49,8 @@
                             {{ $paciente->documento }}
                         </div>
                         <div class="form-group">
-                            <strong>Ideps:</strong>
-                            {{ $paciente->idEps }}
+                            <strong>idContrato:</strong>
+                            {{ $paciente->idContrato }}
                         </div>
 
                     </div>

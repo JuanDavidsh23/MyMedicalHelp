@@ -50,7 +50,6 @@
 
                                             <td>
                                                 <form action="{{ route('Ep.destroy',$ep->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('Ep.show',$ep->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('Ep.edit',$ep->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
