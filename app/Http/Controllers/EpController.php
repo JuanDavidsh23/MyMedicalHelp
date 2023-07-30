@@ -48,7 +48,7 @@ class EpController extends Controller
         $ep = Ep::create($request->all());
 
         return redirect()->route('Ep.index')
-            ->with('success', 'Ep created successfully.');
+            ->with('success', 'Eps creada correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class EpController extends Controller
         $ep->update($request->all());
     
         return redirect()->route('Ep.index')
-            ->with('success', 'Ep updated successfully.');
+            ->with('success', 'Eps actualizada correctamente.');
     }
     
 
@@ -105,6 +105,6 @@ class EpController extends Controller
         $ep = Ep::find($id)->delete();
 
         return redirect()->route('Ep.index')
-            ->with('success', 'Ep deleted successfully');
+            ->with('success', 'Eps eliminada correctamente');
     }
 }

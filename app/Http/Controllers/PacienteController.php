@@ -90,7 +90,7 @@ class PacienteController extends Controller
         $paciente = Paciente::create($validatedData);
 
         return redirect()->route('Paciente.index')
-            ->with('success', 'Paciente created successfully.');
+            ->with('success', 'Paciente creado correctamente.');
     }
 
     /**
@@ -163,7 +163,7 @@ class PacienteController extends Controller
         $paciente->update($validatedData);
     
         return redirect()->route('Paciente.index')
-            ->with('success', 'Paciente updated successfully.');
+            ->with('success', 'Paciente actualizado correctamente.');
     }
     
 
@@ -177,6 +177,6 @@ class PacienteController extends Controller
         $paciente = Paciente::find($id)->delete();
 
         return redirect()->route('Paciente.index')
-            ->with('success', 'Paciente deleted successfully');
+            ->with('success', 'Paciente eliminado correctamente');
     }
 }

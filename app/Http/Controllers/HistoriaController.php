@@ -52,7 +52,7 @@ class HistoriaController extends Controller
         $historia = Historia::create($request->all());
 
         return redirect()->route('Historia.index')
-            ->with('success', 'Historia created successfully.');
+            ->with('success', 'Historia creada correctamente.');
     }
 
     /**
@@ -96,7 +96,7 @@ class HistoriaController extends Controller
         $historia->update($request->all());
     
         return redirect()->route('Historia.index')
-            ->with('success', 'Historia updated successfully.');
+            ->with('success', 'Historia creada correctamente.');
     }
     
     /**
@@ -109,6 +109,6 @@ class HistoriaController extends Controller
         $historia = Historia::find($id)->delete();
 
         return redirect()->route('Historia.index')
-            ->with('success', 'Historia deleted successfully');
+            ->with('success', 'Historia eliminada correctamente');
     }
 }

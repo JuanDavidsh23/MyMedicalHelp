@@ -11,22 +11,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css">
 
                             <span id="card_title">
                                <h3> {{ __('Agenda') }} </h3>
                             </span>
                             <div class="d-md-flex justify-content-md-end">
-                                <form action="{{ route('Agenda.index') }}" method="GET" class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary btn-sm ml-2">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                    <input type="text" name="busqueda" placeholder="buscador" class="form-control mr-2">
-                                </form>
+                                
                             </div>
 
                              <div class="float-right">
-                                <a href="{{ route('Agenda.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo') }}
+                                <a href="{{ route('Agenda.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
+                                  {{ __('Nueva Agenda') }}
                                 </a>
                               </div>
                         </div>
@@ -47,7 +43,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table_agenda" class="table table-striped table-hover">
+                            <table id="agenda_table" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -73,7 +69,7 @@
                                             <td>
                                                 <form action="{{ route('Agenda.destroy',$agenda->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
@@ -90,10 +86,18 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(()=>{
-            new DataTable('#table_agenda');
-        })
-        
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('js/Spanish.json') }}"></script>
+
+<script>
+        $(document).ready(function () {
+            $('#agenda_table').DataTable({
+                "language": {
+                    "url": "{{ asset('js/Spanish.json') }}"
+                }
+            });
+        });
     </script>
 @endsection

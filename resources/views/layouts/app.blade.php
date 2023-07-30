@@ -81,7 +81,7 @@
          <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/Paciente" class="d-block">My Medical Help</a>
+          <a href="/inicio" class="d-block">My Medical Help</a>
         </div>
       </div>
 
@@ -104,11 +104,16 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         
+               <li class="nav-item">
+                <a href="/inicio" class="nav-link">
+                <i class="fa-solid fa-house"></i>    
+                            <p>Inicio</p>
+                </a>
+              </li> 
             <li class="nav-item">
                 <a href="/Rol" class="nav-link">
-                  <i class="fa-solid fa-users"></i>
-                  <p>Roles</p>
+                <i class="fa-solid fa-chess"></i>
+                                  <p>Roles</p>
                 </a>
               </li>  
               <li class="nav-item">
@@ -119,8 +124,8 @@
               </li>  
               <li class="nav-item">
                 <a href="/Contrato" class="nav-link">
-                  <i class="fa-solid fa-users"></i>
-                  <p>Contratos</p>
+                <i class="fa-solid fa-file-contract"></i>
+                                  <p>Contratos</p>
                 </a>
               </li> 
               <li class="nav-item">
@@ -137,14 +142,14 @@
                 </li>
               <li class="nav-item">
                 <a href="/Agenda" class="nav-link">
-                  <i class="fa-solid fa-users"></i>
-                  <p>Agenda</p>
+                <i class="fa-solid fa-calendar-days"></i>
+                                    <p>Agenda</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/Historia" class="nav-link">
-                  <i class="fa-solid fa-users"></i>
-                  <p>Historia</p>
+                <i class="fa-solid fa-notes-medical"></i>
+                                  <p>Historia</p>
                 </a>
               </li>
   
@@ -229,9 +234,11 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
 
+<!-- Agrega estos scripts al final del body del layout principal -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+
 
 </body>
 </html>

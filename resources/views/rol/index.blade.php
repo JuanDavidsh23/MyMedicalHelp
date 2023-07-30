@@ -16,12 +16,6 @@
                             </span>
 
                             <div class="d-md-flex justify-content-md-end">
-                                <form action="{{ route('Rol.index') }}" method="GET" class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary btn-sm ml-2">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                    <input type="text" name="busqueda" placeholder="buscador" class="form-control mr-2">
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -48,7 +42,7 @@
                                             <td>{{ $rol->nombre_rol }}</td>
                                             <td>
                                                 <form action="{{ route('Rol.destroy',$rol->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('Rol.edit',$rol->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Rol.edit',$rol->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                 </form>
                                             </td>
                                         </tr>

@@ -17,8 +17,8 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('Ep.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo') }}
+                                <a href="{{ route('Ep.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
+                                  {{ __('Nueva eps') }}
                                 </a>
                               </div>
                         </div>
@@ -38,6 +38,13 @@
                                         
 										<th>Eps</th>
 
+										<th>General</th>
+
+										<th>Principal</th>
+
+										<th>Direccion</th>
+
+
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -48,9 +55,16 @@
                                             
 											<td>{{ $ep->eps }}</td>
 
+											<td>{{ $ep->telefonogeneral }}</td>
+
+											<td>{{ $ep->telefonoprincipal }}</td>
+
+											<td>{{ $ep->direccion }}</td>
+
+
                                             <td>
                                                 <form action="{{ route('Ep.destroy',$ep->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('Ep.edit',$ep->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Ep.edit',$ep->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>

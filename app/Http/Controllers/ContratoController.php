@@ -50,7 +50,7 @@ class ContratoController extends Controller
         $contrato = Contrato::create($request->all());
 
         return redirect()->route('Contrato.index')
-            ->with('success', 'Contrato created successfully.');
+            ->with('success', 'Contrato creado correctamente.');
     }
 
     /**
@@ -97,7 +97,7 @@ class ContratoController extends Controller
     $contrato->update($request->all());
 
     return redirect()->route('Contrato.index')
-        ->with('success', 'Contrato updated successfully');
+        ->with('success', 'Contrato actualizado correctamente');
 }
 
     
@@ -112,6 +112,6 @@ class ContratoController extends Controller
         $contrato = Contrato::find($id)->delete();
 
         return redirect()->route('Contrato.index')
-            ->with('success', 'Contrato deleted successfully');
+            ->with('success', 'Contrato eliminado correctamente');
     }
 }

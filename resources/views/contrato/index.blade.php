@@ -11,13 +11,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css">
+
                             <span id="card_title">
                                 <h3>{{ __('Contrato') }}</h3>
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('Contrato.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-                                  {{ __('Nuevo') }}
+                                <a href="{{ route('Contrato.create') }}" class="btn btn-success btn-sm float-right" data-placement="left">
+                                  {{ __('Nuevo contrato') }}
                                 </a>
                             </div>
                         </div>
@@ -30,7 +32,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="contrato_table" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -57,7 +59,7 @@
                                             </td>
                                             <td>
                                                 <form action="{{ route('Contrato.destroy', $contrato->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
@@ -74,4 +76,19 @@
             </div>
         </div>
     </div>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('js/Spanish.json') }}"></script>
+
+
+<script>
+        $(document).ready(function () {
+            $('#contrato_table').DataTable({
+                "language": {
+                    "url": "{{ asset('js/Spanish.json') }}"
+                }
+            });
+        });
+    </script>
 @endsection

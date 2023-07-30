@@ -139,7 +139,7 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('User.index')
-            ->with('success', 'Usuario creado exitosamente.');
+            ->with('success', 'Usuario creado correctamente.');
           
     }
 
@@ -222,7 +222,7 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('User.index')
-            ->with('success', 'Usuario actualizado exitosamente.');
+            ->with('success', 'Usuario actualizado correctamente.');
     }
 
     public function destroy($id)
@@ -230,6 +230,6 @@ class UserController extends Controller
         $user = User::find($id)->delete();
 
         return redirect()->route('User.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'User eliminado correctamente');
     }
 }
