@@ -14,11 +14,13 @@ body{
     box-shadow: 0 1.5rem 1rem 0 rgba(0, 0, 0, 0.1);
   }
   
-  .img-left{
+  .img-left {
     width: 45%;
-    background: url("../img/LogoMH.png")  center;
-    background-size: cover;
-  }
+    background: url("../img/LogoMH.png") center no-repeat;
+    background-size: auto 100%;
+}
+
+
   
   .card-body{
     padding: 2rem;

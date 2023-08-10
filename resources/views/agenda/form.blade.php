@@ -27,13 +27,13 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('id_pacientes') }}
-            {{ Form::select('id_pacientes',$pacientes, $agenda->id_pacientes, ['class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Id Pacientes']) }}
+            {{ Form::label('Paciente') }}
+            {{ Form::select('id_pacientes',$pacientes, $agenda->id_pacientes, ['class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
             {!! $errors->first('id_pacientes', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('id_user') }}
-            {{ Form::select('id_user', $user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Id User']) }}
+            {{ Form::label('Enfermer@') }}
+            {{ Form::select('id_user', $user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Enfermer@']) }}
             {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

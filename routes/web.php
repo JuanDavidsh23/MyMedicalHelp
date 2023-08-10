@@ -51,9 +51,12 @@ Auth::routes(); */
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/', function () {
+        return view('login');
+    });    
     Route::get('/inicio', function () {
         return view('inicio');
-    });    
+    });   
     Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
     Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
     Route::resource('Historia', App\Http\Controllers\HistoriaController::class);
@@ -77,7 +80,7 @@ Route::post('/login', function () {
         return redirect('inicio');
     }
 
-    return redirect()->back()->withInput()->withErrors(['login' => __('Correo o contraseña incorrectos.')]);
+    return redirect()->back()->withInput()->withErrors(['login' => __('Credenciales incorrectos.')]);
 })->middleware('guest')->name('login');
 
 Route::get('/login', function () {

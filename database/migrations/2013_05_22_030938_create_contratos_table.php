@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('contratos', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('Nro_Contrato');
              $table->unsignedBigInteger('idEps');
             $table->foreign('idEps')->references('id')->on('eps')->onDelete('cascade');
             $table->date('fecha_inicio');

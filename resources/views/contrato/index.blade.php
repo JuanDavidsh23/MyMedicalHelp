@@ -36,7 +36,8 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Ideps</th>
+                                        <th>Nro.Contrato</th>
+                                        <th>Eps</th>
                                         <th>Fecha Inicio Contrato</th>
                                         <th>Fecha Fin Contrato</th>
                                         <th>Estado</th>
@@ -47,6 +48,7 @@
                                     @foreach ($contratos as $contrato)
                                         <tr>
                                             <td>{{ ++$i }}</td>
+                                            <td>{{ $contrato->Nro_Contrato}}
                                             <td>{{ $contrato->ep->eps }}</td>
                                             <td>{{ $contrato->fecha_inicio }}</td>
                                             <td>{{ $contrato->fecha_fin }}</td>
@@ -62,7 +64,6 @@
                                                     <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
