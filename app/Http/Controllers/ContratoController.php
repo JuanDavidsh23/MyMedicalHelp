@@ -24,6 +24,23 @@ class ContratoController extends Controller
         return view('contrato.index', compact('contratos'))
             ->with('i', (request()->input('page', 1) - 1) * $contratos->perPage());
     }
+    public function toggleEstado($id, Request $request)
+    {
+        $contrato = Contrato::findOrFail($id);
+        
+        if ($contrato->estado == 0) {
+            $contrato->estado = 1;
+            $contrato->razon_cancelacion = $request->input('razon_cancelacion'); // Asegúrate de que el nombre del campo coincida con el formulario en la vista
+            $contrato->save();
+            
+            return redirect()->back()->with('success', 'Contrato marcado como inactivo.');
+        } else {
+        }
+    }
+    
+    
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,14 +61,18 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        request()->validate(Contrato::$rules);
+{
+    request()->validate(Contrato::$rules);
 
-        $contrato = Contrato::create($request->all());
+    $data = $request->all();
+    $data['estado'] = 0; 
 
-        return redirect()->route('Contrato.index')
-            ->with('success', 'Contrato creado correctamente.');
-    }
+    $contrato = Contrato::create($data);
+
+    return redirect()->route('Contrato.index')
+        ->with('success', 'Contrato creado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

@@ -83,16 +83,7 @@ input:checked + .slider:before {
                 {{ Form::date('fecha_fin', $contrato->fecha_fin, ['class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Fin']) }}
                 {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-            <div class="form-group col-md-6">
-                {{ Form::label('estado') }}
-                <br>
-                <label class="switch">
-                    {{ Form::hidden('estado', '0') }} <!-- Valor predeterminado para el estado inactivo -->
-                    {{ Form::checkbox('estado', '1', $contrato->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'id' => 'estado_checkbox']) }}
-                    <span class="slider"></span>
-                </label>
-                {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
+        
             <div class="form-group col-md-6">
                 <div class="form-check">
                     {{ Form::checkbox('terminos_condiciones', 'si', false, ['class' => 'form-check-input', 'id' => 'terminos_condiciones_checkbox']) }}
@@ -121,9 +112,4 @@ input:checked + .slider:before {
         }
     });
 
-    document.getElementById('estado_checkbox').addEventListener('change', function() {
-        const slider = document.querySelector('.slider');
-        slider.classList.toggle('activo');
-        slider.classList.toggle('inactivo');
-    });
 </script>

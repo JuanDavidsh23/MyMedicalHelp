@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->boolean('estado');
+            $table->text('razon_cancelacion')->nullable();
             $table->timestamps();
         });
     }

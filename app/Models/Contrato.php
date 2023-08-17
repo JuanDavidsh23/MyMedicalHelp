@@ -27,6 +27,7 @@ class Contrato extends Model
 		'fecha_inicio' => 'required',
 		'fecha_fin' => 'required',
 		'estado' => 'required',
+    'razon_cancelacion'=>'required',
     ];
 
     protected $perPage = 20;
@@ -36,7 +37,7 @@ class Contrato extends Model
      *
      * @var array
      */
-    protected $fillable = ['Nro_Contrato','idEps','fecha_inicio','fecha_fin','estado'];
+    protected $fillable = ['Nro_Contrato','idEps','fecha_inicio','fecha_fin','estado','razon_cancelacion'];
 
 
     /**

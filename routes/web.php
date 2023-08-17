@@ -57,17 +57,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/inicio', function () {
         return view('inicio');
     });   
-    Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
-    Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
-    Route::resource('Historia', App\Http\Controllers\HistoriaController::class);
-    Route::resource('Paciente', App\Http\Controllers\PacienteController::class);
-    Route::resource('Permiso', App\Http\Controllers\PermisoController::class);
-    Route::resource('Rol', App\Http\Controllers\RolController::class);
-    Route::resource('Ep', App\Http\Controllers\EpController::class);
-    Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
+  
 });
 Route::resource('User', App\Http\Controllers\UserController::class);
-
+Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
+Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
+Route::resource('Historia', App\Http\Controllers\HistoriaController::class);
+Route::resource('Paciente', App\Http\Controllers\PacienteController::class);
+Route::resource('Permiso', App\Http\Controllers\PermisoController::class);
+Route::resource('Rol', App\Http\Controllers\RolController::class);
+Route::resource('Ep', App\Http\Controllers\EpController::class);
+Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
+Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
 
 Route::post('/login', function () {
     $credentials = [
