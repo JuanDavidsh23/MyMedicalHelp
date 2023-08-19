@@ -40,7 +40,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-    
+
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -62,8 +62,10 @@
             </div>
           </form>
         </div>
+        
       </li>
 
+      
 
     </ul>
   </nav>
@@ -81,7 +83,8 @@
          <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/inicio" class="d-block">My Medical Help</a>
+          <a href="/inicio" class="d-block">{{ Auth::user()->name }}</a>
+
         </div>
       </div>
 

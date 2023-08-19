@@ -110,18 +110,15 @@ class ContratoController extends Controller
      */
     public function update(Request $request, $id)
 {
-    $request->validate([
-        // Aquí van las reglas de validación para los campos del formulario
-    ]);
+    request()->validate(Contrato::$rules);
 
-    $contrato = Contrato::find($id);
+    $contrato = Contrato::findOrFail($id);
     $contrato->update($request->all());
 
     return redirect()->route('Contrato.index')
         ->with('success', 'Contrato actualizado correctamente');
 }
 
-    
 
     /**
      * @param int $id

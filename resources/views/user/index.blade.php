@@ -21,7 +21,8 @@
                             </div>
                             <div class="float-right">
                                 <a href="{{ route('User.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Usuario') }}
+                                  {{ __('Nuevo Usuario') }} 
+                                  
                                 </a>
                             </div>
                         </div>
@@ -38,10 +39,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Apellido</th>
                                         <th>Telefono</th>
                                         <th>Direccion</th>
-                                        <th>Cedula</th>
+                                        <th>Documento</th>
                               
                                         
                                         <th></th>
@@ -52,7 +52,6 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->apellido }}</td>
                                             <td>{{ $user->telefono }}</td>
                                             <td>{{ $user->direccion }}</td>
                                             <td>{{ $user->cedula }}</td>

@@ -84,15 +84,17 @@ class EpController extends Controller
      * @param  Ep $ep
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ep $ep)
+    public function update(Request $request, $id)
     {
-        $request->validate(Ep::$rules);
-    
+        request()->validate(Ep::$rules);
+        $ep = Ep::findOrFail($id);
         $ep->update($request->all());
     
         return redirect()->route('Ep.index')
             ->with('success', 'Eps actualizada correctamente.');
     }
+
+ 
     
 
     /**

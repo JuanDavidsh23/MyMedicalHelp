@@ -27,7 +27,7 @@ class Contrato extends Model
 		'fecha_inicio' => 'required',
 		'fecha_fin' => 'required',
 		'estado' => 'required',
-    'razon_cancelacion'=>'required',
+    'razon_cancelacion'=>'',
     ];
 
     protected $perPage = 20;

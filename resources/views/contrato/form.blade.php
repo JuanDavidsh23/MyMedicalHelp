@@ -84,32 +84,13 @@ input:checked + .slider:before {
                 {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         
-            <div class="form-group col-md-6">
-                <div class="form-check">
-                    {{ Form::checkbox('terminos_condiciones', 'si', false, ['class' => 'form-check-input', 'id' => 'terminos_condiciones_checkbox']) }}
-                    {{ Form::label('terminos_condiciones_checkbox', 'Acepto los términos y condiciones', ['class' => 'form-check-label']) }}
-                </div>
                 <br>
             </div>
         </div>
     </div>
     <div class="box-footer mt20">
-        <button id="submitButton" type="submit" class="btn btn-primary" disabled>{{ __('Enviar') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>
 
-<script>
-    document.getElementById('terminos_condiciones_checkbox').addEventListener('click', function() {
-        if (this.checked) {
-            if (confirm('¿Estás seguro?')) {
-                console.log('Confirmado');
-                document.getElementById('submitButton').disabled = false;
-            } else {
-                this.checked = false;
-            }
-        } else {
-            document.getElementById('submitButton').disabled = true;
-        }
-    });
 
-</script>

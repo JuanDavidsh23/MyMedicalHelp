@@ -18,7 +18,6 @@ class UserController extends Controller
     use RegistersUsers;
 
     protected $redirectTo = '/User';
-
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
@@ -27,14 +26,13 @@ class UserController extends Controller
             ->orWhere('name', 'LIKE', '%' . $busqueda . '%')
             ->latest('id')
             ->paginate();
-
-        $data = [
-            'users' => $users,
-        ];
-
-        return view('User.index', compact('users'))
+    
+        $totalUsers = User::count();
+        
+        return view('User.index', compact('users', 'totalUsers'))
             ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
+    
 
     public function create()
     {

@@ -19,18 +19,17 @@ class PacienteController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
-        $pacientes = Paciente::where('documento',$busqueda)
-                    ->orWhere('nombre','LIKE','%'.$busqueda.'%')
-                    ->latest('id')
-                    ->paginate();
-
-        $data = [
-            'pacientes'=>$pacientes,
-        ];
-
-        return view('paciente.index', compact('pacientes'))
+        $pacientes = Paciente::where('documento', $busqueda)
+            ->orWhere('nombre', 'LIKE', '%' . $busqueda . '%')
+            ->latest('id')
+            ->paginate();
+    
+        $totalPacientes = Paciente::count();
+    
+        return view('paciente.index', compact('pacientes', 'totalPacientes'))
             ->with('i', (request()->input('page', 1) - 1) * $pacientes->perPage());
     }
+    
 
     /**
      * Show the form for creating a new resource.
