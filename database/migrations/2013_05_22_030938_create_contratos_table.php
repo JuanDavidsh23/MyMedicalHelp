@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('idEps')->references('id')->on('eps')->onDelete('cascade');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->boolean('estado');
+            $table->boolean('estado')->nullable();
             $table->text('razon_cancelacion')->nullable();
             $table->timestamps();
         });

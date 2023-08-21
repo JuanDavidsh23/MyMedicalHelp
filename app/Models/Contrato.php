@@ -26,7 +26,7 @@ class Contrato extends Model
 		'idEps' => 'required',
 		'fecha_inicio' => 'required',
 		'fecha_fin' => 'required',
-		'estado' => 'required',
+		'estado' => '',
     'razon_cancelacion'=>'',
     ];
 

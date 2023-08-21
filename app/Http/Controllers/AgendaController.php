@@ -58,8 +58,10 @@ class AgendaController extends Controller
         $agenda = new Agenda();
         $pacientes = Paciente::pluck('nombre','id');
         $user = User::where('IdRol', 2)->pluck('name', 'id');
-        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
-        ->pluck('eps.eps', 'contratos.id');
+        $contrato = Contrato::where('contratos.estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->select(DB::raw("CONCAT(eps.eps, ' - ', contratos.Nro_contrato) as display"), 'contratos.id')
+        ->pluck('display', 'contratos.id');
         $eps = Ep::pluck('eps','id');
         return view('agenda.create', compact('agenda','pacientes','user','contrato','eps'));
     }

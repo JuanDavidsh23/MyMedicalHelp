@@ -70,17 +70,16 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {{ Form::label('Rol') }}
-                    {{ Form::select('IdRol', $rol, 2, ['class' => 'form-control' . ($errors->has('IdRol') ? ' is-invalid' : ''), 'placeholder' => 'IdRol', 'id' => 'IdRol']) }}
+                    {{ Form::select('IdRol', $rol, 1, ['class' => 'form-control' . ($errors->has('IdRol') ? ' is-invalid' : ''), 'placeholder' => 'IdRol', 'id' => 'IdRol']) }}
                     {!! $errors->first('IdRol', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-md-6">
-                <div id="contrato-form" style="display: none;">
-                    <div class="form-group">
-                        {{ Form::label('Contrato') }}
-                        {{ Form::select('idContrato',$contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
-                        {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
-                    </div>
+            <div id="contrato-form" style="display: none;">
+                <div class="form-group">
+                    {{ Form::label('Contrato') }}
+                    {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+                    {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>

@@ -1,3 +1,60 @@
+<style>
+.hidden-checkbox {
+    display: none;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.alert-container {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.alert {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.alert-content {
+    padding-right: 30px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    color: black;
+}
+
+.hidden-checkbox:checked + .btn + .alert-container {
+    display: block;
+}
+
+
+</style>
 @extends('layouts.app')
 
 @section('template_title')
@@ -100,7 +157,9 @@
                                                         @if ($contrato->estado == 0)
                                                             <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                         @endif
+                                                        
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -149,7 +208,22 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <!-- Opcional: Puedes agregar aquí botones para editar contratos inactivos -->
+                                                    @if($contrato->estado == 1)
+                                                        <input type="radio" name="alert-toggle-group" id="alert-toggle-{{ $contrato->id }}" class="hidden-checkbox">
+                                                        <label for="alert-toggle-{{ $contrato->id }}" class="btn">Mostrar Motivo</label>
+
+                                                        <div class="alert-container">
+                                                            <div class="alert" id="my-alert-{{ $contrato->id }}">
+                                                                <div class="alert-content"> 
+                                                                    <div class="form-group">
+                                                                        {{ $contrato->razon_cancelacion }}
+                                                                    </div>
+                                                                </div>
+                                                                <label class="close-btn" onclick="closeAlert('{{ $contrato->id }}')">X</label>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -192,5 +266,13 @@
                 }
             });
         });
+
+        function closeAlert(id) {
+            const alertToggle = document.getElementById(`alert-toggle-${id}`);
+            if (alertToggle) {
+                alertToggle.checked = false;
+            }
+        }
+
     </script>
 @endsection
