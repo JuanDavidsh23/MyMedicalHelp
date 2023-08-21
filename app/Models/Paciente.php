@@ -46,7 +46,7 @@ class Paciente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','idContrato'];
+    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','estado','idContrato'];
 
 
     /**

@@ -38,8 +38,10 @@ class UserController extends Controller
     {
         $user = new User();
         $rol = Rol::pluck('nombre_rol', 'id');
-        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
-        ->pluck('eps.eps', 'contratos.id');
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');    
         $eps = Ep::pluck('eps','id');
         return view('User.create', compact('user', 'rol','contrato','eps'));
     }
@@ -54,6 +56,7 @@ class UserController extends Controller
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
             'email' => ['required', 'email', 'unique:users'],
+            'estado' => 0,
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['required', 'integer'],
@@ -73,6 +76,7 @@ class UserController extends Controller
             'ciudad' => $data['ciudad'],
             'cedula' => $data['cedula'],
             'email' => $data['email'],
+            'estado' => 0,
             'password' => Hash::make($data['password']),
             'IdRol' => $data['IdRol'],
             'idContrato' => $data['idContrato'], 
@@ -152,8 +156,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $rol = Rol::pluck('nombre_rol', 'id');
-        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
-        ->pluck('eps.eps', 'contratos.id');
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');    
         $eps = Ep::pluck('eps','id');
         return view('user.edit', compact('user', 'rol','contrato','eps'));
     }
@@ -175,6 +181,11 @@ class UserController extends Controller
 
         ];
 
+        if($request->input('IdRol') == 2) {
+            $rules['idContrato'] = 'required';
+            $rules['zona'] = 'required';
+        }
+        
         $messages = [
             'required' => 'El campo :attribute es obligatorio.',
             'string' => 'El campo :attribute debe ser una cadena de texto.',

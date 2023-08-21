@@ -21,6 +21,7 @@ return new class extends Migration
             $table->BigInteger('cedula');
             $table->string('zona')->nullable();
             $table->string('email')->unique();
+            $table->integer('estado')->default(0);
             $table->unsignedBigInteger('idRol');
             $table->foreign('idRol')->references('id')->on('rols')->onDelete('cascade'); 
             $table->unsignedBigInteger('idContrato')->nullable();

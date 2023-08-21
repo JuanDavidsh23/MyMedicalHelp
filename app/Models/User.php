@@ -33,7 +33,7 @@ class User extends Model implements Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name','apellido','telefono','direccion','ciudad','cedula','zona','email','password','IdRol','idContrato'];
+    protected $fillable = ['name','apellido','telefono','direccion','ciudad','cedula','zona','email','estado','password','IdRol','idContrato'];
 
 
     /**

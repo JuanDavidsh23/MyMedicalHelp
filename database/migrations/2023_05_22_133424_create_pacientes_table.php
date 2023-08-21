@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('ciudad');
             $table->BigInteger('documento');
+            $table->integer('estado')->default(0);
             $table->unsignedBigInteger('idContrato')->nullable();
             $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
             $table->timestamps();

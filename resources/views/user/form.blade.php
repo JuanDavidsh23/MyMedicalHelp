@@ -76,14 +76,13 @@
             </div>
             <div class="col-md-6">
             <div id="contrato-form" style="display: none;">
-                <div class="form-group">
-                    {{ Form::label('Contrato') }}
-                    {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
-                    {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+            <div class="form-group">
+                {{ Form::label('Contrato') }}
+                {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+                {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-        </div>
-        <div class="row">
+            </div>
+            <div class="row">
             <div class="col-md-6">
                 <div id="zona-form" style="display: none;">
                     <div class="form-group">
@@ -94,6 +93,8 @@
                 </div>
             </div>
         </div>
+        </div>
+
         <script>
                 document.getElementById('IdRol').addEventListener('change', function() {
                     var contratoForm = document.getElementById('contrato-form');

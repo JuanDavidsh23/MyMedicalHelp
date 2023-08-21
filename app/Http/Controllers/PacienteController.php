@@ -81,12 +81,10 @@ class PacienteController extends Controller
             'idContrato.required' => 'El campo ID de rol es obligatorio.',
              
         ];
-        
+
         $validatedData = $request->validate($rules, $messages);
-
-  
-
-        $paciente = Paciente::create($validatedData);
+        $paciente = Paciente::create(array_merge($validatedData, ['estado' => 0]));
+        
 
         return redirect()->route('Paciente.index')
             ->with('success', 'Paciente creado correctamente.');

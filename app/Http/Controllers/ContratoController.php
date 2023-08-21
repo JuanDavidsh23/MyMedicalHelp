@@ -30,7 +30,7 @@ class ContratoController extends Controller
         
         if ($contrato->estado == 0) {
             $contrato->estado = 1;
-            $contrato->razon_cancelacion = $request->input('razon_cancelacion'); // Asegúrate de que el nombre del campo coincida con el formulario en la vista
+            $contrato->razon_cancelacion = $request->input('razon_cancelacion');
             $contrato->save();
             
             return redirect()->back()->with('success', 'Contrato marcado como inactivo.');
