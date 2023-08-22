@@ -4,22 +4,22 @@
             
             <div class="form-group col-md-6">
                 {{ Form::label('eps') }}
-                {{ Form::text('eps', $ep->eps, ['class' => 'form-control' . ($errors->has('eps') ? ' is-invalid' : ''), 'placeholder' => 'eps']) }}
+                {{ Form::text('eps', $ep->eps, ['class' => 'form-control' . ($errors->has('eps') ? ' is-invalid' : ''), 'placeholder' => 'Eps']) }}
                 {!! $errors->first('eps', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group col-md-6">
-                {{ Form::label('direccion') }}
-                {{ Form::text('direccion', $ep->direccion, ['class' => 'form-control' . ($errors->has('direccion') ? ' is-invalid' : ''), 'placeholder' => 'direccion']) }}
+                {{ Form::label('Direccion') }}
+                {{ Form::text('direccion', $ep->direccion, ['class' => 'form-control' . ($errors->has('direccion') ? ' is-invalid' : ''), 'placeholder' => 'Direccion']) }}
                 {!! $errors->first('direccion', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group col-md-6">
-                {{ Form::label('telefonogeneral') }}
-                {{ Form::number('telefonogeneral', $ep->telefonogeneral, ['class' => 'form-control' . ($errors->has('telefonogeneral') ? ' is-invalid' : ''), 'placeholder' => 'telefonogeneral']) }}
+                {{ Form::label('Telefono Asesor') }}
+                {{ Form::number('telefonogeneral', $ep->telefonogeneral, ['class' => 'form-control' . ($errors->has('telefonogeneral') ? ' is-invalid' : ''), 'placeholder' => 'Telefono General']) }}
                 {!! $errors->first('telefonogeneral', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group col-md-6">
-                {{ Form::label('telefonoprincipal') }}
-                {{ Form::number('telefonoprincipal', $ep->telefonoprincipal, ['class' => 'form-control' . ($errors->has('telefonoprincipal') ? ' is-invalid' : ''), 'placeholder' => 'Procedimientos']) }}
+                {{ Form::label('Telefono Principal') }}
+                {{ Form::number('telefonoprincipal', $ep->telefonoprincipal, ['class' => 'form-control' . ($errors->has('telefonoprincipal') ? ' is-invalid' : ''), 'placeholder' => 'Telefono Principal']) }}
                 {!! $errors->first('telefonoprincipal', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>

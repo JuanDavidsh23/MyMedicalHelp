@@ -45,6 +45,7 @@
                         <a class="nav-link" id="inactivos-tab" data-toggle="tab" href="#inactivos" aria-controls="inactivos" aria-selected="false">Inactivos</a>
                     </li>
                 </ul>
+                <br>
 
                 <div class="tab-content">
                     <!-- TAB Activos -->

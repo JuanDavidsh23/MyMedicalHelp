@@ -6,7 +6,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\rolController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\PermisosController;
-use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -47,16 +46,16 @@ Route::post('/Regpaciente',[pacienteController::class,'store'])->name('paciente.
 Route::get('/paciente/delete/{id}',[pacienteController::class,'delete'])->name('paciente.delete');
 Auth::routes(); */
 
-Route::resource('User', App\Http\Controllers\UserController::class);
+Route::get('/', function () {
+    return view('Auth.login');
+});    
+
 
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return view('login');
-    });    
     Route::get('/inicio', 'App\Http\Controllers\InicioController@index')->name('inicio');
-
+    Route::resource('User', App\Http\Controllers\UserController::class);
     Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
     Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
     Route::resource('Historia', App\Http\Controllers\HistoriaController::class);
@@ -67,9 +66,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
 });
 
+
 Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
 
-Route::post('/login', function () {
+Route::post('/Auth.login', function () {
     $credentials = [
         'email' => request()->input('email'),
         'password' => request()->input('password')
@@ -88,3 +88,7 @@ Route::get('/login', function () {
 })->middleware('guest')->name('login');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

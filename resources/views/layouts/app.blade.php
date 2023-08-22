@@ -79,6 +79,7 @@
          <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
+        <a href="/inicio" class="d-block">{{ Auth::user()->name }}</a>
 
         </div>
       </div>
@@ -151,7 +152,7 @@
                 </a>
               </li>
   
-
+              
               <li class="nav-item">
     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="nav-icon fas fa-sign-out-alt"></i>

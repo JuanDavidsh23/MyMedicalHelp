@@ -45,7 +45,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nombre</th>
                                         <th>Telefono</th>
                                         <th>Direccion</th>
                                         <th>Documento</th>
@@ -55,7 +55,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                @foreach ($users->where('estado', 0) as $user)
+
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $user->name }}</td>
@@ -103,7 +104,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                @foreach ($users->where('estado', 1) as $user)
+
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $user->name }}</td>

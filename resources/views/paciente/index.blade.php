@@ -49,7 +49,6 @@
                                         <th>No</th>
                                         
 										<th>Nombre</th>
-										<th>Apellido</th>
 										<th>Correo</th>
 										<th>Telefono</th>
 										<th>Documento</th>
@@ -59,12 +58,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pacientes as $paciente)
+                                @foreach ($pacientes->where('estado', 0) as $paciente)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $paciente->nombre }}</td>
-											<td>{{ $paciente->apellido }}</td>
 											<td>{{ $paciente->correo }}</td>
 											<td>{{ $paciente->telefono }}</td>
 											<td>{{ $paciente->documento }}</td>
@@ -104,7 +102,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pacientes as $paciente)
+                                @foreach ($pacientes->where('estado', 1) as $paciente)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             

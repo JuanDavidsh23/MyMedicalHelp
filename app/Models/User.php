@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,23 +13,22 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     
     static $rules = [
-		'name' => 'required',
-		'apellido' => 'required',
-		'telefono' => 'required',
-		'direccion' => 'required',
-		'ciudad' => 'required',
-		'cedula' => 'required',
-		'zona' => 'required',
-		'email' => 'required',
+        'name' => 'required',
+        'apellido' => 'required',
+        'telefono' => 'required',
+        'direccion' => 'required',
+        'ciudad' => 'required',
+        'cedula' => 'required',
+        'zona' => 'required',
+        'email' => 'required',
         'password' => 'required',
         'IdRol' => 'required',
         'idContrato' => 'required',
-
-     
     ];
 
     protected $perPage = 20;
-/**
+
+    /**
      *
      * @var array
      */
@@ -60,4 +60,3 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Agenda', 'id_user', 'id');
     }
 }
- 
