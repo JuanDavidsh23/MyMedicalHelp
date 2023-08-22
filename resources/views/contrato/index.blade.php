@@ -189,24 +189,34 @@
                                                     <td>{{ $contrato->fecha_inicio }}</td>
                                                     <td>{{ $contrato->fecha_fin }}</td>
                                                     <td>
-                                                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#reasonModal{{ $contrato->id }}">Inactivo</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="reasonModal{{ $contrato->id }}" tabindex="-1" role="dialog" aria-labelledby="reasonModalLabel{{ $contrato->id }}" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="reasonModalLabel{{ $contrato->id }}">Razón de la Cancelación</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <p>{{ $contrato->razon_cancelacion }}</p>
+                                                        @if ($contrato->estado == 0)
+                                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#deactivateModal{{ $contrato->id }}">Desactivar</button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="deactivateModal{{ $contrato->id }}" tabindex="-1" role="dialog" aria-labelledby="deactivateModalLabel{{ $contrato->id }}" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="deactivateModalLabel{{ $contrato->id }}">Desactivar Contrato</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            ¿Estás seguro de que deseas desactivar este contrato? Al hacerlo, todos los usuarios, pacientes y agendas asociados también se desactivarán.
+                                                                            <form action="{{ route('Contrato.toggleEstado', $contrato->id) }}" method="POST">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="mt-3">
+                                                                                    <button type="submit" class="btn btn-danger">Confirmar Desactivación</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </td>
+
                                                     <td>
                                                     @if($contrato->estado == 1)
                                                         <input type="radio" name="alert-toggle-group" id="alert-toggle-{{ $contrato->id }}" class="hidden-checkbox">

@@ -47,6 +47,7 @@ Route::post('/Regpaciente',[pacienteController::class,'store'])->name('paciente.
 Route::get('/paciente/delete/{id}',[pacienteController::class,'delete'])->name('paciente.delete');
 Auth::routes(); */
 
+Route::resource('User', App\Http\Controllers\UserController::class);
 
 
 Route::middleware(['auth'])->group(function () {
@@ -56,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
     });    
     Route::get('/inicio', 'App\Http\Controllers\InicioController@index')->name('inicio');
 
-    Route::resource('User', App\Http\Controllers\UserController::class);
     Route::resource('Agenda', App\Http\Controllers\AgendaController::class);
     Route::resource('Contrato', App\Http\Controllers\ContratoController::class);
     Route::resource('Historia', App\Http\Controllers\HistoriaController::class);

@@ -79,7 +79,6 @@
          <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/inicio" class="d-block">{{ Auth::user()->name }}</a>
 
         </div>
       </div>

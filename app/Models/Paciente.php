@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Paciente extends Model
-{
+{ 
     
     static $rules = [
 		'nombre' => 'required',
@@ -61,7 +61,8 @@ class Paciente extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function ep()
-    {
+    {   
+        return $this->belongsTo(Ep::class, 'idEps');
         return $this->hasOne('App\Models\Ep', 'id', 'idContrato');
     }
     
@@ -71,6 +72,13 @@ class Paciente extends Model
     public function historias()
     {
         return $this->hasMany('App\Models\Historia', 'pacientes_id', 'id');
+    }
+    public function eps()
+    {
+        return $this->belongsTo(Ep::class, 'idEps');
+    }
+    public function contrato(){
+        return $this->belongsTo(Contrato::class, 'idContrato');
     }
     
 

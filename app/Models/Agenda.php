@@ -25,7 +25,9 @@ class Agenda extends Model
 {
     
     static $rules = [
+        'estado'=> '',
 		'fecha_inicio' => 'required',
+        'idContrato' => 'required',
 		'fecha_fin' => 'required',
 		'hora' => 'required',
 		'hora_fin' => 'required',
@@ -40,7 +42,7 @@ class Agenda extends Model
      *
      * @var array
      */
-    protected $fillable = ['fecha_inicio','fecha_fin','hora','hora_fin','lugar','id_pacientes','id_user'];
+    protected $fillable = ['estado','idContrato','fecha_inicio','fecha_fin','hora','hora_fin','lugar','id_pacientes','id_user'];
 
 
     /**
@@ -58,6 +60,11 @@ class Agenda extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_user');
     }
+    
+    public function contrato(){
+        return $this->belongsTo(Contrato::class, 'idContrato');
+    }
+
     
 
 }

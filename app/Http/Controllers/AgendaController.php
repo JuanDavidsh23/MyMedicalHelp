@@ -69,6 +69,7 @@ class AgendaController extends Controller
     public function store(Request $request)
 {
     $rules = [
+        'idContrato' => 'required',
         'fecha_inicio' => 'required',
         'fecha_fin' => 'required', 
         'hora' => 'required',
@@ -104,7 +105,7 @@ class AgendaController extends Controller
     return redirect()->route('Agenda.index')
         ->with('success', 'Agenda creada correctamente.');
 }
-
+    
 
     /**
      * Display the specified resource.
@@ -130,7 +131,11 @@ class AgendaController extends Controller
         $agenda = Agenda::find($id);
         $pacientes = Paciente::pluck('nombre','id');
         $user = User::pluck('name','id');
-        return view('agenda.edit', compact('agenda','pacientes','user'));
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');     
+        return view('agenda.edit', compact('agenda','pacientes','user','contrato'));
     }
 
     /**
@@ -145,6 +150,7 @@ class AgendaController extends Controller
     $agenda = Agenda::findOrFail($id);
 
         $rules = [
+            'idContrato' => 'required',
             'fecha_inicio' => 'required',
             'fecha_fin' => 'required', 
             'hora' => 'required',

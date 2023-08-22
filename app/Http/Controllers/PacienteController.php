@@ -19,10 +19,13 @@ class PacienteController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
-        $pacientes = Paciente::where('documento', $busqueda)
-            ->orWhere('nombre', 'LIKE', '%' . $busqueda . '%')
-            ->latest('id')
-            ->paginate();
+        $pacientes = Paciente::with('eps')->where(function ($query) use ($busqueda) {
+        $query->where('documento', $busqueda)
+              ->orWhere('nombre', 'LIKE', '%' . $busqueda . '%');
+        })
+        ->latest('id')
+        ->paginate();
+
     
         $totalPacientes = Paciente::count();
     
@@ -39,8 +42,10 @@ class PacienteController extends Controller
     public function create()
     {
         $paciente = new Paciente();
-        $contrato = Contrato::join('eps', 'contratos.idEps', '=', 'eps.id')
-        ->pluck('eps.eps', 'contratos.id');
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');    
         $eps = Ep::pluck('eps','id');
         return view('paciente.create', compact('paciente','eps','contrato'));
     }
@@ -113,8 +118,12 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::find($id);
         $eps = Ep::pluck('eps','id');
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');    
 
-        return view('paciente.edit', compact('paciente','eps'));
+        return view('paciente.edit', compact('paciente','eps','contrato'));
     }
 
     /**

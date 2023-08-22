@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Contrato;
 use Illuminate\Http\Request;
 use App\Models\Ep;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Paciente;
+use App\Models\Agenda;
+
+
+
 
 /**
  * Class ContratoController
@@ -26,17 +33,44 @@ class ContratoController extends Controller
     }
     public function toggleEstado($id, Request $request)
     {
-        $contrato = Contrato::findOrFail($id);
-        
-        if ($contrato->estado == 0) {
-            $contrato->estado = 1;
-            $contrato->razon_cancelacion = $request->input('razon_cancelacion');
-            $contrato->save();
-            
-            return redirect()->back()->with('success', 'Contrato marcado como inactivo.');
-        } else {
+        DB::beginTransaction();  // Comienza una transacción
+    
+        try {
+            $contrato = Contrato::findOrFail($id);
+    
+            // Si el contrato está activo (0), desactívalo (1) y registra la razón de cancelación
+            if ($contrato->estado == 0) {
+                $contrato->estado = 1;
+                $contrato->razon_cancelacion = $request->input('razon_cancelacion');
+    
+                // Desactivar usuarios, pacientes y agendas asociados
+                User::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar usuarios
+                Paciente::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar pacientes
+                Agenda::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar agendas
+    
+                $contrato->save();
+                DB::commit();
+    
+                return redirect()->back()->with('success', 'Contrato marcado como inactivo y todos los elementos asociados han sido desactivados.');
+    
+            } else {
+                // Si el contrato está inactivo (1), actívalo (0)
+                $contrato->estado = 0;
+                $contrato->razon_cancelacion = null;  // Puedes resetear la razón de cancelación si lo deseas
+                $contrato->save();
+                DB::commit();
+    
+                return redirect()->back()->with('success', 'Contrato marcado como activo.');
+            }
+    
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Ocurrió un error al intentar cambiar el estado del contrato.');
         }
     }
+    
+    
+
     
     
     
@@ -132,4 +166,15 @@ class ContratoController extends Controller
         return redirect()->route('Contrato.index')
             ->with('success', 'Contrato eliminado correctamente');
     }
+
+    public function pacientes()
+    {
+        return $this->hasMany(Paciente::class, 'idContrato'); 
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'idContrato');
+    }
+    
 }

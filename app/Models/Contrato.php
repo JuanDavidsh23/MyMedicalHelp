@@ -48,5 +48,10 @@ class Contrato extends Model
         return $this->hasOne('App\Models\Ep', 'id', 'idEps');
     }
     
+    public function eps(){
+        return $this->belongsTo(Ep::class, 'idEps');
+    }
+  
+    
 
 }

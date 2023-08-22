@@ -2,7 +2,7 @@
     <div class="box-body">
         <div class="form-group">
             {{ Form::label('Contrato') }}
-            {{ Form::select('idContrato',$contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+            {{ Form::select('idContrato',$contrato, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
             {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -50,7 +50,9 @@ document.getElementById('fecha_inicio').onchange = function() {
     document.getElementById('fecha_fin').min = this.value;
 };
 
-document.getElementById('hora_inicio').onchange = function() {
+document.getElementById('hora').onchange = function() {
      document.getElementById('fecha_inicio').value === document.getElementById('fecha_fin').value
 };
+
+
 </script>

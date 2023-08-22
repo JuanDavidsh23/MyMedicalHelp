@@ -14,6 +14,7 @@ return new class extends Migration
         
  Schema::create('agendas', function (Blueprint $table) {
     $table->id();
+    $table->integer('estado')->default(0);
     $table->unsignedBigInteger('idContrato')->nullable();
     $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
     $table->date('fecha_inicio');

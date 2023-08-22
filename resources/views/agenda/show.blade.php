@@ -44,6 +44,11 @@
                             <strong>Enfermera:</strong>
                             {{ $agenda->usuario->name }}
                         </div>
+                        <div class="form-group">
+                            <strong>Contrato:</strong>
+                            {{ $agenda->contrato ? ($agenda->contrato->eps ? $agenda->contrato->eps->eps . ' - ' . $agenda->contrato->Nro_contrato : 'EPS no asignada') : 'Contrato no asignado' }}
+                        </div>
+
 
                     </div>
                 </div>

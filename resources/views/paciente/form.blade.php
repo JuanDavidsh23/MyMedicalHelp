@@ -36,9 +36,9 @@
                 {{ Form::text('documento', $paciente->documento, ['class' => 'form-control' . ($errors->has('documento') ? ' is-invalid' : ''), 'placeholder' => 'Documento']) }}
                 {!! $errors->first('documento', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 {{ Form::label('Contrato') }}
-                {{ Form::select('idContrato',$contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
+                {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
                 {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
             </div>
         </div>
