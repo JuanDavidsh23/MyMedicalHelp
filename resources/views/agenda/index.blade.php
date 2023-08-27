@@ -16,6 +16,14 @@
                         <span id="card_title">
                             <h3> {{ __('Agenda') }} </h3>
                         </span>
+                        <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" aria-controls="activos" aria-selected="true">Activos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="inactivos-tab" data-toggle="tab" href="#inactivos" aria-controls="inactivos" aria-selected="false">Inactivos</a>
+                    </li>
+                </ul>
                         
                         <div class="float-right">
                             <a href="{{ route('Agenda.create') }}" class="btn btn-success btn-sm float-right" data-placement="left">
@@ -37,14 +45,7 @@
                 </div>
                 @endif
 
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="activos-tab" data-toggle="tab" href="#activos" aria-controls="activos" aria-selected="true">Activos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="inactivos-tab" data-toggle="tab" href="#inactivos" aria-controls="inactivos" aria-selected="false">Inactivos</a>
-                    </li>
-                </ul>
+                
                 <br>
 
                 <div class="tab-content">
