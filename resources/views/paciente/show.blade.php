@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <strong>idContrato:</strong>
-                            {{ $agenda->contrato->eps->eps . ' - ' . $agenda->contrato->Nro_contrato }}
+                            {{ $paciente->contrato && $paciente->contrato->eps ? $paciente->contrato->eps->eps : 'No asignado' }}
                         </div>
 
                     </div>

@@ -41,8 +41,8 @@
                             {{ $user->ciudad }}
                         </div>
                         <div class="form-group">
-                            <strong>Departamemnto:</strong>
-                            {{ $user->departamemnto }}
+                            <strong>Eps:</strong>
+                            {{ $user->idContrato }}
                         </div>
                         <div class="form-group">
                             <strong>Cedula:</strong>

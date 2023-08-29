@@ -5,36 +5,57 @@
             {{ Form::select('idContrato',$contrato, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => 'Selecciona un contrato']) }}
             {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('fecha_inicio') }}
-            {{ Form::date('fecha_inicio', $agenda->fecha_inicio, ['id' => 'fecha_inicio', 'class' => 'form-control' . ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}
-            {!! $errors->first('fecha_inicio', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('fecha_fin') }}
-            {{ Form::date('fecha_fin', $agenda->fecha_fin, ['id' => 'fecha_fin', 'class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Fin']) }}
-            {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('hora') }}
-            {{ Form::time('hora', $agenda->hora, ['id' => 'hora_inicio', 'class' => 'form-control' . ($errors->has('hora') ? ' is-invalid' : ''), 'placeholder' => 'Hora']) }}
-            {!! $errors->first('hora', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('hora_fin') }}
-            {{ Form::time('hora_fin', $agenda->hora_fin, ['id' => 'hora_fin', 'class' => 'form-control' . ($errors->has('hora_fin') ? ' is-invalid' : ''), 'placeholder' => 'Hora Fin']) }}
-            {!! $errors->first('hora_fin', '<div class="invalid-feedback">:message</div>') !!}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('fecha_inicio') }}
+                    {{ Form::date('fecha_inicio', $agenda->fecha_inicio, ['id' => 'fecha_inicio', 'class' => 'form-control' . ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}
+                    {!! $errors->first('fecha_inicio', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('fecha_fin') }}
+                    {{ Form::date('fecha_fin', $agenda->fecha_fin, ['id' => 'fecha_fin', 'class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Fin']) }}
+                    {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            {{ Form::label('Paciente') }}
-            {{ Form::select('id_pacientes',$pacientes, $agenda->id_pacientes, ['class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
-            {!! $errors->first('id_pacientes', '<div class="invalid-feedback">:message</div>') !!}
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('hora') }}
+                    {{ Form::time('hora', $agenda->hora, ['id' => 'hora_inicio', 'class' => 'form-control' . ($errors->has('hora') ? ' is-invalid' : ''), 'placeholder' => 'Hora']) }}
+                    {!! $errors->first('hora', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('hora_fin') }}
+                    {{ Form::time('hora_fin', $agenda->hora_fin, ['id' => 'hora_fin', 'class' => 'form-control' . ($errors->has('hora_fin') ? ' is-invalid' : ''), 'placeholder' => 'Hora Fin']) }}
+                    {!! $errors->first('hora_fin', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            {{ Form::label('Enfermer@') }}
-            {{ Form::select('id_user', $user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Enfermer@']) }}
-            {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('Paciente') }}
+                    {{ Form::select('id_pacientes',$pacientes, $agenda->id_pacientes, ['class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
+                    {!! $errors->first('id_pacientes', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ Form::label('Enfermer@') }}
+                    {{ Form::select('id_user', $user, $agenda->id_user, ['class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Enfermer@']) }}
+                    {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
         </div>
 
 

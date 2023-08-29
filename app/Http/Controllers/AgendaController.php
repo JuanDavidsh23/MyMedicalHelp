@@ -67,44 +67,61 @@ class AgendaController extends Controller
     }
 
     public function store(Request $request)
-{
-    $rules = [
-        'idContrato' => 'required',
-        'fecha_inicio' => 'required',
-        'fecha_fin' => 'required', 
-        'hora' => 'required',
-        'hora_fin' => 'required',
-        'id_pacientes' => 'required',
-        'id_user' => 'required',
-    ];
+    {
+        $rules = [
+            'idContrato' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required', 
+            'hora' => 'required',
+            'hora_fin' => 'required',
+            'id_pacientes' => 'required',
+            'id_user' => 'required',
+        ];
 
-    $messages = [
-        'required' => 'El campo es obligatorio.',
-    ];
+        $messages = [
+            'required' => 'El campo es obligatorio.',
+        ];
 
-    $validatedData = $request->validate($rules, $messages);
+        $validatedData = $request->validate($rules, $messages);
 
-    // Verificar si el paciente ya tiene una agenda activa en el rango de fechas proporcionado
-    $existingAgenda = Agenda::where('id_pacientes', $validatedData['id_pacientes'])
-        ->where(function ($query) use ($validatedData) {
-            $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                ->orWhere(function ($query) use ($validatedData) {
-                    $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
-                        ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
-                });
-        })
-        ->first();
+        // Verificar si el paciente ya tiene una agenda activa en el rango de fechas proporcionado
+        $existingPacienteAgenda = Agenda::where('id_pacientes', $validatedData['id_pacientes'])
+            ->where(function ($query) use ($validatedData) {
+                $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                    ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                    ->orWhere(function ($query) use ($validatedData) {
+                        $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
+                            ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
+                    });
+            })
+            ->first();
 
-    if ($existingAgenda) {
-        return redirect()->back()->withErrors('El paciente ya tiene una agenda activa en el rango de fechas proporcionado.');
+        if ($existingPacienteAgenda) {
+            return redirect()->back()->withErrors('El paciente ya tiene una agenda activa en el rango de fechas proporcionado.');
+        }
+
+        // Verificar si el enfermero ya tiene una agenda en la misma fecha y hora
+        $existingEnfermeroAgenda = Agenda::where('id_user', $validatedData['id_user'])
+            ->where(function ($query) use ($validatedData) {
+                $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                    ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
+                    ->orWhere(function ($query) use ($validatedData) {
+                        $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
+                            ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
+                    });
+            })
+            ->first();
+
+        if ($existingEnfermeroAgenda) {
+            return redirect()->back()->withErrors('El enfermero ya tiene una agenda en la misma fecha y hora.');
+        }
+
+        $agenda = Agenda::create($validatedData);
+
+        return redirect()->route('Agenda.index')
+            ->with('success', 'Agenda creada correctamente.');
     }
 
-    $agenda = Agenda::create($validatedData);
-
-    return redirect()->route('Agenda.index')
-        ->with('success', 'Agenda creada correctamente.');
-}
     
 
     /**

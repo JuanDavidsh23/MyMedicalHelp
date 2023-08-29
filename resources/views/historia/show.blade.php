@@ -21,16 +21,16 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Observaciones:</strong>
-                            {{ $historia->observaciones }}
+                            <strong>Diagnostico:</strong>
+                            {{ $historia->diagnostico }}
                         </div>
                         <div class="form-group">
-                            <strong>Procedimientos:</strong>
-                            {{ $historia->procedimientos }}
+                            <strong>Signos vitales:</strong>
+                            {{ $historia->signosvitales }}
                         </div>
                         <div class="form-group">
-                            <strong>Recomendaciones:</strong>
-                            {{ $historia->recomendaciones }}
+                            <strong>Tratamiento:</strong>
+                            {{ $historia->tratamiento }}
                         </div>
                         <div class="form-group">
                             <strong>Pacientes Id:</strong>

@@ -65,9 +65,7 @@
                                             <td>
                                                 <form action="{{ route('Ep.destroy',$ep->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-warning" href="{{ route('Ep.edit',$ep->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    
                                                 </form>
                                             </td>
                                         </tr>
@@ -82,3 +80,8 @@
         </div>
     </div>
 @endsection
+
+
+<!-- @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button> -->
