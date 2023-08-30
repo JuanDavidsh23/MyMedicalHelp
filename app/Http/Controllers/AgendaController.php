@@ -201,3 +201,6 @@ class AgendaController extends Controller
             ->with('success', 'Agenda eliminado con éxito');
     }
 }
+
+///API
+
