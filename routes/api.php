@@ -3,6 +3,7 @@ use App\Http\Controllers\Api\ApiPacienteController;
 use App\Http\Controllers\Api\ApiAgendaController;
 use App\Http\Controllers\Api\ApiUserController;
 use App\Http\Controllers\Api\ApiHistoriasController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
+], function ($router) {
+
+    Route::post('/login', [AuthController::class,'login']);
+    Route::post('/logout', [AuthController::class,'logout']);
+
+
+});
 
 
 Route::group(['prefix' => 'agendas'], function () {
