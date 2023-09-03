@@ -32,6 +32,7 @@ Route::group([
 
 Route::group(['prefix' => 'agendas'], function () {
     Route::get('/', [ApiAgendaController::class, 'getAgenda']);
+    Route::get('/{id}', [ApiAgendaController::class, 'getAgenda']);
     Route::post('/', [ApiAgendaController::class, 'createAgenda']);
     Route::put('/{id}', [ApiAgendaController::class, 'updateAgenda']);
     Route::delete('/{id}', [ApiAgendaController::class, 'deleteAgenda']);
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'agendas'], function () {
 
 Route::group(['prefix' => 'paciente'], function () {
     Route::get('/', [ApiPacienteController::class, 'getPacientes']);
+    Route::get('/{id}', [ApiPacienteController::class, 'getPacientes']);
     Route::post('/', [ApiPacienteController::class, 'createPaciente']);
     Route::put('/{id}', [ApiPacienteController::class, 'updatePaciente']);
     Route::delete('/{id}', [ApiPacienteController::class, 'deletePaciente']);
@@ -48,6 +50,7 @@ Route::group(['prefix' => 'paciente'], function () {
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [ApiUserController::class, 'getUsers']);
+    Route::get('/{id}', [ApiUserController::class, 'getUsers']);
     Route::post('/', [ApiUserController::class, 'createUser']);
     Route::put('/{id}', [ApiUserController::class, 'updateUser']);
     Route::delete('/{id}', [ApiUserController::class, 'deleteUser']);
@@ -55,6 +58,7 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['prefix' => 'historia'], function () {
     Route::get('/', [ApiHistoriasController::class, 'getHistorias']);
+    Route::get('/{id}', [ApiHistoriasController::class, 'getHistorias']);
     Route::post('/', [ApiHistoriasController::class, 'createHistoria']);
     Route::put('/{id}', [ApiHistoriasController::class, 'updateHistoria']);
     Route::delete('/{id}', [ApiHistoriasController::class, 'deleteHistoria']);

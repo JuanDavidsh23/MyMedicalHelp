@@ -22,12 +22,24 @@ class ApiPacienteController extends Controller
         return response()->json($paciente, 201);
     }
 
-    public function getPacientes(Request $request)
+    public function getPacientes(Request $request, $id = null)
     {
-        $pacientes = Paciente::all();
-
-        return response()->json($pacientes);
+        if ($id !== null) {
+            // Buscar un paciente específico por ID
+            $paciente = Paciente::find($id);
+    
+            if (!$paciente) {
+                return response()->json(['message' => 'Paciente no encontrado'], 404);
+            }
+    
+            return response()->json($paciente);
+        } else {
+            // Obtener todos los pacientes si no se proporciona un ID
+            $pacientes = Paciente::all();
+            return response()->json($pacientes);
+        }
     }
+    
 
     public function updatePaciente(Request $request, $id)
     {

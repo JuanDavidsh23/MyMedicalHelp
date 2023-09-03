@@ -23,12 +23,24 @@ class ApiHistoriasController extends Controller
         return response()->json($historia, 201);
     }
 
-    public function getHistorias(Request $request)
+    public function getHistorias(Request $request, $id = null)
     {
-        $historias = Historia::all();
-
-        return response()->json($historias);
+        if ($id !== null) {
+            // Buscar una historia específica por ID
+            $historia = Historia::find($id);
+    
+            if (!$historia) {
+                return response()->json(['message' => 'Historia no encontrada'], 404);
+            }
+    
+            return response()->json($historia);
+        } else {
+            // Obtener todas las historias si no se proporciona un ID
+            $historias = Historia::all();
+            return response()->json($historias);
+        }
     }
+    
 
     public function updateHistoria(Request $request, $id)
     {

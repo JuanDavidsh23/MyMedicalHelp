@@ -24,12 +24,26 @@ class ApiAgendaController extends Controller
     }
 
 
-    public function getagenda(Request $request)
+    public function getAgenda(Request $request, $id = null)
     {
-        $agenda = Agenda::all(); 
-
-        return response()->json($agenda);
+        if ($id !== null) {
+            // Buscar una agenda específica por ID
+            $agenda = Agenda::find($id);
+    
+            if (!$agenda) {
+                return response()->json(['message' => 'Agenda no encontrada'], 404);
+            }
+    
+            return response()->json($agenda);
+        } else {
+            // Obtener todas las agendas si no se proporciona un ID
+            $agendas = Agenda::all();
+            return response()->json($agendas);
+        }
     }
+    
+
+    
 
     public function updateAgenda(Request $request, $id)
     {

@@ -22,13 +22,24 @@ class ApiUserController extends Controller
         // Devolver una respuesta JSON con el objeto creado
         return response()->json($user, 201);
     }
-
-    public function getUsers(Request $request)
+    public function getUsers(Request $request, $id = null)
     {
-        $users = User::all();
-
-        return response()->json($users);
+        if ($id !== null) {
+            // Buscar un usuario específico por ID
+            $user = User::find($id);
+    
+            if (!$user) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+    
+            return response()->json($user);
+        } else {
+            // Obtener todos los usuarios si no se proporciona un ID
+            $users = User::all();
+            return response()->json($users);
+        }
     }
+    
 
     public function updateUser(Request $request, $id)
     {
