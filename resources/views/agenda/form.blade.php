@@ -62,7 +62,7 @@
 
     </div>
     <div class="box-footer mt20">
-         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de que deseas confirmar esta agenda?')">{{ __('Enviar') }}
+         <button type="submit" class="btn btn-primary" style="background-color: #E74C3C; color: white; border-radius: 10px; border-color:#E74C3C; " onclick="return confirm('¿Estás seguro de que deseas confirmar esta agenda?')">{{ __('Guardar') }}
     </div>
 </div>
 
