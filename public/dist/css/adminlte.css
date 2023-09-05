@@ -11,7 +11,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-  --blue: #007bff;
+  --blue: #eb7373;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -40,6 +40,7 @@
   --font-family-sans-serif: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
 
 *,
 *::before,
@@ -4218,7 +4219,7 @@ input[type="button"].btn-block {
   margin-top: 0;
   margin-right: 0;
   margin-left: 0;
-  background-color: #007bff;
+  background-color: #ff0095;
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.1);
@@ -12814,6 +12815,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 [class*="sidebar-light-"] .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #E74C3C;
   color: #000;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -12889,7 +12891,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item > .nav-link:active {
-  color: #c2c7d0;
+  color: #E74C3C;
 }
 
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item.menu-open > .nav-link,
@@ -12900,6 +12902,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 [class*="sidebar-dark-"] .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #E74C3C;
   color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -12945,7 +12948,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #007bff;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -12967,13 +12970,13 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-success .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-success .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #28a745;
+  background-color: #E74C3C;
   color: #fff;
 }
 
 .sidebar-dark-success .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .sidebar-light-success .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
-  border-color: #28a745;
+  border-color: #E74C3C;
 }
 
 .sidebar-dark-info .nav-sidebar > .nav-item > .nav-link.active,
@@ -12989,7 +12992,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-warning .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-warning .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #ffc107;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13000,7 +13003,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-danger .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #dc3545;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13011,7 +13014,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-light .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-light .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #f8f9fa;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13022,7 +13025,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-dark .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #343a40;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13033,7 +13036,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-lightblue .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-lightblue .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #3c8dbc;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13044,7 +13047,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-navy .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-navy .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #001f3f;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13055,7 +13058,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-olive .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-olive .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #3d9970;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13066,7 +13069,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-lime .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-lime .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #01ff70;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13908,23 +13911,23 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-warning .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-warning .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
-  border-color: #f39c12;
+  border-color: #E74C3C;
 }
 
 .dark-mode .sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-danger .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #e74c3c;
+  background-color: #E74C3C;
   color: #fff;
 }
 
 .dark-mode .sidebar-dark-danger .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-danger .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
-  border-color: #e74c3c;
+  border-color: #E74C3C;
 }
 
 .dark-mode .sidebar-dark-light .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-light .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #f8f9fa;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13935,7 +13938,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-dark .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-dark .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #343a40;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13946,7 +13949,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-lightblue .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-lightblue .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #86bad8;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13957,7 +13960,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-navy .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-navy .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #002c59;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -13968,7 +13971,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-olive .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-olive .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #74c8a3;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13979,7 +13982,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-lime .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-lime .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #67ffa9;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -13990,7 +13993,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-fuchsia .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-fuchsia .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #f672d8;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -14001,7 +14004,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-maroon .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-maroon .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #ed6c9b;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -14012,7 +14015,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-blue .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-blue .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #3f6791;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -14023,7 +14026,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-indigo .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-indigo .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #6610f2;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -14034,7 +14037,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-purple .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-purple .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #6f42c1;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -14045,7 +14048,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-pink .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-pink .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #e83e8c;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -14056,7 +14059,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-red .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-red .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #e74c3c;
+  background-color: #E74C3C;
   color: #fff;
 }
 
@@ -14067,7 +14070,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-orange .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-orange .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #fd7e14;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
@@ -14078,7 +14081,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .dark-mode .sidebar-dark-yellow .nav-sidebar > .nav-item > .nav-link.active,
 .dark-mode .sidebar-light-yellow .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #f39c12;
+  background-color: #E74C3C;
   color: #1f2d3d;
 }
 
