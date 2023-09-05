@@ -18,6 +18,7 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
+        
         $busqueda = $request->busqueda;
         $pacientes = Paciente::with('eps')->where(function ($query) use ($busqueda) {
         $query->where('documento', $busqueda)

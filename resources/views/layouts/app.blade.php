@@ -16,13 +16,13 @@
 <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap4.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<link rel="icon" type="image/png" href="{{ asset('dist/img/log.jpg') }}">
+<link rel="icon" type="image/png" href="{{ asset('dist/img/logoo.png') }}">
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -37,12 +37,40 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-
+      
     </ul>
     <!-- Right navbar links -->
+    
+    <style>
+     .connected {
+    background-color: rgba(0, 128, 0, 0.3); /* Fondo verde claro difuminado */
+    padding: 5px;
+    border-radius: 5px;
+    color: green;
+}
+
+
+    </style>
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
+      <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 2px solid green; padding: 5px; border-radius: 5px; color: green;">
+        {{ auth()->user()->name }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="userDropdown">
+        <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    </div>
+</li>
+
+
+
+
+
        
         <div class="navbar-search-block">
           <form class="form-inline">
@@ -80,7 +108,7 @@
          <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-        <a href="/inicio" class="d-block">{{ Auth::user()->name }}</a>
+        <a href="/inicio" class="d-block">My Medical Help</a>
 
         </div>
       </div>
@@ -154,24 +182,14 @@
               </li>
   
               
-              <li class="nav-item">
-    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="nav-icon fas fa-sign-out-alt"></i>
-        <p>
-            Cerrar Sesión
-        </p>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-
-          </li>
+        
         </ul>
+        
       </nav>
 
       <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
+
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -231,7 +249,6 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
 
 <!-- Agrega estos scripts al final del body del layout principal -->
@@ -243,19 +260,3 @@
 </body>
 </html>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/bootstrap.min.css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/') }}" rel="stylesheet">
-    <title>Usuarios</title>
-</head>
-<body>
-
-</body>
-</html>
-
-</footer>
-</html>

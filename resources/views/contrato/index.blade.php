@@ -177,8 +177,8 @@
                                                 <th>Eps</th>
                                                 <th>Fecha Inicio Contrato</th>
                                                 <th>Fecha Fin Contrato</th>
-                                                <th>Estado</th>
                                                 <th></th>
+                                                <th>Motivo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -221,7 +221,7 @@
                                                     <td>
                                                     @if($contrato->estado == 1)
                                                         <input type="radio" name="alert-toggle-group" id="alert-toggle-{{ $contrato->id }}" class="hidden-checkbox">
-                                                        <label for="alert-toggle-{{ $contrato->id }}" class="btn">Mostrar Motivo</label>
+                                                        <label for="alert-toggle-{{ $contrato->id }}" class="btn btn-warning">Mostrar Motivo</label>
 
                                                         <div class="alert-container">
                                                             <div class="alert" id="my-alert-{{ $contrato->id }}">
