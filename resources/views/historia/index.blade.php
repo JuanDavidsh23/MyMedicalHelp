@@ -43,10 +43,7 @@
 										<th>Evolución</th>
 										<th>Tratamiento</th>
 										<th>Paciente</th>
-
-
-
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,8 +63,6 @@
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Historia.show',$historia->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
                                                     <a class="btn btn-sm btn-warning" href="{{ route('Historia.edit',$historia->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
