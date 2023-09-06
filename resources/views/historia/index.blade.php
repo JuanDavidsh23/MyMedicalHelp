@@ -37,8 +37,8 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Diagnostico</th>
-										<th>Signos</th>
+										<th>Diagnóstico</th>
+										<th>Signos Vitales</th>
 										<th>Antecedentes</th>
 										<th>Evolución</th>
 										<th>Tratamiento</th>

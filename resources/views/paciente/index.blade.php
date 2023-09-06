@@ -50,7 +50,7 @@
                                         
 										<th>Nombre</th>
 										<th>Correo</th>
-										<th>Telefono</th>
+										<th>Teléfono</th>
 										<th>Documento</th>
 										<th>Eps</th>
 

@@ -46,14 +46,27 @@ class HistoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        request()->validate(Historia::$rules);
+{
+    $rules = [
+        'diagnostico' => 'required',
+        'signosvitales' => 'required',
+        'antecedentesalergicos' => 'required',
+        'evolucion' => 'required',
+        'tratamiento' => 'required',
+        'pacientes_id' => 'required',
+    ];
 
-        $historia = Historia::create($request->all());
+    $messages = [
+        'required' => 'El campo :attribute es obligatorio.',
+    ];
 
-        return redirect()->route('Historia.index')
-            ->with('success', 'Historia creada correctamente.');
-    }
+    $validatedData = $request->validate($rules, $messages);
+
+    $historia = Historia::create($validatedData);
+
+    return redirect()->route('Historia.index')
+        ->with('success', 'Historia creada correctamente.');
+}
 
     /**
      * Display the specified resource.
@@ -89,15 +102,28 @@ class HistoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        request()->validate(Historia::$rules);
-    
-        $historia = Historia::findOrFail($id);
-        $historia->update($request->all());
-    
-        return redirect()->route('Historia.index')
-            ->with('success', 'Historia creada correctamente.');
-    }
+{
+    $rules = [
+        'diagnostico' => 'required',
+        'signosvitales' => 'required',
+        'antecedentesalergicos' => 'required',
+        'evolucion' => 'required',
+        'tratamiento' => 'required',
+        'pacientes_id' => 'required',
+    ];
+
+    $messages = [
+        'required' => 'El campo :attribute es obligatorio.',
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+
+    $historia = Historia::findOrFail($id);
+    $historia->update($validatedData);
+
+    return redirect()->route('Historia.index')
+        ->with('success', 'Historia actualizada correctamente.');
+}
     
     /**
      * @param int $id
