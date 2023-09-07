@@ -17,11 +17,15 @@
                                <h3> {{ __('Historia') }}</h3>
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('Historia.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                  {{ __('Nueva Historia') }}
-                                </a>
-                              </div>
+                            <div class="float-right">
+                    <a href="{{ route('Historia.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('Historia.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nuevo Historia') }}
+    </a>
+    
+</div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

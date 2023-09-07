@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Historia;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 /**
@@ -25,6 +27,15 @@ class HistoriaController extends Controller
         return view('historia.index', compact('historias'))
             ->with('i', (request()->input('page', 1) - 1) * $historias->perPage());
     }
+
+    public function pdf(){
+
+        $historias=Historia::all();
+        $pdf = Pdf::loadView('Historia.pdf', compact('historias'));
+        return $pdf->stream();
+
+    }
+    
 
     /**
      * Show the form for creating a new resource.

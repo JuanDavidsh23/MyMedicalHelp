@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Paciente;
 use App\Models\Agenda;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -30,6 +32,31 @@ class ContratoController extends Controller
 
         return view('contrato.index', compact('contratos'))
             ->with('i', (request()->input('page', 1) - 1) * $contratos->perPage());
+    }
+
+    public function pdf(){
+
+        $contratos=Contrato::all();
+        $pdf = Pdf::loadView('Contrato.pdf', compact('contratos'));
+        return $pdf->stream();
+
+    }
+
+    public function obtenerDatos(Request $request)
+    {
+        $contratoId = $request->query('contratoId');
+    
+        // Obtén pacientes y usuarios relacionados con el contrato seleccionado
+        $pacientes = Paciente::where('idContrato', $contratoId)->get(['id', 'nombre']);
+        $usuarios = User::where('idContrato', $contratoId)->get(['id', 'name']);
+    
+        // Devuelve los datos en formato JSON
+        return response()->json([
+            'pacientes' => $pacientes,
+            'usuarios' => $usuarios,
+    
+        ]);
+        
     }
     public function toggleEstado($id, Request $request)
     {

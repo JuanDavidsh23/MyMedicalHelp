@@ -83,11 +83,16 @@
                         </li>
                     </ul>
 
-                            <div class="float-right">
-                                <a href="{{ route('Contrato.create') }}" class="btn btn-success btn-sm float-right" data-placement="left">
-                                    {{ __('Nuevo contrato') }}
-                                </a>
-                            </div>
+                    <div class="float-right">
+                    <a href="{{ route('Contrato.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('Contrato.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nuevo contrato') }}
+    </a>
+    
+</div>
+
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

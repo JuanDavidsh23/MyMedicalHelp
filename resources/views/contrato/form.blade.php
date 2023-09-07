@@ -19,10 +19,17 @@
                 {!! $errors->first('fecha_inicio', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group col-md-6">
-                {{ Form::label('Fecha Fin') }}
-                {{ Form::date('fecha_fin', $contrato->fecha_fin, ['id' => 'fecha_fin', 'class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''), 'placeholder' => '']) }}
-                {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
+    {{ Form::label('Fecha Fin') }}
+    {{ Form::date('fecha_fin', $contrato->fecha_fin, [
+        'id' => 'fecha_fin',
+        'class' => 'form-control' . ($errors->has('fecha_fin') ? ' is-invalid' : ''),
+        'placeholder' => '',
+        'min' => now()->format('Y-m-d'), // Establece la fecha mínima como la fecha actual
+        'required' => 'required' // Para requerir la entrada de fecha
+    ]) }}
+    {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+
                 <br>
             </div>
         </div>

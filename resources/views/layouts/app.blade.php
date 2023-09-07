@@ -41,31 +41,26 @@
     </ul>
     <!-- Right navbar links -->
     
-    <style>
-     .connected {
-    background-color: rgba(0, 128, 0, 0.3); /* Fondo verde claro difuminado */
-    padding: 5px;
-    border-radius: 5px;
-    color: green;
+     <style>  
+    .user-email {
+    margin-right: 10px; /* Ajusta el valor según la separación deseada */
 }
+</style>
 
-
-    </style>
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 2px solid green; padding: 5px; border-radius: 5px; color: green;">
-        {{ auth()->user()->name }}
-    </a>
-    <div class="dropdown-menu" aria-labelledby="userDropdown">
-        <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <span class="user-email">{{ auth()->user()->email }}</span>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt" id="logout-icon"></i>
         </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-    </div>
-</li>
+    </li>
+</ul>
+
+
+
 
 
 
@@ -105,7 +100,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-         <img src="{{ asset('dist/img/LogoMH.jpg') }}" class="img-circle elevation-2" alt="User Image">
+         <img src="{{ asset('dist/img/enfermero.png') }}"  alt="User Image">
         </div>
         <div class="info">
         <a href="/inicio" class="d-block">My Medical Help</a>

@@ -6,6 +6,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\rolController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\HistoriaController;
+
+
+
 
 
 
@@ -21,12 +27,19 @@ use App\Http\Controllers\PermisosController;
 */
 
 Route::get('/', function () {
-    return view('Auth.login');
+    return view('Homepage');
 });    
 
 
 
+
+
 Route::middleware(['auth'])->group(function () {
+    Route::get('Contrato/pdf', [ContratoController::class,'pdf'])->name('Contrato.pdf');
+    Route::get('User/pdf', [UserController::class,'pdf'])->name('User.pdf');
+    Route::get('Paciente/pdf', [PacienteController::class,'pdf'])->name('Paciente.pdf');
+    Route::get('Agenda/pdf', [AgendaController::class,'pdf'])->name('Agenda.pdf');
+    Route::get('Historia/pdf', [HistoriaController::class,'pdf'])->name('Historia.pdf');
 
     Route::get('/inicio', 'App\Http\Controllers\InicioController@index')->name('inicio');
     Route::resource('User', App\Http\Controllers\UserController::class);
@@ -38,8 +51,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('Rol', App\Http\Controllers\RolController::class);
     Route::resource('Ep', App\Http\Controllers\EpController::class);
     Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
+
+
+
 });
 
+Route::get('/contratos/obtener-datos', 'App\Http\Controllers\ContratoController@obtenerDatos')->name('contratos.obtener-datos');
 
 Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
 

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <link rel="icon" type="image/png" href="{{ asset('dist/img/log.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('dist/img/logoo.png') }}">
   
 </head>
 <body>
@@ -19,7 +19,7 @@
 
         <div class="card-body">
           <h4 class="title text-center mt-4">
-            My Medical Help
+            Iniciar sesión
           </h4>
           <form class="form-box px-3" method="POST" action="{{ route('login') }}">
             @csrf
