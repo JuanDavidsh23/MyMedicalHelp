@@ -1,5 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
+        
         <div class="row">
             <div class="col-md-6">
             <div class="form-group">
@@ -9,6 +10,22 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+    <div class="col-md-6">
+    <div class="form-group">
+    {{ Form::label('Paciente') }}
+    {{ Form::select('id_pacientes', [], null, ['id' => 'idPaciente', 'class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
+    {!! $errors->first('id_pacientes', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+    </div>
+    <div class="col-md-6">
+    <div class="form-group">
+    {{ Form::label('Enfermer@') }}
+    {{ Form::select('id_user', [], null, ['id' => 'idEnfermera', 'class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Enfermer@']) }}
+    {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
+</div>
+    </div>
+</div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -49,22 +66,7 @@
             </div>
         </div>
         
-        <div class="row">
-    <div class="col-md-6">
-    <div class="form-group">
-    {{ Form::label('Paciente') }}
-    {{ Form::select('id_pacientes', [], null, ['id' => 'idPaciente', 'class' => 'form-control' . ($errors->has('id_pacientes') ? ' is-invalid' : ''), 'placeholder' => 'Pacientes']) }}
-    {!! $errors->first('id_pacientes', '<div class="invalid-feedback">:message</div>') !!}
-</div>
-    </div>
-    <div class="col-md-6">
-    <div class="form-group">
-    {{ Form::label('Enfermer@') }}
-    {{ Form::select('id_user', [], null, ['id' => 'idEnfermera', 'class' => 'form-control' . ($errors->has('id_user') ? ' is-invalid' : ''), 'placeholder' => 'Enfermer@']) }}
-    {!! $errors->first('id_user', '<div class="invalid-feedback">:message</div>') !!}
-</div>
-    </div>
-</div>
+        
 
 
 

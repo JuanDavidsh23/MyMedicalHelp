@@ -61,11 +61,10 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+                                        <th>Pacientes</th>
+                                        <th>Enfermera</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Final</th>
-										<th>Pacientes</th>
-										<th>Enfermera</th>
 										<th>Eps</th>
 
                                         <th>Acciones</th>
@@ -75,11 +74,10 @@
                                     @foreach ($agendas as $agenda)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $agenda->paciente->nombre }}</td>
+											<td>{{ $agenda->usuario->name }}</td>
 											<td>{{ $agenda->fecha_inicio }}</td>
 											<td>{{ $agenda->fecha_fin }}</td>
-											<td>{{ $agenda->paciente->nombre }}</td>
-											<td>{{ $agenda->usuario->name }}</td>
                                             <td>
                                                 {{ $agenda->contrato ? ($agenda->contrato->eps ? $agenda->contrato->eps->eps . ' - ' . $agenda->contrato->Nro_contrato : 'EPS no asignada') : 'Contrato no asignado' }}
                                             </td>

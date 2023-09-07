@@ -40,13 +40,12 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+                                        <th>Paciente</th>
 										<th>Diagnóstico</th>
 										<th>Signos Vitales</th>
 										<th>Antecedentes</th>
 										<th>Evolución</th>
 										<th>Tratamiento</th>
-										<th>Paciente</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -54,13 +53,13 @@
                                     @foreach ($historias as $historia)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $historia->paciente->nombre }}</td>
 											<td>{{ $historia->diagnostico }}</td>
 											<td>{{ $historia->signosvitales }}</td>
 											<td>{{ $historia->antecedentesalergicos }}</td>
 											<td>{{ $historia->evolucion }}</td>
 											<td>{{ $historia->tratamiento }}</td>
-											<td>{{ $historia->paciente->nombre }}</td>
+											
 
                                             <td>
                                                 <form action="{{ route('Historia.destroy',$historia->id) }}" method="POST">

@@ -1,6 +1,11 @@
 <div class="box box-info padding-1">
     <div class="box-body">
         <div class="row">
+        <div class="form-group col-md-6">
+                {{ Form::label('Contrato') }}
+                {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
+            </div>
             <div class="form-group col-md-6">
                 {{ Form::label('Nombre') }}
                 {{ Form::text('nombre', $paciente->nombre, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => '']) }}
@@ -36,11 +41,7 @@
                 {{ Form::text('documento', $paciente->documento, ['class' => 'form-control' . ($errors->has('documento') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                 {!! $errors->first('documento', '<div class="invalid-feedback">:message</div>') !!}
             </div>
-            <div class="form-group col-md-6">
-                {{ Form::label('Contrato') }}
-                {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => '']) }}
-                {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
+            
         </div>
     </div>
     <div class="box-footer mt20">
