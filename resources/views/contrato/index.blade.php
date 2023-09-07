@@ -156,7 +156,7 @@
                                                     </td>
                                                     <td>
                                                         @if ($contrato->estado == 0)
-                                                            <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('. ') }}</a>
                                                         @endif
                                                         
                                                     </td>

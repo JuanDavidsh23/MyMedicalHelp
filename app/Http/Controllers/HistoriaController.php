@@ -111,4 +111,7 @@ class HistoriaController extends Controller
         return redirect()->route('Historia.index')
             ->with('success', 'Historia eliminada correctamente');
     }
+
+
+    
 }

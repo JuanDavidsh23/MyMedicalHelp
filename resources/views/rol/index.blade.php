@@ -42,7 +42,7 @@
                                             <td>{{ $rol->nombre_rol }}</td>
                                             <td>
                                                 <form action="{{ route('Rol.destroy',$rol->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('Rol.edit',$rol->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Rol.edit',$rol->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                 </form>
                                             </td>
                                         </tr>

@@ -67,5 +67,14 @@ class ApiHistoriasController extends Controller
 
         return response()->json(['message' => 'Historia eliminada correctamente']);
     }
+    public function getHistoriasByPacienteId($pacientes_id) {
+        $historias = Historia::where('pacientes_id', $pacientes_id)->get();
+    
+        if (!$historias->isEmpty()) {
+            return response()->json($historias, 200);
+        } else {
+            return response()->json(['message' => 'No se encontró historia para este paciente'], 404);
+        }
+    }
 }
 

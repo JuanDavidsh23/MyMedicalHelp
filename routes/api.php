@@ -36,6 +36,9 @@ Route::group(['prefix' => 'agendas'], function () {
     Route::post('/', [ApiAgendaController::class, 'createAgenda']);
     Route::put('/{id}', [ApiAgendaController::class, 'updateAgenda']);
     Route::delete('/{id}', [ApiAgendaController::class, 'deleteAgenda']);
+    Route::get('/contract/{idContrato}', [ApiAgendaController::class, 'getAgendasByContractId']); 
+    Route::get('/user/{userId}', [ApiAgendaController::class, 'getAgendasByUserId']); 
+
 });
 
 
@@ -51,6 +54,7 @@ Route::group(['prefix' => 'paciente'], function () {
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [ApiUserController::class, 'getUsers']);
     Route::get('/{id}', [ApiUserController::class, 'getUsers']);
+    Route::get('/email/{email}', [ApiUserController::class, 'getUserByEmail']);
     Route::post('/', [ApiUserController::class, 'createUser']);
     Route::put('/{id}', [ApiUserController::class, 'updateUser']);
     Route::delete('/{id}', [ApiUserController::class, 'deleteUser']);
@@ -62,6 +66,8 @@ Route::group(['prefix' => 'historia'], function () {
     Route::post('/', [ApiHistoriasController::class, 'createHistoria']);
     Route::put('/{id}', [ApiHistoriasController::class, 'updateHistoria']);
     Route::delete('/{id}', [ApiHistoriasController::class, 'deleteHistoria']);
+    Route::get('/paciente/{pacientes_id}', [ApiHistoriasController::class, 'getHistoriasByPacienteId']);
+
 });
 
 

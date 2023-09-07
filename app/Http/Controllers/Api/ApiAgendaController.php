@@ -73,4 +73,21 @@ class ApiAgendaController extends Controller
     return response()->json(['message' => 'Agenda eliminada correctamente']);
 }
 
+public function getAgendasByContractId($idContrato) {
+    try {
+        $agendas = Agenda::where('idContrato', $idContrato)->get();  // Asumiendo que tienes un modelo llamado "Agenda"
+        
+        return response()->json($agendas, 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error al obtener las agendas.'], 500);
+    }
+}
+
+public function getAgendasByUserId($userId) {
+    $agendas = Agenda::where('id_user', $userId)->get();  // Asume que el campo en la tabla agenda para el ID de usuario es 'id_user'
+    return response()->json($agendas);
+}
+
+
+
 }
