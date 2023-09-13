@@ -30,6 +30,7 @@ Route::group([
 });
 
 
+
 Route::group(['prefix' => 'agendas'], function () {
     Route::get('/', [ApiAgendaController::class, 'getAgenda']);
     Route::get('/{id}', [ApiAgendaController::class, 'getAgenda']);

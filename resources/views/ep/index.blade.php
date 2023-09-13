@@ -45,7 +45,7 @@
 										<th>Direccion</th>
 
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

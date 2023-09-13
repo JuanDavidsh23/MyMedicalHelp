@@ -121,41 +121,35 @@
         });
     });
 </script>
-<!-- Sidebar Menu -->
-<nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-        <li class="nav-item">
-            <a href="/inicio" class="nav-link">
-            <i class="fa-solid fa-house"></i>    
-                <p>Inicio</p>
-            </a>
-        </li> 
-
-        <!-- Si idRol no es 3, muestra estos links -->
-        @if(auth()->user()->idRol != 3)
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <li class="nav-item">
+                <a href="/inicio" class="nav-link">
+                <i class="fa-solid fa-house"></i>    
+                            <p>Inicio</p>
+                </a>
+              </li> 
             <li class="nav-item">
                 <a href="/Rol" class="nav-link">
                 <i class="fa-solid fa-chess"></i>
-                    <p>Roles</p>
+                                  <p>Roles</p>
                 </a>
-            </li>  
-            
-            <li class="nav-item">
+              </li>  
+              <li class="nav-item">
                 <a href="/Ep" class="nav-link">
                 <i class="fa-sharp fa-solid fa-building"></i>
-                    <p>Eps</p>
+                  <p>Eps</p>
                 </a>
-            </li>
-
-            <li class="nav-item">
+              </li>  
+              <li class="nav-item">
                 <a href="/Contrato" class="nav-link">
                 <i class="fa-solid fa-file-contract"></i>
-                    <p>Contratos</p>
+                                  <p>Contratos</p>
                 </a>
-            </li>
-        @endif 
-
+              </li> 
               <li class="nav-item">
                 <a href="/User" class="nav-link">
                 <i class="fa-solid fa-user-nurse"></i>

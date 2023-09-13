@@ -44,7 +44,7 @@
 <h3>¿Qué Somos?</h3>
     <div class="divi">
         
-            <p>La empresa de My Medical Help se encarga de gestionar el proceso tercerización de servicios de enfermeras de atención en el hogar, ellos cuentan con un grupo de enfermeras de My Medical Help, las enfermeras son asignadas a un paciente el cual cuenta con una historia clínica y cuidados.</p>
+            <p>Nuestro proyecto tiene como finalidad investigar sobre las nuevas tecnologías, por esto mismo nos encargaremos de desarrollar un sistema de tercerización de servicios de enfermeras domiciliarias por zonas, esto con el fin de tener una mayor agilidad y cobertura en las enfermeras de hogar, eso va directamente para impactar el sector de la salud domiciliaria en la ciudad de Medellín, se tendrán en cuenta el desarrollo e impacto del producto en la ciudad, tanto la satisfacción de las EPS como de los pacientes, para así llegar a una mayor recopilación de información y obtener unos resultados favorables.. </p>
         <div class="img-logo">
     <img class="img" alt="centered " src='img/corazon.png' width="300px" height="200px" >
 </div>

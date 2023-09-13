@@ -83,11 +83,16 @@
                         </li>
                     </ul>
 
-                            <div class="float-right">
-                                <a href="{{ route('Contrato.create') }}" class="btn btn-success btn-sm float-right" data-placement="left">
-                                    {{ __('Nuevo contrato') }}
-                                </a>
-                            </div>
+                    <div class="float-right">
+                    <a href="{{ route('Contrato.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('Contrato.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nuevo contrato') }}
+    </a>
+    
+</div>
+
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -110,7 +115,7 @@
                                                 <th>Fecha Inicio Contrato</th>
                                                 <th>Fecha Fin Contrato</th>
                                                 <th>Estado</th>
-                                                <th></th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -156,9 +161,38 @@
                                                     </td>
                                                     <td>
                                                         @if ($contrato->estado == 0)
-                                                            <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('. ') }}</a>
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('Contrato.edit', $contrato->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                         @endif
-                                                        
+                                                        <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#viewModal{{ $contrato->id }}"><i class="fa fa-fw fa-eye"></i></a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="viewModal{{ $contrato->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $contrato->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="viewModalLabel{{ $contrato->id }}">Detalles del Contrato</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h6>Pacientes Asociados:</h6>
+                                                                        <ul>
+                                                                            @foreach($contrato->pacientes as $paciente)
+                                                                                <li>{{ $paciente->nombre}}</li> 
+                                                                            @endforeach
+                                                                        </ul>
+                                                                        
+                                                                        <h6>Usuarios Asociados:</h6>
+                                                                        <ul>
+                                                                            @foreach($contrato->usuarios as $usuario)
+                                                                                <li>{{ $usuario->name }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </td>
 
                                                 </tr>
@@ -177,8 +211,8 @@
                                                 <th>Eps</th>
                                                 <th>Fecha Inicio Contrato</th>
                                                 <th>Fecha Fin Contrato</th>
-                                                <th>Estado</th>
                                                 <th></th>
+                                                <th>Motivo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -221,7 +255,7 @@
                                                     <td>
                                                     @if($contrato->estado == 1)
                                                         <input type="radio" name="alert-toggle-group" id="alert-toggle-{{ $contrato->id }}" class="hidden-checkbox">
-                                                        <label for="alert-toggle-{{ $contrato->id }}" class="btn">Mostrar Motivo</label>
+                                                        <label for="alert-toggle-{{ $contrato->id }}" class="btn btn-warning">Mostrar Motivo</label>
 
                                                         <div class="alert-container">
                                                             <div class="alert" id="my-alert-{{ $contrato->id }}">

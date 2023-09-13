@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Show') }} Agenda</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('Agenda.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('Agenda.index') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 

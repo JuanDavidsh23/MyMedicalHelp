@@ -21,7 +21,7 @@
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Name:</strong>
+                            <strong>Nombre:</strong>
                             {{ $user->name }}
                         </div>
                         <div class="form-group">
@@ -41,17 +41,10 @@
                             {{ $user->ciudad }}
                         </div>
                         <div class="form-group">
-                            <strong>Eps:</strong>
-                            {{ $user->idContrato }}
-                        </div>
-                        <div class="form-group">
                             <strong>Cedula:</strong>
                             {{ $user->cedula }}
                         </div>
-                        <div class="form-group">
-                            <strong>Zona:</strong>
-                            {{ $user->zona }}
-                        </div>
+
                         <div class="form-group">
                             <strong>Email:</strong>
                             {{ $user->email }}
@@ -60,7 +53,14 @@
                             <strong>Fecha de registro:</strong>
                             {{ $user->created_at }}
                         </div>
-
+                        <div class="form-group">
+                            <strong>Eps:</strong>
+                            {{ $user->idContrato }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Zona:</strong>
+                            {{ $user->zona }}
+                        </div>
                     </div>
                 </div>
             </div>

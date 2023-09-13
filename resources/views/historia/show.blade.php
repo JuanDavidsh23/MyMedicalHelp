@@ -19,6 +19,21 @@
                     </div>
 
                     <div class="card-body">
+                    <div class="form-group">
+                            <strong>Paciente :</strong>
+                            {{ $historia->paciente->nombre }}
+
+                        </div>
+                        <div class="form-group">
+                            <strong>Antecedentes :</strong>
+                            {{ $historia->antecedentesalergicos }}
+
+                        </div>
+                        <div class="form-group">
+                            <strong>Evolución :</strong>
+                            {{ $historia->evolucion }}
+
+                        </div>
                         
                         <div class="form-group">
                             <strong>Diagnostico:</strong>
@@ -32,11 +47,7 @@
                             <strong>Tratamiento:</strong>
                             {{ $historia->tratamiento }}
                         </div>
-                        <div class="form-group">
-                            <strong>Pacientes Id:</strong>
-                            {{ $historia->paciente->nombre }}
-
-                        </div>
+                      
 
                     </div>
                 </div>

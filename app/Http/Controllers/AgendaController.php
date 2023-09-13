@@ -10,6 +10,8 @@ use App\Models\Paciente;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -24,6 +26,8 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
     public function index(Request $request)
     {
         $busqueda = $request->input('busqueda');
@@ -44,6 +48,14 @@ class AgendaController extends Controller
     
         return view('agenda.index', compact('agendas'))
             ->with('i', (request()->input('page', 1) - 1) * $agendas->perPage());
+    }
+
+    public function pdf(){
+
+        $agendas=Agenda::all();
+        $pdf = Pdf::loadView('Agenda.pdf', compact('agendas'));
+        return $pdf->stream();
+
     }
     
 

@@ -32,7 +32,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nombre Rol</th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

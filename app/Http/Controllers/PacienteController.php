@@ -5,6 +5,8 @@ use App\Models\Contrato;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\Ep;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 /**
  * Class PacienteController
  * @package App\Http\Controllers
@@ -18,6 +20,7 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
+        
         $busqueda = $request->busqueda;
         $pacientes = Paciente::with('eps')->where(function ($query) use ($busqueda) {
         $query->where('documento', $busqueda)
@@ -31,6 +34,14 @@ class PacienteController extends Controller
     
         return view('paciente.index', compact('pacientes', 'totalPacientes'))
             ->with('i', (request()->input('page', 1) - 1) * $pacientes->perPage());
+    }
+
+    public function pdf(){
+
+        $pacientes=Paciente::all();
+        $pdf = Pdf::loadView('Paciente.pdf', compact('pacientes'));
+        return $pdf->stream();
+
     }
     
 

@@ -17,11 +17,15 @@
                                <h3> {{ __('Historia') }}</h3>
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('Historia.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                  {{ __('Nueva Historia') }}
-                                </a>
-                              </div>
+                            <div class="float-right">
+                    <a href="{{ route('Historia.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('Historia.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nuevo Historia') }}
+    </a>
+    
+</div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -36,38 +40,32 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Diagnostico</th>
-										<th>Signos</th>
+                                        <th>Paciente</th>
+										<th>Diagnóstico</th>
+										<th>Signos Vitales</th>
 										<th>Antecedentes</th>
 										<th>Evolución</th>
 										<th>Tratamiento</th>
-										<th>Paciente</th>
-
-
-
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($historias as $historia)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $historia->paciente->nombre }}</td>
 											<td>{{ $historia->diagnostico }}</td>
 											<td>{{ $historia->signosvitales }}</td>
 											<td>{{ $historia->antecedentesalergicos }}</td>
 											<td>{{ $historia->evolucion }}</td>
 											<td>{{ $historia->tratamiento }}</td>
-											<td>{{ $historia->paciente->nombre }}</td>
+											
 
                                             <td>
                                                 <form action="{{ route('Historia.destroy',$historia->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Historia.show',$historia->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('') }}</a>
                                                     <a class="btn btn-sm btn-warning" href="{{ route('Historia.edit',$historia->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

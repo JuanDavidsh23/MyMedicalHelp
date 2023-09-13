@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\RouteServiceProvider;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 class UserController extends Controller
@@ -18,6 +20,8 @@ class UserController extends Controller
     use RegistersUsers;
 
     protected $redirectTo = '/User';
+
+   
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
@@ -30,9 +34,17 @@ class UserController extends Controller
         $totalUsers = User::count();
         
         return view('User.index', compact('users', 'totalUsers'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
-    
+
+   
+    public function pdf(){
+
+        $user=User::all();
+        $pdf = Pdf::loadView('User.pdf', compact('user'));
+        return $pdf->stream();
+
+    }
 
     public function create()
     {

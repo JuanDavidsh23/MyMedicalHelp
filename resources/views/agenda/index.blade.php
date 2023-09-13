@@ -25,11 +25,16 @@
                     </li>
                 </ul>
                         
-                        <div class="float-right">
-                            <a href="{{ route('Agenda.create') }}" class="btn btn-success btn-sm float-right" data-placement="left">
-                                {{ __('Nueva Agenda') }}
-                            </a>
-                        </div>
+                       
+                    <div class="float-right">
+                    <a href="{{ route('Agenda.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('Agenda.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nueva Agenda') }}
+    </a>
+    
+</div>
                     </div>
                 </div>
 
@@ -56,25 +61,23 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+                                        <th>Pacientes</th>
+                                        <th>Enfermera</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Final</th>
-										<th>Pacientes</th>
-										<th>Enfermera</th>
 										<th>Eps</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($agendas as $agenda)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $agenda->paciente->nombre }}</td>
+											<td>{{ $agenda->usuario->name }}</td>
 											<td>{{ $agenda->fecha_inicio }}</td>
 											<td>{{ $agenda->fecha_fin }}</td>
-											<td>{{ $agenda->paciente->nombre }}</td>
-											<td>{{ $agenda->usuario->name }}</td>
                                             <td>
                                                 {{ $agenda->contrato ? ($agenda->contrato->eps ? $agenda->contrato->eps->eps . ' - ' . $agenda->contrato->Nro_contrato : 'EPS no asignada') : 'Contrato no asignado' }}
                                             </td>
@@ -86,8 +89,6 @@
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('') }}</a>
                                                     <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -111,7 +112,7 @@
 										<th>Enfermera</th>
 										<th>Eps</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,11 +132,10 @@
 
                                             <td>
                                                 <form action="{{ route('Agenda.destroy',$agenda->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                    
                                                 </form>
                                             </td>
                                         </tr>
@@ -153,11 +153,10 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{ asset('js/Spanish.json') }}"></script>
-
-<script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/Spanish.json') }}"></script>
+    <script>
     $(document).ready(function () {
         $('#agenda_table_activos').DataTable({
             "language": {

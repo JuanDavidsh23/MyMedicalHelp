@@ -25,10 +25,14 @@
                                 </li>
                             </ul>
                             <div class="float-right">
-                                <a href="{{ route('User.create') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Usuario') }} 
-                                </a>
-                            </div>
+                    <a href="{{ route('User.pdf') }}" class="btn btn-primary btn-sm ml-2" data-placement="left" target="_blank">
+        {{ __('Informe') }}
+    </a>
+    <a href="{{ route('User.create') }}" class="btn btn-success btn-sm" data-placement="left">
+        {{ __('Nuevo Usuario') }}
+    </a>
+    
+</div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -51,7 +55,7 @@
                                         <th>Documento</th>
                               
                                         
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,16 +72,13 @@
                                             <td>
                                                 <form action="{{ route('User.destroy', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                                                     <a class="btn btn-sm btn-primary" href="{{ route('User.show', $user->id) }}">
-                                                        <i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}
+                                                        <i class="fa fa-fw fa-eye"></i> {{ __('') }}
                                                     </a>
                                                     <a class="btn btn-sm btn-warning" href="{{ route('User.edit', $user->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
+                                                        <i class="fa fa-fw fa-edit"></i> {{ __('') }}
                                                     </a>
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-fw fa-trash"></i> {{ __('') }}
-                                                    </button>
+                                              
                                                 </form>
                                             </td>
                                         </tr>
@@ -115,18 +116,12 @@
                                 
 
                                             <td>
-                                                <form action="{{ route('User.destroy', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                                                     <a class="btn btn-sm btn-primary" href="{{ route('User.show', $user->id) }}">
                                                         <i class="fa fa-fw fa-eye"></i> {{ __('') }}
                                                     </a>
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('User.edit', $user->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i> {{ __('') }}
-                                                    </a>
+
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-fw fa-trash"></i> {{ __('') }}
-                                                    </button>
+
                                                 </form>
                                             </td>
                                         </tr>

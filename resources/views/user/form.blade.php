@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('apellido') }}
+                    {{ Form::label('Apellido') }}
                     {{ Form::text('apellido', $user->apellido, ['class' => 'form-control' . ($errors->has('apellido') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('apellido', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -19,14 +19,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('telefono') }}
+                    {{ Form::label('Teléfono') }}
                     {{ Form::text('telefono', $user->telefono, ['class' => 'form-control' . ($errors->has('telefono') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('telefono', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('direccion') }}
+                    {{ Form::label('Dirección') }}
                     {{ Form::text('direccion', $user->direccion, ['class' => 'form-control' . ($errors->has('direccion') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('direccion', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -35,14 +35,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('ciudad') }}
+                    {{ Form::label('Ciudad') }}
                     {{ Form::text('ciudad', $user->ciudad, ['class' => 'form-control' . ($errors->has('ciudad') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('ciudad', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('cedula') }}
+                    {{ Form::label('Cedula') }}
                     {{ Form::text('cedula', $user->cedula, ['class' => 'form-control' . ($errors->has('cedula') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('cedula', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {{ Form::label('Correo Electrónico') }}
+                    {{ Form::label('Correo') }}
                     {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                     {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                 </div>

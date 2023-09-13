@@ -52,6 +52,13 @@ class Contrato extends Model
         return $this->belongsTo(Ep::class, 'idEps');
     }
   
+    public function usuarios() {
+        return $this->hasMany('App\Models\User', 'idContrato');
+    }
+    
+    public function pacientes() {
+        return $this->hasMany('App\Models\Paciente', 'idContrato');
+    }
     
 
 }

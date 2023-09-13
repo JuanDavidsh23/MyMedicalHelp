@@ -6,6 +6,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\rolController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\HistoriaController;
+
+
+
 
 
 
@@ -20,39 +26,20 @@ use App\Http\Controllers\PermisosController;
 |
 */
 
-
-//USUARIOS
-/* Route::get('/',[UsuariosController::class,'index',])->name('usuarios.index');
-Route::get('/usuario',[UsuariosController::class,'create']);
-Route::post('/usuario',[UsuariosController::class,'store'])->name('usuarios.store');
-Route::get('/usuario/delete/{id}',[UsuariosController::class,'delete'])->name('usuarios.delete');
-
-//ROLES
-Route::get('/roles',[rolController::class,'getroles',])->name('roles.index');
-Route::get('/Regrol',[rolController::class,'create']);
-Route::post('/Regrol',[rolController::class,'store'])->name('roles.store');
-Route::get('/rol/delete/{id}',[rolController::class,'deleterol'])->name('roles.delete');
-
-//PERMISOS
-Route::get('/permisos',[PermisosController::class,'get_permisos',])->name('permisos.index');
-Route::get('/Regpermiso',[PermisosController::class,'create']);
-Route::post('/Regpermiso',[PermisosController::class,'store'])->name('permisos.store');
-Route::get('/permisos/delete/{id}',[PermisosController::class,'delete'])->name('permisos.delete');
-
-//PACIENTE
-Route::get('/paciente',[pacienteController::class,'get_paciente',])->name('paciente.index');
-Route::get('/Regpaciente',[pacienteController::class,'create']);
-Route::post('/Regpaciente',[pacienteController::class,'store'])->name('paciente.store');
-Route::get('/paciente/delete/{id}',[pacienteController::class,'delete'])->name('paciente.delete');
-Auth::routes(); */
-
 Route::get('/', function () {
-    return view('Auth.login');
+    return view('Homepage');
 });    
 
 
 
+
+
 Route::middleware(['auth'])->group(function () {
+    Route::get('Contrato/pdf', [ContratoController::class,'pdf'])->name('Contrato.pdf');
+    Route::get('User/pdf', [UserController::class,'pdf'])->name('User.pdf');
+    Route::get('Paciente/pdf', [PacienteController::class,'pdf'])->name('Paciente.pdf');
+    Route::get('Agenda/pdf', [AgendaController::class,'pdf'])->name('Agenda.pdf');
+    Route::get('Historia/pdf', [HistoriaController::class,'pdf'])->name('Historia.pdf');
 
     Route::get('/inicio', 'App\Http\Controllers\InicioController@index')->name('inicio');
     Route::resource('User', App\Http\Controllers\UserController::class);
@@ -64,28 +51,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('Rol', App\Http\Controllers\RolController::class);
     Route::resource('Ep', App\Http\Controllers\EpController::class);
     Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
+
+
+
 });
 
+Route::get('/contratos/obtener-datos', 'App\Http\Controllers\ContratoController@obtenerDatos')->name('contratos.obtener-datos');
 
 Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
 
-Route::post('/Auth.login', function () {
-    $credentials = [
-        'email' => request()->input('email'),
-        'password' => request()->input('password')
-    ];
 
-    if (Auth::attempt($credentials)) {
-        request()->session()->regenerate();
-        return redirect('inicio');
-    }
-
-    return redirect()->back()->withInput()->withErrors(['login' => __('Credenciales incorrectos.')]);
-})->middleware('guest')->name('login');
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->middleware('guest')->name('login');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
