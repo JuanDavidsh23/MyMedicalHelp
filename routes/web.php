@@ -56,12 +56,9 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::post('/reactivateUser', [UserController::class, 'reactivateUser']);
 Route::get('/contratos/obtener-datos', 'App\Http\Controllers\ContratoController@obtenerDatos')->name('contratos.obtener-datos');
-
 Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
-
-
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Auth::routes();

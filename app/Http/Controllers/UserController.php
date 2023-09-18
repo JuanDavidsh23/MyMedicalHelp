@@ -30,10 +30,15 @@ class UserController extends Controller
             ->orWhere('name', 'LIKE', '%' . $busqueda . '%')
             ->latest('id')
             ->paginate();
+            $contrato = Contrato::where('estado', 0)
+            ->join('eps', 'contratos.idEps', '=', 'eps.id')
+            ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+            ->pluck('eps_contrato', 'contratos.id');
+
     
         $totalUsers = User::count();
         
-        return view('User.index', compact('users', 'totalUsers'))
+        return view('User.index', compact('users', 'totalUsers', 'contrato'))
         ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
@@ -253,4 +258,23 @@ class UserController extends Controller
         return redirect()->route('User.index')
             ->with('success', 'User eliminado correctamente');
     }
+
+    public function reactivateUser(Request $request)
+{
+    $userId = $request->input('userId');
+    $contratoId = $request->input('contratoId');
+
+    // Poner el estado del usuario a 3
+    $user = User::find($userId);
+    $user->estado = 3;
+    $user->save();
+
+    // Crear un nuevo usuario con la misma información pero nuevo contrato
+    $newUser = $user->replicate();
+    $newUser->idContrato = $contratoId;
+    $newUser->save();
+
+    return response()->json(['success' => true]);
+}
+
 }

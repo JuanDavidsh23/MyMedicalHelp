@@ -119,7 +119,29 @@
                                                     <a class="btn btn-sm btn-primary" href="{{ route('User.show', $user->id) }}">
                                                         <i class="fa fa-fw fa-eye"></i> {{ __('') }}
                                                     </a>
-
+                                                    <button class="btn btn-sm btn-success reactivar-btn" data-id="{{ $user->id }}">Reactivar</button>
+                                                    <div class="modal fade" id="reactivarModal" tabindex="-1" role="dialog" aria-labelledby="reactivarModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="reactivarModalLabel">Seleccionar Contrato</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form id="reactivarForm">
+                                                                    {{ Form::label('Contrato') }}
+                                                                    {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un contrato']) }}
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-primary" id="saveReactivation">Guardar</button>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                     @csrf
 
                                                 </form>
@@ -145,6 +167,34 @@
 <script src="{{ asset('js/Spanish.json') }}"></script>
 
 <script>
+    $(document).ready(function() {
+        var selectedUserId;
+        $('.reactivar-btn').click(function() {
+            selectedUserId = $(this).data('id');
+            $('#reactivarModal').modal('show');
+        });
+
+        $('#saveReactivation').click(function() {
+            var selectedContract = $('#reactivarModal select[name="idContrato"]').val();
+            if (selectedContract) {
+                $.post("/reactivateUser", {
+                    userId: selectedUserId,
+                    contratoId: selectedContract,
+                    _token: '{{ csrf_token() }}'
+                }, function(data) {
+                    if (data.success) {
+                        alert('Usuario reactivado con éxito.');
+                        location.reload();
+                    } else {
+                        alert('Error al reactivar el usuario.');
+                    }
+                });
+            } else {
+                alert('Por favor, selecciona un contrato.');
+            }
+        });
+    });
+
     $(document).ready(function () {
         $('#usuarios_table').DataTable({
             "language": {
