@@ -43,13 +43,29 @@ class EpController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Ep::$rules);
-
-        $ep = Ep::create($request->all());
-
+        $rules = [
+            'eps' => 'required|min:4',
+            'direccion' => 'required|min:10',
+            'telefonogeneral' => 'required|digits:10',
+            'telefonoprincipal' => 'required|digits:7',
+        ];
+    
+        $messages = [
+            'eps.min' => 'La EPS debe tener al menos 4 letras.',
+            'direccion.min' => 'La dirección debe tener al menos 10 caracteres.',
+            'telefonogeneral.digits' => 'El celular del asesor debe tener 10 números.',
+            'telefonoprincipal.digits' => 'El teléfono principal debe tener 7 números.',
+            'required' => 'El campo es obligatorio.',
+        ];
+    
+        $validatedData = $request->validate($rules, $messages);
+    
+        $ep = Ep::create($validatedData);
+    
         return redirect()->route('Ep.index')
             ->with('success', 'Eps creada correctamente.');
     }
+    
 
     /**
      * Display the specified resource.
@@ -86,16 +102,29 @@ class EpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->validate(Ep::$rules);
+        $rules = [
+            'eps' => 'required|min:4',
+            'direccion' => 'required|min:10',
+            'telefonogeneral' => 'required|digits:10',
+            'telefonoprincipal' => 'required|digits:7',
+        ];
+    
+        $messages = [
+            'eps.min' => 'La EPS debe tener al menos 4 letras.',
+            'direccion.min' => 'La dirección debe tener al menos 10 caracteres.',
+            'telefonogeneral.digits' => 'El celular del asesor debe tener 10 números.',
+            'telefonoprincipal.digits' => 'El teléfono principal debe tener 7 números.',
+            'required' => 'El campo es obligatorio.',
+        ];
+        
+        $request->validate($rules, $messages);
+    
         $ep = Ep::findOrFail($id);
         $ep->update($request->all());
     
         return redirect()->route('Ep.index')
             ->with('success', 'Eps actualizada correctamente.');
     }
-
- 
-    
 
     /**
      * @param int $id

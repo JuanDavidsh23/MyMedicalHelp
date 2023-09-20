@@ -101,12 +101,17 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'nombre_rol' => 'required|unique:rols,nombre_rol,' . $id,
+            'nombre_rol' => [
+                'required',
+                'unique:rols,nombre_rol,' . $id,
+                'regex:/^[a-zA-Z\s]{3,}$/'
+            ],
         ];
     
         $messages = [
             'nombre_rol.required' => 'Rol es obligatorio.',
-            'nombre_rol.unique' => 'No puedes cambiar el nombre de este rol por que ya ha sido registrado.',
+            'nombre_rol.unique' => 'No puedes cambiar el nombre de este rol porque ya ha sido registrado.',
+            'nombre_rol.regex' => 'El nombre del rol debe contener al menos 3 letras y no puede tener caracteres especiales.',
         ];
     
         $validatedData = $request->validate($rules, $messages);

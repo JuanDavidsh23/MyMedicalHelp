@@ -37,6 +37,9 @@ class Paciente extends Model
 		'ciudad' => 'required',
 		'documento' => 'required',
 		'idContrato' => 'required',
+        'ejecucion' => 'required',
+
+        
     ];
 
     protected $perPage = 20;
@@ -46,7 +49,7 @@ class Paciente extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','estado','idContrato'];
+    protected $fillable = ['nombre','apellido','correo','telefono','direccion','ciudad','documento','estado','idContrato','ejecucion'];
 
 
     /**

@@ -52,7 +52,15 @@
 
                 
                 <br>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="tab-content">
                     <!-- TAB Activos -->
                     <div class="tab-pane fade show active" id="activos" aria-labelledby="activos-tab">
@@ -71,7 +79,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($agendas as $agenda)
+                                @foreach ($agendas->where('estado', 0) as $agenda)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $agenda->paciente->nombre }}</td>
@@ -116,7 +124,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($agendas as $agenda)
+                                @foreach ($agendas->where('estado', 1) as $agenda)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             

@@ -3,7 +3,7 @@
         <div class="row">
         <div class="form-group col-md-6">
                 {{ Form::label('Contrato') }}
-                {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => '']) }}
+                {{ Form::select('idContrato', $contrato, $paciente->idContrato, ['class' => 'form-control' . ($errors->has('idContrato') ? ' is-invalid' : ''), 'placeholder' => '']) }}
                 {!! $errors->first('idContrato', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group col-md-6">

@@ -97,6 +97,7 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
             'IdRol' => $data['IdRol'],
             'idContrato' => $data['idContrato'], 
+            'ejecucion' => 0,
             'zona' => $data['zona']
 
         ]);
@@ -109,17 +110,27 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
             'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
             'telefono' => ['required', 'integer', 'digits:10'],
-            'direccion' => ['required', 'string', 'max:50', 'min:5'],
-            'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
+            'direccion' => ['required', 'string', 'max:50', 'min:10'],
+            'ciudad' => ['required', 'string', 'max:30', 'min:4','regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'string', 'digits_between:7,10'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['nullable', 'integer'],
             'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+            'idContrato' => ['nullable', 'integer'],
+            'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+            'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+            'ejecucion' => ['default:0'],
 
 
         ];
+        
+        if($request->input('IdRol') == 2) {
+            $rules['idContrato'] = 'required';
+            $rules['zona'] = 'required|string|regex:/^[A-Za-z ]+$/';
+        }
+    
 
         $messages = [
             'required' => 'El campo :attribute es obligatorio.',
@@ -152,6 +163,7 @@ class UserController extends Controller
             'password' => Hash::make($validatedData['password']),
             'IdRol' => $validatedData['IdRol'],
             'idContrato' => $validatedData['idContrato'],
+            'ejecucion' => 0,
             'zona' => $validatedData['zona'],
 
 
@@ -187,7 +199,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
             'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
             'telefono' => ['required', 'digits:10'],
-            'direccion' => ['required', 'string', 'max:50', 'min:5'],
+            'direccion' => ['required', 'string', 'max:50', 'min:15'],
             'ciudad' => ['required', 'string', 'regex:/^[A-Za-z ]+$/'],
             'cedula' => ['required', 'digits_between:7,10'],
             'email' => ['required', 'email', 'unique:users,email,' . $id],
@@ -195,6 +207,7 @@ class UserController extends Controller
             'IdRol' => ['required', 'integer'],
             'idContrato' => ['nullable', 'integer'],
             'zona' => ['nullable', 'string', 'regex:/^[A-Za-z ]+$/'],
+            'ejecucion' => ['default:0'],
 
         ];
 
@@ -235,10 +248,6 @@ class UserController extends Controller
         $user->idContrato = $validatedData['idContrato'];
         $user->zona = $validatedData['zona'];
 
-
-        
-        
-
         // Verificar si se proporcionó una nueva contraseña
         if (!empty($validatedData['password'])) {
             // Encriptar la nueva contraseña
@@ -263,18 +272,25 @@ class UserController extends Controller
 {
     $userId = $request->input('userId');
     $contratoId = $request->input('contratoId');
-
-    // Poner el estado del usuario a 3
+    
     $user = User::find($userId);
-    $user->estado = 3;
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'User not found']);
+    }
+    
+    $newUser = $user->replicate();
+
+    $user->estado = 2;
+    $user->email = 'Desactivado' . rand(1000, 9999) . '@example.com';
+    $user->password = "Desactivado";
     $user->save();
 
-    // Crear un nuevo usuario con la misma información pero nuevo contrato
-    $newUser = $user->replicate();
+    $newUser->estado = 0;
     $newUser->idContrato = $contratoId;
     $newUser->save();
 
     return response()->json(['success' => true]);
 }
+
 
 }

@@ -20,19 +20,23 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
-        
+        $contrato = Contrato::where('estado', 0)
+        ->join('eps', 'contratos.idEps', '=', 'eps.id')
+        ->selectRaw("concat(eps.eps, ' - ', contratos.Nro_contrato) as eps_contrato, contratos.id")
+        ->pluck('eps_contrato', 'contratos.id');
         $busqueda = $request->busqueda;
         $pacientes = Paciente::with('eps')->where(function ($query) use ($busqueda) {
         $query->where('documento', $busqueda)
               ->orWhere('nombre', 'LIKE', '%' . $busqueda . '%');
         })
+        
         ->latest('id')
         ->paginate();
 
     
         $totalPacientes = Paciente::count();
     
-        return view('paciente.index', compact('pacientes', 'totalPacientes'))
+        return view('paciente.index', compact('pacientes', 'totalPacientes','contrato'))
             ->with('i', (request()->input('page', 1) - 1) * $pacientes->perPage());
     }
 
@@ -70,12 +74,12 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'nombre' => 'required|string|max:30|min:3',
-            'apellido' => 'required|string|max:30|min:5',
+            'nombre' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
+            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
             'correo' => 'required|email|unique:pacientes',
             'telefono' => 'required|integer|digits:10',
-            'direccion' => 'required|string|max:50|min:5',
-            'ciudad' => 'required|string',
+            'direccion' => 'required|string|max:50|min:10',
+            'ciudad' => ['required','string','max:20','min:5', 'regex:/^[A-Za-z ]+$/'],
             'documento' => 'required|string|digits_between:7,10|unique:pacientes',
             'idContrato' => 'required|integer',
         ];
@@ -94,12 +98,14 @@ class PacienteController extends Controller
                 'string' => 'El campo :attribute debe tener  menos de :max caracteres.',
             ],
             'integer' => 'El campo :attribute debe ser un número entero.',  
-            'idContrato.required' => 'El campo ID de rol es obligatorio.',
+            'idContrato.required' => 'El campo contrato es obligatorio.',
+            'regex' => 'El campo :attribute solo puede contener letras.',
+
              
         ];
 
         $validatedData = $request->validate($rules, $messages);
-        $paciente = Paciente::create(array_merge($validatedData, ['estado' => 0]));
+        $paciente = Paciente::create(array_merge($validatedData, ['estado' => 0,'ejecucion' => 0]));
         
 
         return redirect()->route('Paciente.index')
@@ -147,12 +153,12 @@ class PacienteController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'nombre' => 'required|string|max:30|min:3',
-            'apellido' => 'required|string|max:30|min:5',
+            'nombre' => ['required', 'string', 'max:30', 'min:3', 'regex:/^[A-Za-z ]+$/'],
+            'apellido' => ['required', 'string', 'max:30', 'min:5', 'regex:/^[A-Za-z ]+$/'],
             'correo' => 'required|email|unique:pacientes,correo,' . $id,
             'telefono' => 'required|integer|digits:10',
             'direccion' => 'required|string|max:50|min:5',
-            'ciudad' => 'required|string',
+            'ciudad' => ['required', 'string', 'max:30', 'min:4', 'regex:/^[A-Za-z ]+$/'],
             'documento' => 'required|string|digits_between:7,10',
             'idContrato' => 'required|integer',
         ];
@@ -171,7 +177,9 @@ class PacienteController extends Controller
                 'string' => 'El campo :attribute debe tener menos de :max caracteres.',
             ],
             'integer' => 'El campo :attribute debe ser un número entero.',
-            'idContrato.required' => 'El campo ID de rol es obligatorio.',
+            'idContrato.required' => 'El campo contrato es obligatorio.',
+            'regex' => 'El campo :attribute solo puede contener letras.',
+
         ];
     
         $validatedData = $request->validate($rules, $messages);
@@ -196,4 +204,29 @@ class PacienteController extends Controller
         return redirect()->route('Paciente.index')
             ->with('success', 'Paciente eliminado correctamente');
     }
+
+
+    public function reactivatePaciente(Request $request)
+    {
+        $pacienteId = $request->input('pacienteId');
+        $contratoId = $request->input('contratoId');
+
+        $paciente = Paciente::find($pacienteId);
+        if (!$paciente) {
+            return response()->json(['success' => false, 'message' => 'Paciente not found']);
+        }
+    
+        $newPaciente = $paciente->replicate();
+    
+        $paciente->estado = 2;
+        $paciente->correo = 'Desactivado' . rand(1000, 9999) . '@example.com';
+        $paciente->save();
+    
+        $newPaciente->estado = 0;
+        $newPaciente->idContrato = $contratoId;
+        $newPaciente->save();
+    
+        return response()->json(['success' => true]);
+    }
+    
 }

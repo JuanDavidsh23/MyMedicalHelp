@@ -96,18 +96,27 @@
         </div>
 
         <script>
-                document.getElementById('IdRol').addEventListener('change', function() {
-                    var contratoForm = document.getElementById('contrato-form');
-                    var zonaForm = document.getElementById('zona-form');
-                    if (this.value === '2') {
-                        contratoForm.style.display = 'block';
-                        zonaForm.style.display = 'block';
-                    } else {
-                        contratoForm.style.display = 'none';
-                        zonaForm.style.display = 'none';
-                    }
-                });
-            </script>
+        function checkRoleSelection() {
+            var selectedRole = document.getElementById('IdRol').value;
+            var contratoForm = document.getElementById('contrato-form');
+            var zonaForm = document.getElementById('zona-form');
+            
+            if (selectedRole === '2') {
+                contratoForm.style.display = 'block';
+                zonaForm.style.display = 'block';
+            } else {
+                contratoForm.style.display = 'none';
+                zonaForm.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkRoleSelection();
+        });
+
+        document.getElementById('IdRol').addEventListener('change', checkRoleSelection);
+
+        </script>
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary" style="background-color: #E74C3C; color: white; border-radius: 10px; border-color:#E74C3C; ">{{ __('Guardar') }}</button>

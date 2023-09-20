@@ -119,7 +119,9 @@
                                                     <a class="btn btn-sm btn-primary" href="{{ route('User.show', $user->id) }}">
                                                         <i class="fa fa-fw fa-eye"></i> {{ __('') }}
                                                     </a>
-                                                    <button class="btn btn-sm btn-success reactivar-btn" data-id="{{ $user->id }}">Reactivar</button>
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-info reactivar-btn" data-toggle="modal" data-target="#reactivarModal" data-id="{{ $user->id }}">
+                                                        <i class="fa fa-fw fa-refresh"></i> Reactivar
+                                                    </a>
                                                     <div class="modal fade" id="reactivarModal" tabindex="-1" role="dialog" aria-labelledby="reactivarModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -130,8 +132,8 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form id="reactivarForm">
-                                                                    {{ Form::label('Contrato') }}
+
+                                                            {{ Form::label('Contrato') }}
                                                                     {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un contrato']) }}
                                                                 </form>
                                                             </div>
@@ -161,46 +163,39 @@
         </div>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{ asset('js/Spanish.json') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        var selectedUserId;
-        $('.reactivar-btn').click(function() {
-            selectedUserId = $(this).data('id');
-            $('#reactivarModal').modal('show');
-        });
+$(document).ready(function() {
+    let selectedUserId;
 
-        $('#saveReactivation').click(function() {
-            var selectedContract = $('#reactivarModal select[name="idContrato"]').val();
-            if (selectedContract) {
-                $.post("/reactivateUser", {
-                    userId: selectedUserId,
-                    contratoId: selectedContract,
-                    _token: '{{ csrf_token() }}'
-                }, function(data) {
-                    if (data.success) {
-                        alert('Usuario reactivado con éxito.');
-                        location.reload();
-                    } else {
-                        alert('Error al reactivar el usuario.');
-                    }
-                });
-            } else {
-                alert('Por favor, selecciona un contrato.');
-            }
-        });
+    $('.reactivar-btn').on('click', function() {
+        selectedUserId = $(this).data('id');
+        $('#reactivarModal').modal('show');
     });
 
-    $(document).ready(function () {
-        $('#usuarios_table').DataTable({
-            "language": {
-                "url": "{{ asset('js/Spanish.json') }}"
-            }
-        });
+    $('#saveReactivation').click(function() {
+        var selectedContract = $('#reactivarModal select[name="idContrato"]').val();
+        if (selectedContract) {
+            $.post("/reactivateUser", {
+                userId: selectedUserId,
+                contratoId: selectedContract,
+            }, function(data) {
+                if (data.success) {
+                    alert('Usuario reactivado con éxito.');
+                    location.reload();
+                } else {
+                    alert('Error al reactivar el usuario.');
+                }
+            });
+        } else {
+            alert('Por favor, selecciona un contrato.');
+        }
     });
+});
+
 </script>
+
 @endsection

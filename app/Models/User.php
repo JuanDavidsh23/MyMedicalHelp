@@ -26,6 +26,8 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'required',
         'IdRol' => 'required',
         'idContrato' => 'required',
+        'ejecucion' => 'required',
+
     ];
 
     protected $perPage = 20;
@@ -36,7 +38,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name', 'apellido', 'telefono', 'direccion', 'ciudad', 'cedula', 'zona',
-        'email', 'estado', 'password', 'IdRol', 'idContrato'
+        'email', 'estado', 'password', 'IdRol', 'idContrato','ejecucion'
     ];
     
    protected $hidden = [

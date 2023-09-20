@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('idRol')->references('id')->on('rols')->onDelete('cascade'); 
             $table->unsignedBigInteger('idContrato')->nullable();
             $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
+            $table->integer('ejecucion')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

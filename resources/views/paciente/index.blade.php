@@ -126,6 +126,32 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
+                                                    <a href="javascript:void(0);" class="btn btn-sm btn-info reactivar-btn" data-toggle="modal" data-target="#reactivarModal" data-id="{{ $paciente->id }}">
+                                                        <i class="fa fa-fw fa-refresh"></i> Reactivar
+                                                    </a>
+                                                    <div class="modal fade" id="reactivarModal" tabindex="-1" role="dialog" aria-labelledby="reactivarModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="reactivarModalLabel">Seleccionar Contrato</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                            {{ Form::label('Contrato') }}
+                                                                    {{ Form::select('idContrato', $contrato, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un contrato']) }}
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-primary" id="saveReactivation">Guardar</button>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    @csrf
                                                 </form>
                                             </td>
                                         </tr>
@@ -147,13 +173,43 @@
     <script src="{{ asset('js/Spanish.json') }}"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#table_paciente').DataTable({
-                "language": {
-                    "url": "{{ asset('js/Spanish.json') }}"
+    $(document).ready(function() {
+        let selectedPacienteId; // Esta variable guarda el ID del paciente seleccionado.
+
+        $('.reactivar-btn').on('click', function() {
+            selectedPacienteId = $(this).data('id');
+        });
+
+
+        // Esta función se ejecuta cuando haces clic en el botón "Guardar" en el modal de reactivación de Paciente.
+        $('#saveReactivation').on('click', function(e) {
+            e.preventDefault();
+
+            const contratoId = $('select[name="idContrato"]').val();
+
+            // Enviamos una solicitud AJAX al servidor para reactivar el paciente.
+            $.ajax({
+                url: '/reactivatePaciente', // Reemplaza esto con la URL correcta en tu aplicación.
+                method: 'POST',
+                data: {
+                    pacienteId: selectedPacienteId,
+                    contratoId: contratoId,
+                    _token: '{{ csrf_token() }}' // Asegúrate de enviar el token CSRF para que Laravel procese el POST.
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Paciente reactivado con éxito');
+                        location.reload();  // <-- Aquí refrescamos la página
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error al reactivar el paciente');
                 }
             });
         });
-    </script>
+    });
+</script>
 
 @endsection

@@ -82,54 +82,39 @@ class AgendaController extends Controller
     {
         $rules = [
             'idContrato' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required', 
-            'hora' => 'required',
-            'hora_fin' => 'required',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+            'hora' => 'required|date_format:H:i',
+            'hora_fin' => 'required|date_format:H:i|after:hora',
             'id_pacientes' => 'required',
             'id_user' => 'required',
         ];
-
+    
         $messages = [
             'required' => 'El campo es obligatorio.',
+            'date' => 'El campo debe ser una fecha válida.',
+            'after_or_equal' => 'La fecha de finalización debe ser posterior o igual a la fecha de inicio.',
+            'date_format' => 'El formato de la hora es inválido.',
+            'after' => 'La hora de finalización debe ser posterior a la hora de inicio.'
         ];
 
         $validatedData = $request->validate($rules, $messages);
 
-        // Verificar si el paciente ya tiene una agenda activa en el rango de fechas proporcionado
-        $existingPacienteAgenda = Agenda::where('id_pacientes', $validatedData['id_pacientes'])
-            ->where(function ($query) use ($validatedData) {
-                $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                    ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                    ->orWhere(function ($query) use ($validatedData) {
-                        $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
-                            ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
-                    });
-            })
-            ->first();
+        $contrato = Contrato::find($request->input('idContrato'));
 
-        if ($existingPacienteAgenda) {
-            return redirect()->back()->withErrors('El paciente ya tiene una agenda activa en el rango de fechas proporcionado.');
-        }
-
-        // Verificar si el enfermero ya tiene una agenda en la misma fecha y hora
-        $existingEnfermeroAgenda = Agenda::where('id_user', $validatedData['id_user'])
-            ->where(function ($query) use ($validatedData) {
-                $query->whereBetween('fecha_inicio', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                    ->orWhereBetween('fecha_fin', [$validatedData['fecha_inicio'], $validatedData['fecha_fin']])
-                    ->orWhere(function ($query) use ($validatedData) {
-                        $query->where('fecha_inicio', '<=', $validatedData['fecha_inicio'])
-                            ->where('fecha_fin', '>=', $validatedData['fecha_fin']);
-                    });
-            })
-            ->first();
-
-        if ($existingEnfermeroAgenda) {
-            return redirect()->back()->withErrors('El enfermero ya tiene una agenda en la misma fecha y hora.');
-        }
-
+        if (!$contrato || ($validatedData['fecha_inicio'] < $contrato->fecha_inicio) || ($validatedData['fecha_fin'] > $contrato->fecha_fin)) {
+            return redirect()->back()->withErrors('Las fechas seleccionadas están fuera del rango permitido del contrato.');
+        } 
         $agenda = Agenda::create($validatedData);
 
+        $paciente = Paciente::findOrFail($validatedData['id_pacientes']);
+        $paciente->ejecucion = 1;
+        $paciente->save();
+    
+        $user = User::findOrFail($validatedData['id_user']);
+        $user->ejecucion = 1;
+        $user->save();
+        
         return redirect()->route('Agenda.index')
             ->with('success', 'Agenda creada correctamente.');
     }
@@ -176,24 +161,28 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
 {
+    $rules = [
+        'idContrato' => 'required',
+        'fecha_inicio' => 'required|date',
+        'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+        'hora' => 'required|date_format:H:i',
+        'hora_fin' => 'required|date_format:H:i|after:hora',
+        'id_pacientes' => 'required',
+        'id_user' => 'required',
+    ];
+
+    $messages = [
+        'required' => 'El campo es obligatorio.',
+        'date' => 'El campo debe ser una fecha válida.',
+        'after_or_equal' => 'La fecha de finalización debe ser posterior o igual a la fecha de inicio.',
+        'date_format' => 'El formato de la hora es inválido.',
+        'after' => 'La hora de finalización debe ser posterior a la hora de inicio.'
+    ];
+
+    $validatedData = $request->validate($rules, $messages);
+    $contrato = Contrato::find($request->input('idContrato'));
+
     $agenda = Agenda::findOrFail($id);
-
-        $rules = [
-            'idContrato' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required', 
-            'hora' => 'required',
-            'hora_fin' => 'required',
-            'id_pacientes' => 'required',
-            'id_user' => 'required',
-        ];
-
-        $messages = [
-            'required' => 'El campo es obligatorio.',
-        ];
-
-        $validatedData = $request->validate($rules, $messages);
-
     $agenda->update($validatedData);
 
     return redirect()->route('Agenda.index')

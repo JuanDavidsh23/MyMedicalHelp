@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\rolController;
-use App\Http\Controllers\pacienteController;
+use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\AgendaController;
@@ -51,12 +51,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('Rol', App\Http\Controllers\RolController::class);
     Route::resource('Ep', App\Http\Controllers\EpController::class);
     Route::resource('rolespermisos', App\Http\Controllers\RolesPermisoController::class);
+    Route::post('/reactivatePaciente', [PacienteController::class, 'reactivatePaciente']);
+    Route::post('/reactivateUser', [UserController::class, 'reactivateUser']);
 
 
 
 });
 
-Route::post('/reactivateUser', [UserController::class, 'reactivateUser']);
 Route::get('/contratos/obtener-datos', 'App\Http\Controllers\ContratoController@obtenerDatos')->name('contratos.obtener-datos');
 Route::put('/contrato/toggleEstado/{id}', 'App\Http\Controllers\ContratoController@toggleEstado')->name('Contrato.toggleEstado');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

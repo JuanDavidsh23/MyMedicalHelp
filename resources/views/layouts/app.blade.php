@@ -48,7 +48,7 @@
 
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <span class="user-email">{{ auth()->user()->email }}</span>
+        <span class="user-email">{{ auth()->user()->name }}</span>
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt" id="logout-icon"></i>
         </a>

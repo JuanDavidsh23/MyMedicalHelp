@@ -92,36 +92,51 @@ document.getElementById('hora').onchange = function() {
 <script>
     // Obtener elementos del DOM
     const idContratoSelect = document.getElementById('idContrato');
-    const idPacienteSelect = document.getElementById('idPaciente');
-    const idEnfermeraSelect = document.getElementById('idEnfermera');
+const idPacienteSelect = document.getElementById('idPaciente');
+const idEnfermeraSelect = document.getElementById('idEnfermera');
 
-    // Manejar el evento change del contrato
-    idContratoSelect.addEventListener('change', function () {
-        const selectedContratoId = this.value;
+// Suponiendo que usas Blade para obtener los valores actuales de la edición
+const pacienteIdActual = '{{ $agenda->id_pacientes }}';
+const usuarioIdActual = '{{ $agenda->id_user }}';
 
-        // Realizar una solicitud AJAX para obtener pacientes y usuarios relacionados con el contrato seleccionado
-        // Reemplaza 'ruta/obtener-datos' con la ruta adecuada en tu aplicación
-        fetch(`/contratos/obtener-datos?contratoId=${selectedContratoId}`)
-            .then(response => response.json())
-            .then(data => {
-                // Llenar los campos de selección de paciente y usuario con los datos obtenidos
-                idPacienteSelect.innerHTML = '<option value="">Selecciona un paciente</option>';
-                idEnfermeraSelect.innerHTML = '<option value="">Selecciona una enfermer@</option>';
+// Manejar el evento change del contrato
+idContratoSelect.addEventListener('change', function () {
+    const selectedContratoId = this.value;
 
-                data.pacientes.forEach(paciente => {
-                    const option = document.createElement('option');
-                    option.value = paciente.id;
-                    option.textContent = paciente.nombre;
-                    idPacienteSelect.appendChild(option);
-                });
+    fetch(`/contratos/obtener-datos?contratoId=${selectedContratoId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Llenar los campos de selección de paciente y usuario con los datos obtenidos
+            idPacienteSelect.innerHTML = '<option value="">Selecciona un paciente</option>';
+            idEnfermeraSelect.innerHTML = '<option value="">Selecciona una enfermer@</option>';
 
-                data.usuarios.forEach(usuario => {
-                    const option = document.createElement('option');
-                    option.value = usuario.id;
-                    option.textContent = usuario.name;
-                    idEnfermeraSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error(error));
-    });
+            data.pacientes.forEach(paciente => {
+                const option = document.createElement('option');
+                option.value = paciente.id;
+                option.textContent = paciente.nombre;
+                idPacienteSelect.appendChild(option);
+            });
+
+            data.usuarios.forEach(usuario => {
+                const option = document.createElement('option');
+                option.value = usuario.id;
+                option.textContent = usuario.name;
+                idEnfermeraSelect.appendChild(option);
+            });
+
+            // Después de poblar los selects, seleccionamos el valor correcto si estamos en modo edición
+            if (pacienteIdActual) {
+                idPacienteSelect.value = pacienteIdActual;
+            }
+            if (usuarioIdActual) {
+                idEnfermeraSelect.value = usuarioIdActual;
+            }
+        })
+        .catch(error => console.error(error));
+});
+
+// Si el contrato ya está seleccionado al cargar la página, dispara el evento "change"
+if (idContratoSelect.value) {
+    idContratoSelect.dispatchEvent(new Event('change'));
+}
 </script>

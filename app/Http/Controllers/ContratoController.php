@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Paciente;
 use App\Models\Agenda;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 
 
@@ -26,6 +28,9 @@ class ContratoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
         $contratos = Contrato::with(['usuarios', 'pacientes'])->paginate(10);
@@ -47,8 +52,8 @@ class ContratoController extends Controller
         $contratoId = $request->query('contratoId');
     
         // Obtén pacientes y usuarios relacionados con el contrato seleccionado
-        $pacientes = Paciente::where('idContrato', $contratoId)->get(['id', 'nombre']);
-        $usuarios = User::where('idContrato', $contratoId)->get(['id', 'name']);
+        $pacientes = Paciente::where('idContrato', $contratoId)->where('ejecucion', 0)->get(['id', 'nombre']);
+        $usuarios = User::where('idContrato', $contratoId)->where('ejecucion', 0)->get(['id', 'name']);
     
         // Devuelve los datos en formato JSON
         return response()->json([
@@ -71,10 +76,10 @@ class ContratoController extends Controller
                 $contrato->razon_cancelacion = $request->input('razon_cancelacion');
     
                 // Desactivar usuarios, pacientes y agendas asociados
-                User::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar usuarios
-                Paciente::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar pacientes
-                Agenda::where('idContrato', $id)->update(['estado' => 1]);  // Desactivar agendas
-    
+                User::where('idContrato', $id)->update(['estado' => 1, 'ejecucion' => 0]);  // Desactivar usuarios y poner ejecucion en 0
+                Paciente::where('idContrato', $id)->update(['estado' => 1, 'ejecucion' => 0]); 
+                Agenda::where('idContrato', $id)->update(['estado' => 1]);  
+                
                 $contrato->save();
                 DB::commit();
     
@@ -122,18 +127,31 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    request()->validate(Contrato::$rules);
+    {
+        $rules = [
+            'Nro_Contrato' => 'required|digitos_minimos:3',
+            'fecha_inicio' => 'required|date|before:fecha_fin',
+            'fecha_fin' => 'required|date|after:fecha_inicio|different:fecha_inicio|diferencia_minima_dias:7,fecha_inicio',
+        ];
 
-    $data = $request->all();
-    $data['estado'] = 0; 
+        $messages = [
+            'Nro_Contrato.digitos_minimos' => 'El número de contrato debe tener al menos 3 números.',
+            'fecha_inicio.before' => 'La fecha de inicio debe ser anterior a la fecha final.',
+            'fecha_fin.after' => 'La fecha final debe ser posterior a la fecha de inicio.',
+            'fecha_fin.diferencia_minima_dias' => 'Debe haber al menos 7 días de diferencia entre la fecha de inicio y la fecha final.',
+            'required' => 'El campo :attribute es obligatorio.',
+        ];
 
-    $contrato = Contrato::create($data);
+        $request->validate($rules, $messages);
 
-    return redirect()->route('Contrato.index')
-        ->with('success', 'Contrato creado correctamente.');
-}
+        $data = $request->all();
+        $data['estado'] = 0; 
 
+        $contrato = Contrato::create($data);
+
+        return redirect()->route('Contrato.index')
+            ->with('success', 'Contrato creado correctamente.');
+    }
 
     /**
      * Display the specified resource.
@@ -170,15 +188,29 @@ class ContratoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    request()->validate(Contrato::$rules);
+    {
+        $rules = [
+            'Nro_Contrato' => 'required|digitos_minimos:3',
+            'fecha_inicio' => 'required|date|before:fecha_fin',
+            'fecha_fin' => 'required|date|after:fecha_inicio|different:fecha_inicio|diferencia_minima_dias:7,fecha_inicio',
+        ];
 
-    $contrato = Contrato::findOrFail($id);
-    $contrato->update($request->all());
+        $messages = [
+            'Nro_Contrato.digitos_minimos' => 'El número de contrato debe tener al menos 3 números.',
+            'fecha_inicio.before' => 'La fecha de inicio debe ser anterior a la fecha final.',
+            'fecha_fin.after' => 'La fecha final debe ser posterior a la fecha de inicio.',
+            'fecha_fin.diferencia_minima_dias' => 'Debe haber al menos 7 días de diferencia entre la fecha de inicio y la fecha final.',
+            'required' => 'El campo :attribute es obligatorio.',
+        ];
 
-    return redirect()->route('Contrato.index')
-        ->with('success', 'Contrato actualizado correctamente');
-}
+        $request->validate($rules, $messages);
+
+        $contrato = Contrato::findOrFail($id);
+        $contrato->update($request->all());
+
+        return redirect()->route('Contrato.index')
+            ->with('success', 'Contrato actualizado correctamente');
+    }
 
 
     /**

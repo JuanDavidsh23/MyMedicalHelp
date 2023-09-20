@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('estado')->default(0);
             $table->unsignedBigInteger('idContrato')->nullable();
             $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
+            $table->integer('ejecucion')->default(0);
             $table->timestamps();
         });
     }
