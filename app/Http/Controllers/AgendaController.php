@@ -162,13 +162,13 @@ class AgendaController extends Controller
     public function update(Request $request, $id)
 {
     $rules = [
-        'idContrato' => 'required',
+        'idContrato' => '',
         'fecha_inicio' => 'required|date',
         'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
         'hora' => 'required|date_format:H:i',
         'hora_fin' => 'required|date_format:H:i|after:hora',
-        'id_pacientes' => 'required',
-        'id_user' => 'required',
+        'id_pacientes' => '',
+        'id_user' => '',
     ];
 
     $messages = [

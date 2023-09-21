@@ -95,8 +95,8 @@
                                             <td>
                                                 <form action="{{ route('Agenda.destroy',$agenda->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('') }}</a>
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
-                                                    @csrf
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}" data-id="{{ $agenda->id }}"><i class="fa fa-fw fa-edit"></i></a>
+                                                        @csrf
                                                 </form>
                                             </td>
                                         </tr>
@@ -141,7 +141,6 @@
                                             <td>
                                                 <form action="{{ route('Agenda.destroy',$agenda->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('Agenda.show',$agenda->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('') }}</a>
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('Agenda.edit',$agenda->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('') }}</a>
                                                     @csrf
                                     
                                                 </form>
@@ -166,6 +165,16 @@
     <script src="{{ asset('js/Spanish.json') }}"></script>
     <script>
     $(document).ready(function () {
+        $(document).on('click', '.btn-warning', function() {
+            const agendaId = $(this).data('id');
+
+            if (agendaId) { // Si tiene un id, es una edición
+                // Luego desactivamos los campos en el formulario cuando se carga
+                $('#idContrato').prop('disabled', true);
+                $('#idPaciente').prop('disabled', true);
+                $('#idEnfermera').prop('disabled', true);
+            }
+        });
         $('#agenda_table_activos').DataTable({
             "language": {
                 "url": "{{ asset('js/Spanish.json') }}"

@@ -50,7 +50,8 @@ class ContratoController extends Controller
     public function obtenerDatos(Request $request)
     {
         $contratoId = $request->query('contratoId');
-    
+        // Encuentra el contrato basado en el ID proporcionado
+        $contrato = Contrato::find($contratoId);
         // Obtén pacientes y usuarios relacionados con el contrato seleccionado
         $pacientes = Paciente::where('idContrato', $contratoId)->where('ejecucion', 0)->get(['id', 'nombre']);
         $usuarios = User::where('idContrato', $contratoId)->where('ejecucion', 0)->get(['id', 'name']);
@@ -59,7 +60,10 @@ class ContratoController extends Controller
         return response()->json([
             'pacientes' => $pacientes,
             'usuarios' => $usuarios,
-    
+            'contrato' => [
+                'fecha_inicio' => $contrato->fecha_inicio,
+                'fecha_fin' => $contrato->fecha_fin
+            ]
         ]);
         
     }
