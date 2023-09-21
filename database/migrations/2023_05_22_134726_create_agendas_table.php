@@ -14,13 +14,17 @@ return new class extends Migration
         
  Schema::create('agendas', function (Blueprint $table) {
     $table->id();
-    $table->string('fecha');
-    $table->string('hora');
-    $table->string('lugar');
+    $table->integer('estado')->default(0);
+    $table->unsignedBigInteger('idContrato')->nullable();
+    $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
+    $table->date('fecha_inicio');
+    $table->date('fecha_fin');
+    $table->time('hora');
+    $table->time('hora_fin');
     $table->unsignedBigInteger('id_pacientes');
     $table->foreign('id_pacientes')->references('id')->on('pacientes')->onDelete('cascade'); 
     $table->unsignedBigInteger('id_user');
-    $table->foreign('id_user')->references('id')->on('usuarios')->onDelete('cascade'); 
+    $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade'); 
     $table->timestamps();
 });
     }

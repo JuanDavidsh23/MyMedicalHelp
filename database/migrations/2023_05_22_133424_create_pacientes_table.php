@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('correo');
-            $table->integer('telefono');
+            $table->BigInteger('telefono');
             $table->string('direccion');
             $table->string('ciudad');
-            $table->integer('documento');
-             $table->unsignedBigInteger('idEps');
-            $table->foreign('idEps')->references('id')->on('eps')->onDelete('cascade'); 
+            $table->BigInteger('documento');
+            $table->integer('estado')->default(0);
+            $table->unsignedBigInteger('idContrato')->nullable();
+            $table->foreign('idContrato')->references('id')->on('contratos')->onDelete('cascade');
+            $table->integer('ejecucion')->default(0);
             $table->timestamps();
         });
     }
